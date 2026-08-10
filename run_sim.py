@@ -50,10 +50,32 @@ import common as C                                        # noqa: E402
 import server_iov as S                                    # noqa: E402  (dung lai strategy)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-IS_P4 = os.path.exists(os.path.join(ROOT, "models_sdn.py"))
+IS_P4 = os.path.exists(os.path.join(ROOT, "models_sdn.py"))     # SDN-FL IDS
+IS_P2 = os.path.exists(os.path.join(ROOT, "model_kanconv.py"))  # FedIoV
+IS_P3 = os.path.exists(os.path.join(ROOT, "generator.py"))      # IoVFD
 logger = logging.getLogger(__name__)
 
-if IS_P4:
+if IS_P3:
+    sys.exit(
+        "run_sim.py KHONG dung duoc cho IoVFD (P3).\n\n"
+        "Trong che do simulation cua Flower, doi tuong client bi TAO MOI moi\n"
+        "round — trang thai cuc bo khong song sot (da do bang thuc nghiem).\n"
+        "Client cua P3 giu model local CA NHAN HOA qua cac round, va chi nap\n"
+        "global khi rnd <= 1; neu chay simulation thi tu round 2 tro di no se\n"
+        "train tren model khoi tao ngau nhien -> hong dung co che loi cua bai,\n"
+        "ma hong AM THAM.\n\n"
+        "Dung run_fl.py cho P3 (moi client mot tien trinh nen model local ben\n"
+        "vung), hoac sua client de luu/nap trang thai ra dia theo client id.")
+
+if IS_P2:
+    from client_iov import FedIoVClient as ClientCls           # noqa: E402
+    from model_kanconv import KANConvNet, NUM_GLOBAL_CLASSES, INPUT_LEN  # noqa: E402
+
+    def build_model(arch, num_classes, dropout, hidden=64, layers=2, **kw):
+        return KANConvNet(INPUT_LEN, num_classes, dropout,
+                          kw.get("width", (16, 32)), kw.get("grid_size", 5),
+                          kw.get("spline_order", 3))
+elif IS_P4:
     from client_iov import SDNControllerClient as ClientCls   # noqa: E402
     from models_sdn import build_model, NUM_GLOBAL_CLASSES    # noqa: E402
 else:
@@ -102,7 +124,13 @@ def make_client_fn(ids, args, task, device):
     def client_fn(ctx):
         pid = int(ctx.node_config.get("partition-id", 0))
         cid = ids[pid % len(ids)]
-        if IS_P4:
+        if IS_P2:
+            atk = args.attackers.get(cid, "none")
+            c = ClientCls(cid, args.data_dir, device, args.max_samples,
+                          args.batch_size, task, args.lr, args.dropout,
+                          tuple(args.width), args.grid_size, args.spline_order,
+                          atk, args.attack_scale, args.seed)
+        elif IS_P4:
             c = ClientCls(cid, args.data_dir, device, args.max_samples,
                           args.batch_size, task, args.lr, args.dropout,
                           args.arch, args.hidden, args.layers,
@@ -139,6 +167,18 @@ def main():
                         "chay dong thoi neu thieu RAM")
     p.add_argument("--actor-gpus", type=float, default=0.0,
                    help="Ty le GPU moi client, vd 0.1 = toi da 10 client/GPU")
+    # --- rieng P2 (FedIoV) ---
+    p.add_argument("--width", type=int, nargs=2, default=[16, 32])
+    p.add_argument("--grid-size", type=int, default=5)
+    p.add_argument("--spline-order", type=int, default=3)
+    p.add_argument("--krum-m", type=int, default=5)
+    p.add_argument("--byzantine", type=int, default=2)
+    p.add_argument("--strategy", choices=["multikrum", "fedavg"], default="multikrum")
+    p.add_argument("--attack-ids", type=int, nargs="*", default=[],
+                   help="Client id bi bien thanh doc hai, de kiem chung Multi-Krum")
+    p.add_argument("--attack", choices=["none", "signflip", "gauss", "label"],
+                   default="signflip", help="Kieu tan cong cho --attack-ids")
+    p.add_argument("--attack-scale", type=float, default=5.0)
     # --- rieng P4 ---
     p.add_argument("--arch", choices=["cnn", "rnn"], default="cnn")
     p.add_argument("--hidden", type=int, default=64)
@@ -178,8 +218,14 @@ def main():
     logger.info("Client co du lieu tung task: "
                 + ", ".join(f"task{t}={len(per_task[t])}" for t in tasks))
 
-    model = build_model(args.arch, NUM_GLOBAL_CLASSES, args.dropout,
-                        args.hidden, args.layers).to(device)
+    args.attackers = {c: args.attack for c in args.attack_ids}
+    if IS_P2:
+        model = build_model(args.arch, NUM_GLOBAL_CLASSES, args.dropout,
+                            width=tuple(args.width), grid_size=args.grid_size,
+                            spline_order=args.spline_order).to(device)
+    else:
+        model = build_model(args.arch, NUM_GLOBAL_CLASSES, args.dropout,
+                            args.hidden, args.layers).to(device)
     ckpt_dir = os.path.join(args.out_dir, f"checkpoints{sfx_arch}")
 
     progress = {t: 0 for t in tasks} if args.restart else \
@@ -221,7 +267,14 @@ def main():
             initial_parameters=ndarrays_to_parameters(C.get_model_parameters(model)),
             on_fit_config_fn=S.fit_config_fn(args.local_epochs, args.lr),
         )
-        if IS_P4:
+        if IS_P2:
+            ev = S.make_evaluate_fn(model, loader, nn.CrossEntropyLoss(), device,
+                                    csv_file, args.out_dir, class_names, remaining,
+                                    start_round, task, args.cm_every)
+            strategy = S.MultiKrumStrategy(
+                krum_m=args.krum_m, n_byzantine=args.byzantine,
+                use_krum=(args.strategy == "multikrum"), evaluate_fn=ev, **common_kw)
+        elif IS_P4:
             ev = S.make_evaluate_fn(model, loader, nn.CrossEntropyLoss(), device,
                                     csv_file, args.out_dir, class_names, remaining,
                                     start_round, task, args.arch, args.cm_every)

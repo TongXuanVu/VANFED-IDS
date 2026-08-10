@@ -88,7 +88,7 @@ else:
 
 
 def clients_with_data(data_dir, client_ids, task):
-    fed = os.path.join(data_dir, "federated_data")
+    fed = os.path.join(data_dir, C.FED_SUBDIR)
     ok = []
     for cid in client_ids:
         if task is None:
@@ -160,6 +160,10 @@ def main():
                    help="Moi client. 0 = dung HET du lieu")
     p.add_argument("--test-samples", type=int, default=1_000_000)
     p.add_argument("--fraction-fit", type=float, default=1.0)
+    p.add_argument("--fed-subdir", type=str, default="federated_data",
+                   choices=["federated_data", "federated_data_fewshot",
+                            "federated_data_10shot"],
+                   help="Bo du lieu nao trong --data-dir")
     p.add_argument("--cm-every", type=int, default=0)
     # --- rieng P1: kien truc hai nhanh + hop nhat Dempster-Shafer ---
     p.add_argument("--dst", action="store_true",
@@ -204,6 +208,7 @@ def main():
     p.add_argument("--seed", type=int, default=42)
     args = p.parse_args()
 
+    C.set_fed_subdir(args.fed_subdir)
     os.makedirs(args.out_dir, exist_ok=True)
     sfx_arch = f"_{args.arch}" if IS_P4 else ""
     C.setup_logging(os.path.join(args.out_dir, f"sim{sfx_arch}.log"))

@@ -30,6 +30,19 @@ logger = logging.getLogger(__name__)
 # ----------------------------------------------------------------------------
 # Hang so
 # ----------------------------------------------------------------------------
+# Thu muc con chua shard cua client. Bo du lieu co nhieu bien the:
+#   federated_data          — day du
+#   federated_data_fewshot  — ban few-shot
+#   federated_data_10shot   — ban 10-shot
+# Doi bang set_fed_subdir() truoc khi goi load_client_data().
+FED_SUBDIR = "federated_data"
+
+
+def set_fed_subdir(name):
+    global FED_SUBDIR
+    FED_SUBDIR = name
+
+
 NUM_GLOBAL_CLASSES = 13
 INPUT_LEN = 31
 NUM_TASKS = 5
@@ -112,7 +125,7 @@ def load_client_data(data_dir: str, client_id: int, task: Optional[int],
     task = None -> gop toan bo 5 task (FL thuong, dung nhu 4 bai bao).
     task = 0..4 -> CHI nap dung task do (class-incremental, do muc do quen).
     """
-    fed_dir = os.path.join(data_dir, "federated_data")
+    fed_dir = os.path.join(data_dir, FED_SUBDIR)
     if task is not None:
         paths = [os.path.join(fed_dir, f"client_{client_id}_task_{task + 1}.pt")]
     else:

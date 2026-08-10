@@ -201,9 +201,13 @@ def main():
                    help="Client dong gop histogram cho nhanh cay. Mac dinh 0..N-1")
     p.add_argument("--cm-every", type=int, default=0,
                    help="Ghi confusion matrix moi N round (0 = chi cuoi task)")
+    p.add_argument("--fed-subdir", type=str, default="federated_data",
+                   choices=["federated_data", "federated_data_fewshot",
+                            "federated_data_10shot"])
     p.add_argument("--seed", type=int, default=42)
     args = p.parse_args()
 
+    C.set_fed_subdir(args.fed_subdir)
     os.makedirs(args.out_dir, exist_ok=True)
     C.setup_logging(os.path.join(args.out_dir, "server.log"))
     torch.manual_seed(args.seed)

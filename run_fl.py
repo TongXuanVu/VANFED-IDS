@@ -41,6 +41,9 @@ import sys
 import threading
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import common as C          # noqa: E402
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
 
@@ -61,7 +64,7 @@ STANDALONE = os.path.exists(os.path.join(ROOT, "server_iov.py"))
 
 def clients_with_data(data_dir, client_ids, task):
     """Loc ra nhung client co file .pt cho task nay (task=None -> can it nhat 1 file)."""
-    fed = os.path.join(data_dir, "federated_data")
+    fed = os.path.join(data_dir, C.FED_SUBDIR)
     ok = []
     for cid in client_ids:
         if task is None:
@@ -177,6 +180,7 @@ def run_one_task(pdir, port, args, task, mode, client_ids, rounds):
         server_cmd += ["--task", str(task)]
     if args.cm_every:
         server_cmd += ["--cm-every", str(args.cm_every)]
+    server_cmd += ["--fed-subdir", args.fed_subdir]
     server_cmd += args.server_extra
 
     print(f"\n{'=' * 70}\n[{sfx}] mode={mode} | {len(client_ids)} client | "
@@ -191,6 +195,7 @@ def run_one_task(pdir, port, args, task, mode, client_ids, rounds):
                "--batch-size", str(args.batch_size)]
         if task is not None:
             cmd += ["--task", str(task)]
+        cmd += ["--fed-subdir", args.fed_subdir]
         cmd += args.client_extra
         procs.append(spawn(cmd, pdir, os.path.join(logs, f"client{cid}_{sfx}.log")))
         time.sleep(args.client_stagger)
@@ -238,6 +243,7 @@ def main():
                    help="Giay cho server nap global test truoc khi bat client")
     p.add_argument("--client-stagger", type=float, default=1.0)
     p.add_argument("--timeout", type=int, default=20_000, help="Giay cho MOI task")
+    p.add_argument("--fed-subdir", type=str, default="federated_data")
     p.add_argument("--cm-every", type=int, default=0,
                    help="Ghi confusion matrix moi N round (0 = chi ghi cuoi task). "
                         "Dat > 0 neu so bi cat giua chung truoc khi task ket thuc")
@@ -261,6 +267,7 @@ def main():
     p.add_argument("--client-extra", type=str, default="",
                    help='Tham so them cho client. PHAI co dau =, vd: --client-extra="--arch rnn"')
     args = p.parse_args()
+    C.set_fed_subdir(args.fed_subdir)
     args.server_extra = shlex.split(args.server_extra)
     args.client_extra = shlex.split(args.client_extra)
 
@@ -278,8 +285,8 @@ def main():
     args.data_dir = os.path.abspath(args.data_dir)
     os.makedirs(args.out_dir, exist_ok=True)
 
-    if not os.path.isdir(os.path.join(args.data_dir, "federated_data")):
-        sys.exit(f"Khong thay {args.data_dir}/federated_data — sai --data-dir?")
+    if not os.path.isdir(os.path.join(args.data_dir, C.FED_SUBDIR)):
+        sys.exit(f"Khong thay {args.data_dir}/{C.FED_SUBDIR} — sai --data-dir?")
 
     if args.tasks.strip().lower() == "none":
         tasks = [None]

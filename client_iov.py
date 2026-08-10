@@ -91,8 +91,12 @@ def main():
     p.add_argument("--dropout", type=float, default=0.15)
     p.add_argument("--task", type=int, default=None, choices=range(C.NUM_TASKS),
                    help="Class-incremental: chi hoc du lieu cua task nay")
+    p.add_argument("--fed-subdir", type=str, default="federated_data",
+                   choices=["federated_data", "federated_data_fewshot",
+                            "federated_data_10shot"])
     args = p.parse_args()
 
+    C.set_fed_subdir(args.fed_subdir)
     C.setup_logging()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     client = VanFedClient(args.client_id, args.data_dir, device, args.max_samples,

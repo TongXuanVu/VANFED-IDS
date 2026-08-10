@@ -49,6 +49,9 @@ def main():
     p.add_argument("--flat", action="store_true",
                    help="Gop ca 5 task lam mot (khong class-incremental)")
     p.add_argument("--restart", action="store_true", help="Bo ket qua cu, chay lai tu dau")
+    p.add_argument("--fed_subdir", default="federated_data",
+                   choices=["federated_data", "federated_data_fewshot",
+                            "federated_data_10shot"])
     p.add_argument("--seed", type=int, default=42)
     a = p.parse_args()
 
@@ -66,6 +69,7 @@ def main():
         "--test-samples", str(a.test_samples),
         "--cm-every", str(a.cm_every),
         "--seed", str(a.seed),
+        "--fed-subdir", a.fed_subdir,
     ]
     if not a.no_dst:
         argv += ["--dst",

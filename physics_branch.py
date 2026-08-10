@@ -85,14 +85,16 @@ def load_physics(path):
 class DSTFuser:
     """Giu nhanh cay + hai he so c, thuc hien hop nhat DST luc danh gia."""
 
-    def __init__(self, gbdt, n_packet, c_packet=0.05, c_physics=0.05):
+    def __init__(self, gbdt, n_packet, c_packet=0.05, c_physics=0.05, device=None):
         self.gbdt = gbdt
         self.n_packet = n_packet
+        self.device = device
         self.c_b = c_packet
         self.c_w = c_physics
 
     def physics_probs(self, x):
-        return self.gbdt.predict_proba(physics_slice(x, self.n_packet))
+        return self.gbdt.predict_proba(physics_slice(x, self.n_packet),
+                                       device=self.device)
 
     def fuse(self, p_b, x_raw):
         """p_b: (N, K+1) tu CNN1D. Tra ve (nhan sau hop nhat, mass)."""

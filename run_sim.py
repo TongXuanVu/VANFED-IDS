@@ -173,7 +173,7 @@ def main():
     p.add_argument("--gbdt-rounds", type=int, default=20)
     p.add_argument("--gbdt-depth", type=int, default=6)
     p.add_argument("--gbdt-bins", type=int, default=64)
-    p.add_argument("--gbdt-max-per-client", type=int, default=20_000)
+    p.add_argument("--gbdt-max-per-client", type=int, default=0)
     p.add_argument("--final-full-test", action="store_true",
                    help="Cuoi MOI task, danh gia them MOT lan tren TOAN BO tap "
                         "global test (khong lay mau) -> con so chinh xac de bao cao")
@@ -292,7 +292,7 @@ def main():
                     args.gbdt_depth, args.gbdt_rounds,
                     gbdt_max_per_client=args.gbdt_max_per_client)
                 save_physics(gbdt, gpath, {"task": task})
-            fuser = DSTFuser(gbdt, args.n_packet_features)
+            fuser = DSTFuser(gbdt, args.n_packet_features, device=device)
 
         common_kw = dict(
             model=model, ckpt_dir=ckpt_dir, start_round=start_round,

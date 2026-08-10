@@ -174,6 +174,36 @@ class FederatedGBDT:
                 "L": self._grow(clients, trai, k, depth + 1),
                 "R": self._grow(clients, phai, k, depth + 1)}
 
+    # ---- suy luan nhanh: nen cay thanh mang, duyet theo TANG tren GPU -------
+    @staticmethod
+    def _flatten(tree):
+        """dict long nhau -> (feat, thr, left, right, val). La co feat = -1."""
+        feat, thr, left, right, val = [], [], [], [], []
+
+        def rec(node):
+            i = len(feat)
+            feat.append(-1); thr.append(0); left.append(-1); right.append(-1)
+            val.append(0.0)
+            if "leaf" in node:
+                val[i] = float(node["leaf"])
+            else:
+                feat[i] = int(node["f"])
+                thr[i] = int(node["bin"])
+                left[i] = rec(node["L"])
+                right[i] = rec(node["R"])
+            return i
+
+        rec(tree)
+        return (np.array(feat, np.int64), np.array(thr, np.int64),
+                np.array(left, np.int64), np.array(right, np.int64),
+                np.array(val, np.float32))
+
+    def _compile(self):
+        """Nen tat ca cay mot lan, dung lai cho moi lan predict."""
+        if getattr(self, "_flat", None) is None:
+            self._flat = [(k, self._flatten(t)) for _, k, t in self.trees]
+        return self._flat
+
     @staticmethod
     def _predict_tree(tree, xb):
         out = np.zeros(len(xb))
@@ -222,7 +252,50 @@ class FederatedGBDT:
                 print(f"  vong {rnd + 1}/{self.n_rounds}: acc cuc bo tb = {acc:.4f}")
         return self
 
-    def predict_proba(self, x):
+    def predict_proba(self, x, device=None, batch=2_000_000):
+        """Duyet cay theo TANG, vector hoa. Dung GPU neu co — nhanh hon numpy
+        hang chuc lan, du de danh gia tren toan bo tap test hang chuc trieu mau.
+        """
+        try:
+            import torch
+        except ImportError:
+            torch = None
+        if torch is None or device is None or str(device) == "cpu":
+            return self._predict_proba_numpy(x)
+
+        flat = self._compile()
+        n = len(x)
+        out = np.empty((n, self.n_classes), dtype=np.float32)
+        sau = self.max_depth + 2                       # so tang toi da phai duyet
+        for i0 in range(0, n, batch):
+            xb = to_bins(x[i0:i0 + batch], self.edges)
+            xt = torch.as_tensor(xb, device=device, dtype=torch.int64)
+            m = xt.shape[0]
+            ar = torch.arange(m, device=device)
+            score = torch.zeros((m, self.n_classes), device=device)
+            for k, (feat, thr, left, right, val) in flat:
+                F_ = torch.as_tensor(feat, device=device)
+                T_ = torch.as_tensor(thr, device=device)
+                L_ = torch.as_tensor(left, device=device)
+                R_ = torch.as_tensor(right, device=device)
+                V_ = torch.as_tensor(val, device=device)
+                idx = torch.zeros(m, dtype=torch.int64, device=device)
+                for _ in range(sau):
+                    f = F_[idx]
+                    la = f < 0
+                    if bool(la.all()):
+                        break
+                    xv = xt[ar, f.clamp(min=0)]
+                    di_trai = xv <= T_[idx]
+                    tiep = torch.where(di_trai, L_[idx], R_[idx])
+                    idx = torch.where(la, idx, tiep)
+                score[:, k] += self.lr * V_[idx]
+            p = torch.softmax(score, dim=1)
+            out[i0:i0 + batch] = p.cpu().numpy()
+            del xt, score
+        return out
+
+    def _predict_proba_numpy(self, x):
         xb = to_bins(x, self.edges)
         score = np.zeros((len(x), self.n_classes))
         for _, k, cay in self.trees:
@@ -230,8 +303,8 @@ class FederatedGBDT:
         p = np.exp(score - score.max(1, keepdims=True))
         return p / p.sum(1, keepdims=True)
 
-    def predict(self, x):
-        return self.predict_proba(x).argmax(1)
+    def predict(self, x, device=None):
+        return self.predict_proba(x, device).argmax(1)
 
 
 if __name__ == "__main__":

@@ -149,7 +149,7 @@ def run_test(args, model, device):
                 f"Che do test voi --dst can nhanh physics da train: {gpath}. "
                 f"Chay --mode train truoc.")
         gbdt, _ = load_physics(gpath)
-        fuser = DSTFuser(gbdt, args.n_packet_features)
+        fuser = DSTFuser(gbdt, args.n_packet_features, device=device)
         m, y_true, y_pred, y_pk, y_ph = evaluate_with_dst(
             model, loader, nn.CrossEntropyLoss(), device, fuser, C)
         r = fusion_report(y_true, y_pk, y_ph, y_pred,
@@ -197,7 +197,7 @@ def main():
     p.add_argument("--gbdt-rounds", type=int, default=20)
     p.add_argument("--gbdt-depth", type=int, default=6)
     p.add_argument("--gbdt-bins", type=int, default=64)
-    p.add_argument("--gbdt-max-per-client", type=int, default=20_000)
+    p.add_argument("--gbdt-max-per-client", type=int, default=0)
     p.add_argument("--gbdt-clients", type=int, nargs="+", default=None,
                    help="Client dong gop histogram cho nhanh cay. Mac dinh 0..N-1")
     p.add_argument("--cm-every", type=int, default=0,
@@ -258,7 +258,7 @@ def main():
                 gbdt_max_per_client=args.gbdt_max_per_client)
             save_physics(gbdt, gpath, {"task": args.task,
                                        "n_packet_features": args.n_packet_features})
-        fuser = DSTFuser(gbdt, args.n_packet_features)
+        fuser = DSTFuser(gbdt, args.n_packet_features, device=device)
 
     strategy = VanFedStrategy(
         model=model,

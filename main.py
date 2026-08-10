@@ -39,18 +39,17 @@ def main():
     p.add_argument("--batch_size", type=int, default=512)
     p.add_argument("--lr", type=float, default=1e-3)
     p.add_argument("--max_samples", type=int, default=0, help="0 = dung het du lieu")
-    p.add_argument("--test_samples", type=int, default=300_000,
-                   help="Tran mau danh gia MOI ROUND. Tap test co the vai chuc "
-                        "trieu mau; lay mau van cho cung ket qua toi 3 chu so "
-                        "thap phan ma nhanh hon hang chuc lan. 0 = dung het")
+    p.add_argument("--test_samples", type=int, default=0,
+                   help="0 = DUNG HET tap test moi round (mac dinh). Dat so duong "
+                        "de lay mau THEO TI LE neu muon chay nhanh hon")
     p.add_argument("--no_dst", action="store_true",
                    help="Tat kien truc hai nhanh, chi chay CNN1D (dung lam doi chung)")
     p.add_argument("--n_packet_features", type=int, default=18)
     p.add_argument("--gbdt_rounds", type=int, default=20)
     p.add_argument("--gbdt_depth", type=int, default=6)
-    p.add_argument("--gbdt_max_per_client", type=int, default=20_000,
-                   help="Tran mau MOI CLIENT dung dung cay. Cay chi can thong ke "
-                        "phan bo nen khong can toan bo mau")
+    p.add_argument("--gbdt_max_per_client", type=int, default=0,
+                   help="0 = DUNG HET du lieu client de dung cay (mac dinh). Dat "
+                        "so duong de lay mau bot neu muon nhanh hon")
     p.add_argument("--cm_every", type=int, default=5)
     p.add_argument("--no_full_test", action="store_true",
                    help="Bo qua buoc danh gia tren toan bo tap test cuoi moi task")

@@ -88,8 +88,12 @@ class ClientData:
         return ((pk - (self.y == k)).astype(np.float32),
                 np.maximum(pk * (1 - pk), 1e-6).astype(np.float32))
 
-    def histogram(self, k, mask):
+    def histogram(self, gh, mask):
         """Eq. 9 phia client: cong don g, h vao tung o (feature, bin).
+
+        `gh` la (g, h) da tinh SAN cho ca cay. Truoc day ham nay goi grad_hess()
+        o TUNG node -> mot cay ~127 node phai tinh softmax tren toan bo mau 127
+        lan. Voi 4.4 trieu mau x 13 lop, do la vai gio thay vi vai phut.
 
         Tra ve (G (F, n_bins), H (F, n_bins), so mau) — day la TAT CA nhung gi
         roi khoi client.
@@ -98,7 +102,7 @@ class ClientData:
         size = self.F * self.n_bins
         if n_sel == 0:
             return np.zeros((self.F, self.n_bins)), np.zeros((self.F, self.n_bins)), 0
-        g, h = self.grad_hess(k)
+        g, h = gh
         idx = self.flat_idx[mask].ravel()
         G = np.bincount(idx, weights=np.repeat(g[mask], self.F),
                         minlength=size).reshape(self.F, self.n_bins)
@@ -145,13 +149,18 @@ class FederatedGBDT:
                 tot, tot_f, tot_b = float(gain[b]), f, b
         return tot, tot_f, tot_b
 
-    def _grow(self, clients, masks, k, depth):
-        """Dung mot node. masks[i] = mau nao cua client i thuoc node nay."""
+    def _grow(self, clients, masks, k, depth, gh=None):
+        """Dung mot node. masks[i] = mau nao cua client i thuoc node nay.
+
+        gh: (g, h) cua tung client, tinh MOT LAN cho ca cay roi truyen xuong.
+        """
+        if gh is None:
+            gh = [c.grad_hess(k) for c in clients]
         # --- gop histogram tu tat ca client (Eq. 9) ---
         G = H = None
         tong_mau = 0
-        for c, m in zip(clients, masks):
-            g, h, n = c.histogram(k, m)
+        for c, m, e in zip(clients, masks, gh):
+            g, h, n = c.histogram(e, m)
             G = g if G is None else G + g
             H = h if H is None else H + h
             tong_mau += n
@@ -171,8 +180,8 @@ class FederatedGBDT:
         if sum(t.sum() for t in trai) == 0 or sum(p.sum() for p in phai) == 0:
             return {"leaf": float(-Gt / (Ht + self.lam))}
         return {"f": f, "bin": b,
-                "L": self._grow(clients, trai, k, depth + 1),
-                "R": self._grow(clients, phai, k, depth + 1)}
+                "L": self._grow(clients, trai, k, depth + 1, gh),
+                "R": self._grow(clients, phai, k, depth + 1, gh)}
 
     # ---- suy luan nhanh: nen cay thanh mang, duyet theo TANG tren GPU -------
     @staticmethod

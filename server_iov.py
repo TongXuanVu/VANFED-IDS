@@ -84,7 +84,7 @@ class VanFedStrategy(fl.server.strategy.FedAvg):
 # Danh gia tap trung
 # ----------------------------------------------------------------------------
 def make_evaluate_fn(model, loader, criterion, device, csv_file, out_dir,
-                     class_names, total_rounds, start_round, task):
+                     class_names, total_rounds, start_round, task, cm_every=0):
     """Tra ve evaluate_fn cho Flower. Round cuoi -> xuat confusion matrix."""
 
     def evaluate_fn(server_round: int, parameters, config):
@@ -96,7 +96,9 @@ def make_evaluate_fn(model, loader, criterion, device, csv_file, out_dir,
         m, y_true, y_pred = C.evaluate(model, loader, criterion, device)
         C.log_and_save_metrics(abs_round, m, csv_file)
 
-        if server_round == total_rounds:
+        # Ghi confusion matrix o cuoi task, VA dinh ky neu bat --cm-every,
+        # de bi cat giua chung van con ban gan nhat.
+        if server_round == total_rounds or (cm_every and abs_round % cm_every == 0):
             tag = f"task{task}" if task is not None else "final"
             C.save_confusion_matrix(y_true, y_pred, out_dir, tag, class_names)
         return m["loss"], {k: v for k, v in m.items() if k != "loss"}
@@ -152,6 +154,8 @@ def main():
                    help="Class-incremental: chi danh gia cac lop da hoc")
     p.add_argument("--ckpt", type=str, default=None,
                    help="Checkpoint de resume/test (mac dinh: <out>/checkpoints/latest.pth)")
+    p.add_argument("--cm-every", type=int, default=0,
+                   help="Ghi confusion matrix moi N round (0 = chi cuoi task)")
     p.add_argument("--seed", type=int, default=42)
     args = p.parse_args()
 
@@ -198,7 +202,7 @@ def main():
         on_fit_config_fn=fit_config_fn(args.local_epochs, args.lr),
         evaluate_fn=make_evaluate_fn(model, loader, criterion, device, csv_file,
                                      args.out_dir, class_names, args.rounds,
-                                     start_round, args.task),
+                                     start_round, args.task, args.cm_every),
     )
 
     logger.info(f"Server lang nghe {args.address} | {args.rounds} round | "

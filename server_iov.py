@@ -84,7 +84,8 @@ class VanFedStrategy(fl.server.strategy.FedAvg):
 # Danh gia tap trung
 # ----------------------------------------------------------------------------
 def make_evaluate_fn(model, loader, criterion, device, csv_file, out_dir,
-                     class_names, total_rounds, start_round, task, cm_every=0):
+                     class_names, total_rounds, start_round, task, cm_every=0,
+                     fuser=None):
     """Tra ve evaluate_fn cho Flower. Round cuoi -> xuat confusion matrix."""
 
     def evaluate_fn(server_round: int, parameters, config):
@@ -93,7 +94,21 @@ def make_evaluate_fn(model, loader, criterion, device, csv_file, out_dir,
         abs_round = start_round + server_round
         model.load_state_dict(C.ndarrays_to_state_dict(model, parameters))
         model.to(device)
-        m, y_true, y_pred = C.evaluate(model, loader, criterion, device)
+
+        if fuser is None:                       # mot nhanh (nhu truoc)
+            m, y_true, y_pred = C.evaluate(model, loader, criterion, device)
+        else:                                   # hai nhanh + hop nhat DST
+            from physics_branch import evaluate_with_dst, fusion_report
+            m, y_true, y_pred, y_pk, y_ph = evaluate_with_dst(
+                model, loader, criterion, device, fuser, C)
+            if server_round == total_rounds or (cm_every and abs_round % cm_every == 0):
+                sfx = f"task{task}" if task is not None else "final"
+                r = fusion_report(y_true, y_pk, y_ph, y_pred,
+                                  os.path.join(out_dir, f"dst_fusion_{sfx}.json"))
+                logger.info(f"[Round {abs_round}] DST: packet={r['acc_packet_only']:.4f} "
+                            f"physics={r['acc_physics_only']:.4f} "
+                            f"hop nhat={r['acc_dst_fused']:.4f} "
+                            f"({r['gain_vs_packet']:+.4f} so voi packet)")
         C.log_and_save_metrics(abs_round, m, csv_file)
 
         # Ghi confusion matrix o cuoi task, VA dinh ky neu bat --cm-every,
@@ -124,7 +139,26 @@ def run_test(args, model, device):
     logger.info(f"Nap checkpoint {ckpt} (round {rnd})")
 
     loader, _ = C.load_global_test(args.data_dir, args.test_samples, args.task)
-    m, y_true, y_pred = C.evaluate(model, loader, nn.CrossEntropyLoss(), device)
+    if args.dst:
+        from physics_branch import (DSTFuser, load_physics, evaluate_with_dst,
+                                    fusion_report)
+        sfx_g = f"_task{args.task}" if args.task is not None else ""
+        gpath = os.path.join(args.out_dir, f"physics_branch{sfx_g}.pkl")
+        if not os.path.exists(gpath):
+            raise FileNotFoundError(
+                f"Che do test voi --dst can nhanh physics da train: {gpath}. "
+                f"Chay --mode train truoc.")
+        gbdt, _ = load_physics(gpath)
+        fuser = DSTFuser(gbdt, args.n_packet_features)
+        m, y_true, y_pred, y_pk, y_ph = evaluate_with_dst(
+            model, loader, nn.CrossEntropyLoss(), device, fuser, C)
+        r = fusion_report(y_true, y_pk, y_ph, y_pred,
+                          os.path.join(args.out_dir, f"dst_fusion_test{sfx_g}.json"))
+        logger.info(f"DST: packet={r['acc_packet_only']:.4f} "
+                    f"physics={r['acc_physics_only']:.4f} "
+                    f"hop nhat={r['acc_dst_fused']:.4f}")
+    else:
+        m, y_true, y_pred = C.evaluate(model, loader, nn.CrossEntropyLoss(), device)
     logger.info(C.format_metrics(rnd, m))
     C.append_csv_row(os.path.join(args.out_dir, "test_metrics.csv"),
                      [rnd] + [round(m[k], 6) for k in C.METRIC_KEYS])
@@ -154,6 +188,17 @@ def main():
                    help="Class-incremental: chi danh gia cac lop da hoc")
     p.add_argument("--ckpt", type=str, default=None,
                    help="Checkpoint de resume/test (mac dinh: <out>/checkpoints/latest.pth)")
+    p.add_argument("--dst", action="store_true",
+                   help="Bat kien truc HAI NHANH cua bai: CNN1D (packet) + cay "
+                        "lien ket (physics), hop nhat bang Dempster-Shafer")
+    p.add_argument("--n-packet-features", type=int, default=18,
+                   help="So cot dau danh cho nhanh packet; nhanh physics lay "
+                        "phan con lai. 0 = ca hai nhanh doc het 31 cot")
+    p.add_argument("--gbdt-rounds", type=int, default=20)
+    p.add_argument("--gbdt-depth", type=int, default=6)
+    p.add_argument("--gbdt-bins", type=int, default=64)
+    p.add_argument("--gbdt-clients", type=int, nargs="+", default=None,
+                   help="Client dong gop histogram cho nhanh cay. Mac dinh 0..N-1")
     p.add_argument("--cm-every", type=int, default=0,
                    help="Ghi confusion matrix moi N round (0 = chi cuoi task)")
     p.add_argument("--seed", type=int, default=42)
@@ -189,6 +234,26 @@ def main():
     suffix = f"_task{args.task}" if args.task is not None else ""
     csv_file = os.path.join(args.out_dir, f"metrics{suffix}.csv")
 
+    # --- nhanh physics: dung MOT LAN cho task nay, ngoai vong FedAvg ---
+    fuser = None
+    if args.dst:
+        from physics_branch import (DSTFuser, train_physics_branch,
+                                    save_physics, load_physics)
+        sfx_g = f"_task{args.task}" if args.task is not None else ""
+        gpath = os.path.join(args.out_dir, f"physics_branch{sfx_g}.pkl")
+        if os.path.exists(gpath):
+            gbdt, _ = load_physics(gpath)
+            logger.info(f"Nap nhanh physics co san: {gpath}")
+        else:
+            ids = args.gbdt_clients or list(range(args.num_clients))
+            gbdt = train_physics_branch(
+                args.data_dir, ids, args.task, args.n_packet_features,
+                C.load_client_data, NUM_GLOBAL_CLASSES, args.gbdt_bins,
+                args.gbdt_depth, args.gbdt_rounds)
+            save_physics(gbdt, gpath, {"task": args.task,
+                                       "n_packet_features": args.n_packet_features})
+        fuser = DSTFuser(gbdt, args.n_packet_features)
+
     strategy = VanFedStrategy(
         model=model,
         ckpt_dir=ckpt_dir,
@@ -202,7 +267,7 @@ def main():
         on_fit_config_fn=fit_config_fn(args.local_epochs, args.lr),
         evaluate_fn=make_evaluate_fn(model, loader, criterion, device, csv_file,
                                      args.out_dir, class_names, args.rounds,
-                                     start_round, args.task, args.cm_every),
+                                     start_round, args.task, args.cm_every, fuser),
     )
 
     logger.info(f"Server lang nghe {args.address} | {args.rounds} round | "

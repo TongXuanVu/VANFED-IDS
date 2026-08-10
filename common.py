@@ -157,6 +157,28 @@ def load_client_data(data_dir: str, client_id: int, task: Optional[int],
     return x, y
 
 
+def stratified_subsample(x, y, max_samples, seed=42):
+    """Lay mau GIU NGUYEN TI LE cac lop.
+
+    Khac subsample_capped (can bang lai lop): ham nay giu dung phan bo goc, nen
+    metric do tren mau la UOC LUONG KHONG CHECH cua metric tren toan bo tap.
+    Bat buoc dung cho tap TEST — neu can bang lai thi accuracy bao cao se khong
+    con la accuracy tren tap test that.
+    """
+    if max_samples <= 0 or len(y) <= max_samples:
+        return x, y
+    rng = np.random.default_rng(seed)
+    ty_le = max_samples / len(y)
+    giu = []
+    for c in np.unique(y):
+        idx = np.where(y == c)[0]
+        k = max(1, int(round(len(idx) * ty_le)))       # giu it nhat 1 mau/lop
+        giu.append(rng.choice(idx, min(k, len(idx)), replace=False))
+    keep = np.concatenate(giu)
+    rng.shuffle(keep)
+    return x[keep], y[keep]
+
+
 def load_global_test(data_dir: str, max_samples: int = 1_000_000,
                      task: Optional[int] = None, seed: int = 42):
     """Nap global test. task khac None -> loc ve cac lop DA HOC (0..n-1)."""
@@ -169,9 +191,13 @@ def load_global_test(data_dir: str, max_samples: int = 1_000_000,
         keep = y < n_cls
         x, y = x[keep], y[keep]
         logger.info(f"Task {task}: loc ve lop 0-{n_cls - 1} -> n={len(y)}")
-    x, y = subsample_capped(x, y, max_samples, seed)
+    n_goc = len(y)
+    x, y = stratified_subsample(x, y, max_samples, seed)      # GIU ti le lop
     if max_samples != 0:
         x = x.astype(np.float32)
+    if len(y) < n_goc:
+        logger.info(f"Lay mau theo ti le: {n_goc} -> {len(y)} mau "
+                    f"(phan bo lop giu nguyen, metric khong chech)")
     logger.info(f"Danh gia moi round tren n={len(y)} mau (dtype={x.dtype})")
     loader = DataLoader(TensorDataset(torch.from_numpy(x), torch.from_numpy(y)),
                         batch_size=4096, shuffle=False)

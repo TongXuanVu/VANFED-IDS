@@ -73,14 +73,20 @@ class ClientData:
         self.n_bins = n_bins
         self.n_classes = n_classes
         self.n, self.F = xb.shape
-        self.score = np.zeros((self.n, n_classes), dtype=np.float64)
+        self.score = np.zeros((self.n, n_classes), dtype=np.float32)
+        # Chi so phang: (dac trung f, bin b) -> f*n_bins + b. Nho vay ca ma tran
+        # (F, n_bins) tinh duoc bang MOT np.bincount, thay vi lap F lan trong
+        # Python. Voi vai trieu mau, khac biet la vai phut so voi vai gio.
+        self.flat_idx = (np.arange(self.F, dtype=np.int64) * n_bins
+                         + xb.astype(np.int64))
 
     def grad_hess(self, k):
         """g, h cua lop k theo softmax (nhu XGBoost multi:softprob)."""
         p = np.exp(self.score - self.score.max(1, keepdims=True))
         p /= p.sum(1, keepdims=True)
         pk = p[:, k]
-        return pk - (self.y == k).astype(np.float64), np.maximum(pk * (1 - pk), 1e-6)
+        return ((pk - (self.y == k)).astype(np.float32),
+                np.maximum(pk * (1 - pk), 1e-6).astype(np.float32))
 
     def histogram(self, k, mask):
         """Eq. 9 phia client: cong don g, h vao tung o (feature, bin).
@@ -88,16 +94,17 @@ class ClientData:
         Tra ve (G (F, n_bins), H (F, n_bins), so mau) — day la TAT CA nhung gi
         roi khoi client.
         """
+        n_sel = int(mask.sum())
+        size = self.F * self.n_bins
+        if n_sel == 0:
+            return np.zeros((self.F, self.n_bins)), np.zeros((self.F, self.n_bins)), 0
         g, h = self.grad_hess(k)
-        G = np.zeros((self.F, self.n_bins))
-        H = np.zeros((self.F, self.n_bins))
-        if mask.sum() == 0:
-            return G, H, 0
-        gm, hm, xm = g[mask], h[mask], self.xb[mask]
-        for f in range(self.F):
-            G[f] = np.bincount(xm[:, f], weights=gm, minlength=self.n_bins)
-            H[f] = np.bincount(xm[:, f], weights=hm, minlength=self.n_bins)
-        return G, H, int(mask.sum())
+        idx = self.flat_idx[mask].ravel()
+        G = np.bincount(idx, weights=np.repeat(g[mask], self.F),
+                        minlength=size).reshape(self.F, self.n_bins)
+        H = np.bincount(idx, weights=np.repeat(h[mask], self.F),
+                        minlength=size).reshape(self.F, self.n_bins)
+        return G, H, n_sel
 
 
 # ----------------------------------------------------------------------------
@@ -184,8 +191,22 @@ class FederatedGBDT:
         return out
 
     # ---- API ---------------------------------------------------------------
-    def fit(self, client_x, client_y, verbose=True):
-        """client_x/client_y: danh sach mang cua TUNG client (khong gop lai)."""
+    def fit(self, client_x, client_y, verbose=True, max_per_client=0, seed=42):
+        """client_x/client_y: danh sach mang cua TUNG client (khong gop lai).
+
+        max_per_client > 0: lay mau bot o client qua lon. Cay chi can THONG KE
+        phan bo chu khong can tung mau, nen vai chuc nghin mau moi client la du.
+        """
+        if max_per_client > 0:
+            rng = np.random.default_rng(seed)
+            cx, cy = [], []
+            for x, y in zip(client_x, client_y):
+                if len(y) > max_per_client:
+                    sel = rng.choice(len(y), max_per_client, replace=False)
+                    x, y = x[sel], y[sel]
+                cx.append(x)
+                cy.append(y)
+            client_x, client_y = cx, cy
         self.edges = build_bin_edges(client_x, self.n_bins)
         clients = [ClientData(to_bins(x, self.edges), y, self.n_classes, self.n_bins)
                    for x, y in zip(client_x, client_y)]

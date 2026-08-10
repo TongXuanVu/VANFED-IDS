@@ -173,6 +173,10 @@ def main():
     p.add_argument("--gbdt-rounds", type=int, default=20)
     p.add_argument("--gbdt-depth", type=int, default=6)
     p.add_argument("--gbdt-bins", type=int, default=64)
+    p.add_argument("--gbdt-max-per-client", type=int, default=20_000)
+    p.add_argument("--final-full-test", action="store_true",
+                   help="Cuoi MOI task, danh gia them MOT lan tren TOAN BO tap "
+                        "global test (khong lay mau) -> con so chinh xac de bao cao")
     p.add_argument("--restart", action="store_true")
     p.add_argument("--actor-cpus", type=float, default=1.0,
                    help="CPU cho MOI client song song. Tang len de giam so client "
@@ -285,7 +289,8 @@ def main():
                 gbdt = train_physics_branch(
                     args.data_dir, ids, task, args.n_packet_features,
                     C.load_client_data, NUM_GLOBAL_CLASSES, args.gbdt_bins,
-                    args.gbdt_depth, args.gbdt_rounds)
+                    args.gbdt_depth, args.gbdt_rounds,
+                    gbdt_max_per_client=args.gbdt_max_per_client)
                 save_physics(gbdt, gpath, {"task": task})
             fuser = DSTFuser(gbdt, args.n_packet_features)
 
@@ -329,6 +334,27 @@ def main():
             client_resources={"num_cpus": args.actor_cpus,
                               "num_gpus": args.actor_gpus},
         )
+        # --- danh gia tren TOAN BO tap test, mot lan cuoi task ---
+        if args.final_full_test:
+            logger.info(f"[task {task}] danh gia tren TOAN BO tap global test "
+                        f"(khong lay mau) — buoc nay cham, chi chay 1 lan/task")
+            full_loader, _ = C.load_global_test(args.data_dir, 0, task)
+            if fuser is not None:
+                from physics_branch import evaluate_with_dst, fusion_report
+                mf, yt, yp, ypk, yph = evaluate_with_dst(
+                    model, full_loader, nn.CrossEntropyLoss(), device, fuser, C)
+                fusion_report(yt, ypk, yph, yp,
+                              os.path.join(args.out_dir, f"dst_fusion_FULL{sfx}.json"))
+            else:
+                mf, yt, yp = C.evaluate(model, full_loader,
+                                        nn.CrossEntropyLoss(), device)
+            C.append_csv_row(os.path.join(args.out_dir, f"metrics_FULLTEST{sfx_arch}.csv"),
+                             [start_round + remaining] + [round(mf[k], 6) for k in C.METRIC_KEYS])
+            logger.info("TOAN BO TAP TEST | " + C.format_metrics(start_round + remaining, mf))
+            C.save_confusion_matrix(yt, yp, args.out_dir, f"FULLTEST{sfx}",
+                                    class_names)
+            del full_loader
+
         start_round += remaining
 
     logger.info(f"Xong sau {(time.time() - t0) / 60:.1f} phut. Ket qua: {args.out_dir}")

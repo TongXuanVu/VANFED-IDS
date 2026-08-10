@@ -161,6 +161,14 @@ def main():
     p.add_argument("--test-samples", type=int, default=1_000_000)
     p.add_argument("--fraction-fit", type=float, default=1.0)
     p.add_argument("--cm-every", type=int, default=0)
+    # --- rieng P1: kien truc hai nhanh + hop nhat Dempster-Shafer ---
+    p.add_argument("--dst", action="store_true",
+                   help="Bat hai nhanh: CNN1D (packet) + cay lien ket (physics), "
+                        "hop nhat bang Dempster-Shafer")
+    p.add_argument("--n-packet-features", type=int, default=18)
+    p.add_argument("--gbdt-rounds", type=int, default=20)
+    p.add_argument("--gbdt-depth", type=int, default=6)
+    p.add_argument("--gbdt-bins", type=int, default=64)
     p.add_argument("--restart", action="store_true")
     p.add_argument("--actor-cpus", type=float, default=1.0,
                    help="CPU cho MOI client song song. Tang len de giam so client "
@@ -259,6 +267,23 @@ def main():
         sfx = f"_task{task}" if task is not None else ""
         csv_file = os.path.join(args.out_dir, f"metrics{sfx_arch}{sfx}.csv")
 
+        # --- nhanh physics: dung MOT LAN cho task nay, ngoai vong FedAvg ---
+        fuser = None
+        if getattr(args, "dst", False) and not (IS_P2 or IS_P4):
+            from physics_branch import (DSTFuser, train_physics_branch,
+                                        save_physics, load_physics)
+            gpath = os.path.join(args.out_dir, f"physics_branch{sfx}.pkl")
+            if os.path.exists(gpath):
+                gbdt, _ = load_physics(gpath)
+                logger.info(f"Nap nhanh physics co san: {gpath}")
+            else:
+                gbdt = train_physics_branch(
+                    args.data_dir, ids, task, args.n_packet_features,
+                    C.load_client_data, NUM_GLOBAL_CLASSES, args.gbdt_bins,
+                    args.gbdt_depth, args.gbdt_rounds)
+                save_physics(gbdt, gpath, {"task": task})
+            fuser = DSTFuser(gbdt, args.n_packet_features)
+
         common_kw = dict(
             model=model, ckpt_dir=ckpt_dir, start_round=start_round,
             fraction_fit=args.fraction_fit, fraction_evaluate=0.0,
@@ -287,7 +312,7 @@ def main():
         else:
             ev = S.make_evaluate_fn(model, loader, nn.CrossEntropyLoss(), device,
                                     csv_file, args.out_dir, class_names, remaining,
-                                    start_round, task, args.cm_every)
+                                    start_round, task, args.cm_every, fuser)
             strategy = S.VanFedStrategy(evaluate_fn=ev, **common_kw)
 
         logger.info(f"===== Task {task}: {len(ids)} client, {remaining} round =====")

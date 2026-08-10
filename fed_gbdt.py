@@ -1,0 +1,229 @@
+"""Physics-based IDS: cay tang cuong gradient HOC LIEN KET (FedTree, Eq. 9).
+
+Chen et al., Computers & Security 142 (2024) 103881, muc 3.3.1:
+"the federated learning (FL) model is bifurcated into two segments: neural
+network FL and tree model FL". Nhanh cay dung FedTree (Li et al., 2022) voi
+
+    G_mk = sum_n sum_{i in W_nmk} g_i        (Eq. 9)
+    H_mk = sum_n sum_{i in W_nmk} h_i
+
+nghia la: moi client dung du lieu CUA MINH tinh histogram gradient/hessian
+theo tung o (feature m, bin k); server chi CONG DON cac histogram do lai roi
+tim diem chia. Du lieu tho khong roi khoi client — chi co (G, H) duoc gui di.
+
+Day KHAC HAN voi "moi client train mot LightGBM roi ghep cay lai": cay o day
+duoc dung CHUNG tu thong ke gop cua tat ca client, dung nghia lien ket.
+
+Cai dat theo kieu XGBoost/LightGBM:
+  - da lop bang softmax: moi vong boosting dung K+1 cay, moi cay mot lop
+  - g_i = p_i - y_i,  h_i = p_i (1 - p_i)
+  - gain khi chia:  0.5 * (GL^2/(HL+lam) + GR^2/(HR+lam) - G^2/(H+lam)) - gamma
+  - la:  w = -G / (H + lam)
+  - histogram theo bin (mac dinh 64 bin, chia theo phan vi tren du lieu gop)
+
+Bin edge phai giong nhau o moi client thi histogram moi cong duoc. Bai khong
+noi ro cach thong nhat bin; o day server gom phan vi tu cac client (chi gui
+thong ke phan vi, khong gui mau) — ghi ro day la lua chon cai dat.
+"""
+import numpy as np
+
+
+# ----------------------------------------------------------------------------
+def build_bin_edges(client_x, n_bins=64, n_features=None, seed=42):
+    """Thong nhat bien bin giua cac client tu phan vi cua tung client.
+
+    Moi client gui len n_bins phan vi cua tung dac trung (khong gui mau tho),
+    server lay trung binh -> bien bin dung chung.
+    """
+    if n_features is None:
+        n_features = client_x[0].shape[1]
+    qs = np.linspace(0, 100, n_bins + 1)
+    per_client = []
+    for x in client_x:
+        if len(x) == 0:
+            continue
+        per_client.append(np.percentile(x, qs, axis=0))       # (n_bins+1, F)
+    edges = np.mean(per_client, axis=0)                       # gop
+    # dam bao tang nghiem ngat de np.digitize chay dung
+    for f in range(n_features):
+        e = edges[:, f]
+        for i in range(1, len(e)):
+            if e[i] <= e[i - 1]:
+                e[i] = e[i - 1] + 1e-6
+        edges[:, f] = e
+    return edges
+
+
+def to_bins(x, edges):
+    """(N, F) gia tri thuc -> (N, F) chi so bin trong [0, n_bins-1]."""
+    n_bins = edges.shape[0] - 1
+    out = np.empty(x.shape, dtype=np.int16)
+    for f in range(x.shape[1]):
+        out[:, f] = np.clip(np.digitize(x[:, f], edges[1:-1, f]), 0, n_bins - 1)
+    return out
+
+
+# ----------------------------------------------------------------------------
+class ClientData:
+    """Phan nam o client. Chi tra ve histogram (G, H) — khong bao gio tra mau."""
+
+    def __init__(self, xb, y, n_classes, n_bins):
+        self.xb = xb                       # (N, F) da binning
+        self.y = y
+        self.n_bins = n_bins
+        self.n_classes = n_classes
+        self.n, self.F = xb.shape
+        self.score = np.zeros((self.n, n_classes), dtype=np.float64)
+
+    def grad_hess(self, k):
+        """g, h cua lop k theo softmax (nhu XGBoost multi:softprob)."""
+        p = np.exp(self.score - self.score.max(1, keepdims=True))
+        p /= p.sum(1, keepdims=True)
+        pk = p[:, k]
+        return pk - (self.y == k).astype(np.float64), np.maximum(pk * (1 - pk), 1e-6)
+
+    def histogram(self, k, mask):
+        """Eq. 9 phia client: cong don g, h vao tung o (feature, bin).
+
+        Tra ve (G (F, n_bins), H (F, n_bins), so mau) — day la TAT CA nhung gi
+        roi khoi client.
+        """
+        g, h = self.grad_hess(k)
+        G = np.zeros((self.F, self.n_bins))
+        H = np.zeros((self.F, self.n_bins))
+        if mask.sum() == 0:
+            return G, H, 0
+        gm, hm, xm = g[mask], h[mask], self.xb[mask]
+        for f in range(self.F):
+            G[f] = np.bincount(xm[:, f], weights=gm, minlength=self.n_bins)
+            H[f] = np.bincount(xm[:, f], weights=hm, minlength=self.n_bins)
+        return G, H, int(mask.sum())
+
+
+# ----------------------------------------------------------------------------
+class FederatedGBDT:
+    """Server: dieu phoi dung cay tu histogram gop cua cac client."""
+
+    def __init__(self, n_classes=13, n_bins=64, max_depth=6, n_rounds=20,
+                 lr=0.3, lam=1.0, gamma=0.0, min_child_weight=1e-3):
+        self.n_classes = n_classes
+        self.n_bins = n_bins
+        self.max_depth = max_depth
+        self.n_rounds = n_rounds
+        self.lr = lr
+        self.lam = lam
+        self.gamma = gamma
+        self.min_child_weight = min_child_weight
+        self.edges = None
+        self.trees = []                    # [(round, class, cay)]
+
+    # ---- tim diem chia tu histogram DA GOP ---------------------------------
+    def _best_split(self, G, H):
+        Gt, Ht = G.sum(1)[0], H.sum(1)[0]      # tong cua node (moi feature nhu nhau)
+        goc = Gt * Gt / (Ht + self.lam)
+        tot, tot_f, tot_b = -np.inf, -1, -1
+        GL_c = np.cumsum(G, axis=1)
+        HL_c = np.cumsum(H, axis=1)
+        for f in range(G.shape[0]):
+            GL, HL = GL_c[f, :-1], HL_c[f, :-1]
+            GR, HR = Gt - GL, Ht - HL
+            hop_le = (HL > self.min_child_weight) & (HR > self.min_child_weight)
+            if not hop_le.any():
+                continue
+            gain = 0.5 * (GL ** 2 / (HL + self.lam) + GR ** 2 / (HR + self.lam)
+                          - goc) - self.gamma
+            gain = np.where(hop_le, gain, -np.inf)
+            b = int(np.argmax(gain))
+            if gain[b] > tot:
+                tot, tot_f, tot_b = float(gain[b]), f, b
+        return tot, tot_f, tot_b
+
+    def _grow(self, clients, masks, k, depth):
+        """Dung mot node. masks[i] = mau nao cua client i thuoc node nay."""
+        # --- gop histogram tu tat ca client (Eq. 9) ---
+        G = H = None
+        tong_mau = 0
+        for c, m in zip(clients, masks):
+            g, h, n = c.histogram(k, m)
+            G = g if G is None else G + g
+            H = h if H is None else H + h
+            tong_mau += n
+        if tong_mau == 0:
+            return {"leaf": 0.0}
+
+        Gt, Ht = G.sum(1)[0], H.sum(1)[0]
+        if depth >= self.max_depth:
+            return {"leaf": float(-Gt / (Ht + self.lam))}
+
+        gain, f, b = self._best_split(G, H)
+        if gain <= 0 or f < 0:
+            return {"leaf": float(-Gt / (Ht + self.lam))}
+
+        trai = [m & (c.xb[:, f] <= b) for c, m in zip(clients, masks)]
+        phai = [m & (c.xb[:, f] > b) for c, m in zip(clients, masks)]
+        if sum(t.sum() for t in trai) == 0 or sum(p.sum() for p in phai) == 0:
+            return {"leaf": float(-Gt / (Ht + self.lam))}
+        return {"f": f, "bin": b,
+                "L": self._grow(clients, trai, k, depth + 1),
+                "R": self._grow(clients, phai, k, depth + 1)}
+
+    @staticmethod
+    def _predict_tree(tree, xb):
+        out = np.zeros(len(xb))
+        pile = [(tree, np.ones(len(xb), dtype=bool))]
+        while pile:
+            node, m = pile.pop()
+            if not m.any():
+                continue
+            if "leaf" in node:
+                out[m] = node["leaf"]
+                continue
+            di_trai = m & (xb[:, node["f"]] <= node["bin"])
+            pile.append((node["L"], di_trai))
+            pile.append((node["R"], m & ~di_trai))
+        return out
+
+    # ---- API ---------------------------------------------------------------
+    def fit(self, client_x, client_y, verbose=True):
+        """client_x/client_y: danh sach mang cua TUNG client (khong gop lai)."""
+        self.edges = build_bin_edges(client_x, self.n_bins)
+        clients = [ClientData(to_bins(x, self.edges), y, self.n_classes, self.n_bins)
+                   for x, y in zip(client_x, client_y)]
+        for rnd in range(self.n_rounds):
+            for k in range(self.n_classes):
+                masks = [np.ones(c.n, dtype=bool) for c in clients]
+                cay = self._grow(clients, masks, k, 0)
+                self.trees.append((rnd, k, cay))
+                for c in clients:            # cap nhat score cuc bo
+                    c.score[:, k] += self.lr * self._predict_tree(cay, c.xb)
+            if verbose:
+                acc = np.mean([(c.score.argmax(1) == c.y).mean() for c in clients])
+                print(f"  vong {rnd + 1}/{self.n_rounds}: acc cuc bo tb = {acc:.4f}")
+        return self
+
+    def predict_proba(self, x):
+        xb = to_bins(x, self.edges)
+        score = np.zeros((len(x), self.n_classes))
+        for _, k, cay in self.trees:
+            score[:, k] += self.lr * self._predict_tree(cay, xb)
+        p = np.exp(score - score.max(1, keepdims=True))
+        return p / p.sum(1, keepdims=True)
+
+    def predict(self, x):
+        return self.predict_proba(x).argmax(1)
+
+
+if __name__ == "__main__":
+    rng = np.random.default_rng(0)
+    K, F = 4, 6
+    tam = rng.normal(0, 3, (K, F))
+    cx, cy = [], []
+    for _ in range(5):                                   # 5 client
+        y = rng.integers(0, K, 400)
+        cx.append((tam[y] + rng.normal(0, 1, (400, F))).astype(np.float32))
+        cy.append(y)
+    m = FederatedGBDT(n_classes=K, n_bins=32, max_depth=4, n_rounds=5, lr=0.3)
+    m.fit(cx, cy)
+    yt = rng.integers(0, K, 500)
+    xt = (tam[yt] + rng.normal(0, 1, (500, F))).astype(np.float32)
+    print(f"acc tren tap test doc lap: {(m.predict(xt) == yt).mean():.4f}")

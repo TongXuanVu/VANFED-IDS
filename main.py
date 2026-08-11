@@ -59,6 +59,9 @@ def main():
     p.add_argument("--fed_subdir", default="federated_data",
                    choices=["federated_data", "federated_data_fewshot",
                             "federated_data_10shot"])
+    p.add_argument("--actor_gpus", type=float, default=-1.0,
+                   help="Ty le GPU moi client song song. -1 = tu tinh. 0 = ep CPU")
+    p.add_argument("--actor_cpus", type=float, default=1.0)
     p.add_argument("--seed", type=int, default=42)
     a = p.parse_args()
 
@@ -77,6 +80,8 @@ def main():
         "--cm-every", str(a.cm_every),
         "--seed", str(a.seed),
         "--fed-subdir", a.fed_subdir,
+        "--actor-gpus", str(a.actor_gpus),
+        "--actor-cpus", str(a.actor_cpus),
     ]
     if not a.no_full_test:
         argv.append("--final-full-test")

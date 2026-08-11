@@ -255,6 +255,7 @@ def main():
                 args.data_dir, ids, args.task, args.n_packet_features,
                 C.load_client_data, NUM_GLOBAL_CLASSES, args.gbdt_bins,
                 args.gbdt_depth, args.gbdt_rounds,
+                max_samples=args.max_samples,
                 gbdt_max_per_client=args.gbdt_max_per_client)
             save_physics(gbdt, gpath, {"task": args.task,
                                        "n_packet_features": args.n_packet_features})

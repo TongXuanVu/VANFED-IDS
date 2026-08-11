@@ -44,8 +44,7 @@ def physics_slice(x, n_packet):
 
 def train_physics_branch(data_dir, client_ids, task, n_packet, load_client_data,
                          n_classes=13, n_bins=64, max_depth=6, n_rounds=20,
-                         lr=0.3, max_samples=200_000,
-                         gbdt_max_per_client=20_000):
+                         lr=0.3, max_samples=0, gbdt_max_per_client=0):
     """Dung cay lien ket tu du lieu cac client (chi gop histogram)."""
     cx, cy = [], []
     for cid in client_ids:
@@ -59,9 +58,11 @@ def train_physics_branch(data_dir, client_ids, task, n_packet, load_client_data,
         cy.append(y)
     if not cx:
         raise RuntimeError("Khong client nao co du lieu cho nhanh physics")
-    logger.info(f"Nhanh physics: {len(cx)} client, {sum(len(y) for y in cy)} mau "
-                f"(lay toi da {gbdt_max_per_client}/client), {cx[0].shape[1]} dac trung, "
-                f"{n_rounds} vong boosting")
+    logger.info(
+        f"Nhanh physics: {len(cx)} client, {sum(len(y) for y in cy)} mau "
+        f"(tran nap/client={max_samples or 'khong'}, tran dung cay/client="
+        f"{gbdt_max_per_client or 'khong'}), {cx[0].shape[1]} dac trung, "
+        f"{n_rounds} vong boosting")
     gbdt = FederatedGBDT(n_classes=n_classes, n_bins=n_bins, max_depth=max_depth,
                          n_rounds=n_rounds, lr=lr)
     gbdt.fit(cx, cy, verbose=False, max_per_client=gbdt_max_per_client)

@@ -37,9 +37,17 @@ from model_vanids import bpa, dempster_combine, false_positive_rate
 logger = logging.getLogger(__name__)
 
 
-def physics_slice(x, n_packet):
-    """Cot danh cho nhanh physics. n_packet=0 -> dung het."""
-    return x if n_packet <= 0 else x[:, n_packet:]
+def physics_slice(x, n_packet, copy=False):
+    """Cot danh cho nhanh physics. n_packet=0 -> dung het.
+
+    copy=True: tra ban SAO. Lat cot kieu x[:, k:] tra ve VIEW, giu song mang 31
+    cot goc — voi 97.7 trieu mau do la 11.3 GB khong bao gio duoc giai phong.
+    Luc nap du lieu de dung cay phai copy; luc suy luan thi view la du.
+    """
+    if n_packet <= 0:
+        return x
+    v = x[:, n_packet:]
+    return np.ascontiguousarray(v) if copy else v
 
 
 def train_physics_branch(data_dir, client_ids, task, n_packet, load_client_data,
@@ -54,8 +62,9 @@ def train_physics_branch(data_dir, client_ids, task, n_packet, load_client_data,
             continue
         if len(y) == 0:
             continue
-        cx.append(physics_slice(x, n_packet))
-        cy.append(y)
+        cx.append(physics_slice(x, n_packet, copy=True))
+        cy.append(y.astype(np.int8) if n_classes <= 127 else y)
+        del x
     if not cx:
         raise RuntimeError("Khong client nao co du lieu cho nhanh physics")
     logger.info(

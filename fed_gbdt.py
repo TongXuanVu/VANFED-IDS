@@ -54,10 +54,13 @@ def build_bin_edges(client_x, n_bins=64, n_features=None, seed=42):
     return edges
 
 
+CHUNK = 2_000_000          # so dong xu ly moi lan, de chan bo nho tam
+
+
 def to_bins(x, edges):
-    """(N, F) gia tri thuc -> (N, F) chi so bin trong [0, n_bins-1]."""
+    """(N, F) gia tri thuc -> (N, F) chi so bin. int8 du cho <=127 bin."""
     n_bins = edges.shape[0] - 1
-    out = np.empty(x.shape, dtype=np.int16)
+    out = np.empty(x.shape, dtype=np.int8 if n_bins <= 127 else np.int16)
     for f in range(x.shape[1]):
         out[:, f] = np.clip(np.digitize(x[:, f], edges[1:-1, f]), 0, n_bins - 1)
     return out
@@ -74,19 +77,31 @@ class ClientData:
         self.n_classes = n_classes
         self.n, self.F = xb.shape
         self.score = np.zeros((self.n, n_classes), dtype=np.float32)
-        # Chi so phang: (dac trung f, bin b) -> f*n_bins + b. Nho vay ca ma tran
-        # (F, n_bins) tinh duoc bang MOT np.bincount, thay vi lap F lan trong
-        # Python. Voi vai trieu mau, khac biet la vai phut so voi vai gio.
-        self.flat_idx = (np.arange(self.F, dtype=np.int64) * n_bins
-                         + xb.astype(np.int64))
+        # Offset de doi (dac trung f, bin b) -> f*n_bins + b, gop ca ma tran
+        # (F, n_bins) vao MOT np.bincount.
+        #
+        # Truoc day toi tinh SAN ca mang chi so nay (N, F) kieu int64 — voi 97.7
+        # trieu mau x 13 dac trung do la 9.5 GB, du mot minh no cung lam tran RAM
+        # Kaggle. Gio chi giu vector offset (F,) va dung chi so theo TUNG KHOI.
+        self.offset = (np.arange(self.F, dtype=np.int64) * n_bins)
 
     def grad_hess(self, k):
-        """g, h cua lop k theo softmax (nhu XGBoost multi:softprob)."""
-        p = np.exp(self.score - self.score.max(1, keepdims=True))
-        p /= p.sum(1, keepdims=True)
-        pk = p[:, k]
-        return ((pk - (self.y == k)).astype(np.float32),
-                np.maximum(pk * (1 - pk), 1e-6).astype(np.float32))
+        """g, h cua lop k theo softmax (nhu XGBoost multi:softprob).
+
+        Tinh theo khoi: ma tran softmax trung gian (N, K) voi 97.7 trieu mau la
+        4.7 GB neu lam mot lan.
+        """
+        g = np.empty(self.n, dtype=np.float32)
+        h = np.empty(self.n, dtype=np.float32)
+        for s in range(0, self.n, CHUNK):
+            e = min(s + CHUNK, self.n)
+            sc = self.score[s:e]
+            p = np.exp(sc - sc.max(1, keepdims=True))
+            p /= p.sum(1, keepdims=True)
+            pk = p[:, k]
+            g[s:e] = pk - (self.y[s:e] == k)
+            h[s:e] = np.maximum(pk * (1 - pk), 1e-6)
+        return g, h
 
     def histogram(self, gh, mask):
         """Eq. 9 phia client: cong don g, h vao tung o (feature, bin).
@@ -98,17 +113,25 @@ class ClientData:
         Tra ve (G (F, n_bins), H (F, n_bins), so mau) — day la TAT CA nhung gi
         roi khoi client.
         """
-        n_sel = int(mask.sum())
         size = self.F * self.n_bins
-        if n_sel == 0:
-            return np.zeros((self.F, self.n_bins)), np.zeros((self.F, self.n_bins)), 0
+        G = np.zeros(size)
+        H = np.zeros(size)
         g, h = gh
-        idx = self.flat_idx[mask].ravel()
-        G = np.bincount(idx, weights=np.repeat(g[mask], self.F),
-                        minlength=size).reshape(self.F, self.n_bins)
-        H = np.bincount(idx, weights=np.repeat(h[mask], self.F),
-                        minlength=size).reshape(self.F, self.n_bins)
-        return G, H, n_sel
+        n_sel = 0
+        for s in range(0, self.n, CHUNK):                 # cong don theo khoi
+            e = min(s + CHUNK, self.n)
+            m = mask[s:e]
+            c = int(m.sum())
+            if c == 0:
+                continue
+            n_sel += c
+            flat = (self.offset + self.xb[s:e][m]).ravel()
+            G += np.bincount(flat, weights=np.repeat(g[s:e][m], self.F),
+                             minlength=size)
+            H += np.bincount(flat, weights=np.repeat(h[s:e][m], self.F),
+                             minlength=size)
+        return (G.reshape(self.F, self.n_bins),
+                H.reshape(self.F, self.n_bins), n_sel)
 
 
 # ----------------------------------------------------------------------------

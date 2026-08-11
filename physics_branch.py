@@ -113,36 +113,55 @@ class DSTFuser:
         return self.c_b, self.c_w
 
 
-def evaluate_with_dst(model, loader, criterion, device, fuser, common):
-    """Danh gia HAI NHANH + hop nhat DST.
+def evaluate_with_dst(model, loader, criterion, device, fuser, common,
+                      batch_rows=500_000):
+    """Danh gia HAI NHANH + hop nhat DST, XU LY THEO LO.
 
-    Tra ve dung dinh dang cua common.evaluate() de phan ghi CSV / confusion
-    matrix / checkpoint o server khong phai sua gi:
+    Ban truoc gom ca tap test vao RAM (x_raw, p_b, p_w, mass) — voi 41.8 trieu
+    mau x 31 dac trung do la ~17.7 GB, cong Ray object store 8 GB thi Kaggle
+    (29 GB) chet vi tran RAM. Gio moi lo duoc hop nhat xong roi bo di ngay;
+    chi giu lai NHAN du doan (int16), khong giu dac trung.
+
+    Tra ve dung dinh dang cu:
         (metrics, y_true, y_pred_fused, y_pred_packet, y_pred_physics)
     """
     import torch
     model.eval()
     loss_sum, nb = 0.0, 0
-    P_b, X, Y = [], [], []
+    Y, Yf, Yp, Yw = [], [], [], []
+    buf_x, buf_p, n_buf = [], [], 0
+
+    def xu_ly_lo():
+        """Hop nhat DST cho phan dang giu trong bo dem, roi giai phong."""
+        nonlocal n_buf
+        if not buf_x:
+            return
+        xb = np.concatenate(buf_x)
+        pb = np.concatenate(buf_p)
+        yf, _ = fuser.fuse(pb, xb)
+        Yf.append(yf.astype(np.int16))
+        Yp.append(pb.argmax(1).astype(np.int16))
+        Yw.append(fuser.physics_probs(xb).argmax(1).astype(np.int16))
+        buf_x.clear(); buf_p.clear()
+        n_buf = 0
+
     with torch.no_grad():
         for xb, yb in loader:
-            xb_d = xb.to(device).float()
-            out = model(xb_d)
+            out = model(xb.to(device).float())
             loss_sum += criterion(out, yb.to(device)).item()
             nb += 1
-            P_b.append(torch.softmax(out, 1).cpu().numpy())
-            X.append(xb.numpy().astype(np.float32))
-            Y.append(yb.numpy())
-    p_b = np.concatenate(P_b)
-    x_raw = np.concatenate(X)
+            buf_p.append(torch.softmax(out, 1).cpu().numpy().astype(np.float32))
+            buf_x.append(xb.numpy().astype(np.float32))
+            Y.append(yb.numpy().astype(np.int16))
+            n_buf += len(yb)
+            if n_buf >= batch_rows:
+                xu_ly_lo()
+    xu_ly_lo()
+
     y_true = np.concatenate(Y)
-
-    y_fused, _ = fuser.fuse(p_b, x_raw)
-    y_packet = p_b.argmax(1)
-    y_physics = fuser.physics_probs(x_raw).argmax(1)
-
-    m = common.compute_metrics(y_true, y_fused, loss_sum / max(nb, 1))
-    return m, y_true, y_fused, y_packet, y_physics
+    m = common.compute_metrics(y_true, np.concatenate(Yf), loss_sum / max(nb, 1))
+    return (m, y_true, np.concatenate(Yf),
+            np.concatenate(Yp), np.concatenate(Yw))
 
 
 def fusion_report(y_true, y_packet, y_physics, y_fused, path=None):

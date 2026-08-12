@@ -8,7 +8,7 @@ CACH O DAY: nhet trang thai vao chinh repo (logs/resume/), day len GitHub.
 Session sau chi can `git clone` la co du de chay tiep.
 
 Chi luu nhung gi CAN de resume, khong luu het:
-  checkpoints/latest.pth       trong so model
+  checkpoints*/latest.pth      trong so model (P4 dung checkpoints_cnn)
   metrics_task*.csv            dem so round da xong (rounds_done() doc file nay)
   physics_branch_task*.pkl     cay lien ket — co san thi khong phai dung lai
   classification_report/cm/dst  ket qua da co, khong muon mat
@@ -32,12 +32,24 @@ RESUME = os.path.join(HERE, "logs", "resume")
 # (mau glob, co giu khong) — theo thu tu uu tien khi in
 MAU = [
     "metrics*.csv",
+    "client_weights_*.csv",
     "physics_branch_task*.pkl",
     "classification_report_*.txt",
     "confusion_matrix_*.csv",
     "dst_fusion_*.json",
-    "sim.log",
+    "sim*.log",
 ]
+
+
+def thu_muc_ckpt(goc):
+    """Tra ve ten cac thu muc checkpoint co trong `goc`.
+
+    P1 dung "checkpoints", P4 dung "checkpoints_cnn" / "checkpoints_rnn" (co
+    hau to kien truc). Do bang glob thay vi viet cung ten.
+    """
+    return sorted(os.path.basename(d) for d in
+                  glob.glob(os.path.join(goc, "checkpoints*"))
+                  if os.path.isdir(d))
 
 
 def dem_round(thu_muc):
@@ -57,15 +69,20 @@ def dem_round(thu_muc):
 
 
 def round_checkpoint(thu_muc):
-    p = os.path.join(thu_muc, "checkpoints", "latest.pth")
-    if not os.path.exists(p):
-        return None
-    try:
-        import torch
-        return torch.load(p, map_location="cpu", weights_only=False).get("round")
-    except Exception as e:
-        print(f"  (khong doc duoc latest.pth: {e})")
-        return None
+    """(ten thu muc ckpt, round) cua tung ban latest.pth tim duoc."""
+    ket = []
+    for ten in thu_muc_ckpt(thu_muc):
+        p = os.path.join(thu_muc, ten, "latest.pth")
+        if not os.path.exists(p):
+            continue
+        try:
+            import torch
+            r = torch.load(p, map_location="cpu", weights_only=False).get("round")
+        except Exception as e:
+            print(f"  (khong doc duoc {ten}/latest.pth: {e})")
+            r = None
+        ket.append((ten, r))
+    return ket
 
 
 def in_trang_thai(ten, thu_muc):
@@ -73,9 +90,12 @@ def in_trang_thai(ten, thu_muc):
     if not os.path.isdir(thu_muc):
         print("  (chua co)")
         return
-    r = round_checkpoint(thu_muc)
-    print(f"  latest.pth       : round {r}" if r is not None else
-          "  latest.pth       : KHONG CO")
+    ck = round_checkpoint(thu_muc)
+    if ck:
+        for ten_ck, r in ck:
+            print(f"  {ten_ck}/latest.pth : round {r}")
+    else:
+        print("  latest.pth       : KHONG CO")
     d = dem_round(thu_muc)
     if d:
         for k, v in d.items():
@@ -104,10 +124,11 @@ def save(out_dir, force):
 
     os.makedirs(RESUME, exist_ok=True)
     da = []
-    latest = os.path.join(out_dir, "checkpoints", "latest.pth")
-    if os.path.exists(latest):
-        da.append(chep(latest, os.path.join(RESUME, "checkpoints", "latest.pth"),
-                       "checkpoints/latest.pth"))
+    for ten in thu_muc_ckpt(out_dir):
+        latest = os.path.join(out_dir, ten, "latest.pth")
+        if os.path.exists(latest):
+            da.append(chep(latest, os.path.join(RESUME, ten, "latest.pth"),
+                           f"{ten}/latest.pth"))
     for mau in MAU:
         for p in sorted(glob.glob(os.path.join(out_dir, mau))):
             da.append(chep(p, os.path.join(RESUME, os.path.basename(p)),
@@ -130,10 +151,11 @@ def load(out_dir, force):
 
     os.makedirs(out_dir, exist_ok=True)
     da = []
-    latest = os.path.join(RESUME, "checkpoints", "latest.pth")
-    if os.path.exists(latest):
-        da.append(chep(latest, os.path.join(out_dir, "checkpoints", "latest.pth"),
-                       "checkpoints/latest.pth"))
+    for ten in thu_muc_ckpt(RESUME):
+        latest = os.path.join(RESUME, ten, "latest.pth")
+        if os.path.exists(latest):
+            da.append(chep(latest, os.path.join(out_dir, ten, "latest.pth"),
+                           f"{ten}/latest.pth"))
     for p in sorted(glob.glob(os.path.join(RESUME, "*"))):
         if os.path.isfile(p):
             da.append(chep(p, os.path.join(out_dir, os.path.basename(p)),

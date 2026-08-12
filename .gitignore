@@ -7,6 +7,12 @@ _thu/
 *.pth
 *.log
 
+# NGOAI LE: checkpoint nho de tai hien lai ket qua (xem eval_rounds.py).
+# Chi vai tram KB, can co tren GitHub thi Kaggle moi clone duoc de chay lai.
+!logs/ckpt_eval/
+!logs/ckpt_eval/*.pth
+!logs/ckpt_eval/*.pkl
+
 # du lieu (khong bao gio commit)
 *.pt
 data/

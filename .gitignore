@@ -12,6 +12,10 @@ _thu/
 !logs/ckpt_eval/
 !logs/ckpt_eval/*.pth
 !logs/ckpt_eval/*.pkl
+# Trang thai de resume qua GitHub (xem resume_state.py). Chi latest.pth +
+# metrics CSV + cay + ket qua, KHONG co checkpoint tung round.
+!logs/resume/
+!logs/resume/**
 
 # du lieu (khong bao gio commit)
 *.pt

@@ -48,6 +48,22 @@ def save_counts(cm, names, path):
                    + [int(cm.sum())])
 
 
+def bang_text(cm, names):
+    """Ma tran duoi dang bang chu — de doc thang trong log, khoi phai tai file."""
+    ng = [n[:11] for n in names]
+    w = max(11, max(len(f"{int(v):,}") for v in cm.flatten()))
+    head = " " * 14 + "".join(f"{n:>{w + 2}}" for n in ng) + f"{'TONG':>{w + 2}}"
+    dong = [head, " " * 14 + "-" * (len(head) - 14)]
+    for i, row in enumerate(cm):
+        dong.append(f"{ng[i]:>12} |"
+                    + "".join(f"{int(v):>{w + 2},}" for v in row)
+                    + f"{int(row.sum()):>{w + 2},}")
+    dong.append(f"{'TONG du doan':>12} |"
+                + "".join(f"{int(v):>{w + 2},}" for v in cm.sum(0))
+                + f"{int(cm.sum()):>{w + 2},}")
+    return "\n".join(dong)
+
+
 def plot_counts(cm, names, path, tieu_de):
     """PNG voi SO LUONG THO trong tung o.
 
@@ -168,7 +184,22 @@ def main():
                         f"(task {a.task}, {cm.sum():,} mau)")
             dung = int(np.trace(cm))
             logger.info(f"  {ten_nhanh}: dung {dung:,}/{cm.sum():,} "
-                        f"= {dung / max(cm.sum(), 1):.6f}")
+                        f"= {dung / max(cm.sum(), 1):.6f}\n"
+                        f"  (hang = nhan that, cot = du doan, SO MAU THO)\n"
+                        + bang_text(cm, ten_hien))
+
+        if len(nhanh) > 1:
+            dd = {k: int((v == y_true).sum()) for k, v in nhanh.items()}
+            tot = max(dd, key=dd.get)
+            n_t = len(y_true)
+            logger.info("  --- so sanh nhanh (so mau dung) ---")
+            for k, v in sorted(dd.items(), key=lambda kv: -kv[1]):
+                logger.info(f"    {k:<14} {v:>12,}  ({v / n_t:.6f})"
+                            + ("   <- tot nhat" if k == tot else ""))
+            if tot != "DSTfused":
+                thiet = dd[tot] - dd["DSTfused"]
+                logger.info(f"    ** Hop nhat DST KEM hon '{tot}' "
+                            f"{thiet:,} mau ({thiet / n_t:.6f}) **")
 
         from sklearn.metrics import classification_report
         rp = classification_report(y_true, y_f, labels=list(range(n_cls)),

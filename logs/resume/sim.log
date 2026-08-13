@@ -1093,3 +1093,1866 @@ force-neutral     0.0045    1.0000    0.0089      5744
 2026-08-12 01:40:26,375 - INFO - aggregate_fit: received 60 results and 0 failures
 2026-08-12 01:40:26,482 - INFO - [Round 12] tong hop 60 client (265083 mau), train_loss=1.5564
 2026-08-12 01:40:26,487 - INFO - [Round 42] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_042.pth
+2026-08-12 17:20:51,802 - INFO - GPU cho moi actor: 0.5 (2 GPU / 4 CPU)
+2026-08-12 17:20:51,802 - INFO - Thiet bi: cuda | pool 100 client | 30 round/task | Flower simulation (Ray)
+2026-08-12 17:20:51,802 - INFO - Client co du lieu tung task: task0=50, task1=60, task2=70, task3=80, task4=100
+2026-08-12 17:20:52,131 - INFO - Chay tiep tu checkpoint round 42
+2026-08-12 17:20:52,132 - INFO - Tiep tuc: task0=30/30, task1=11/30
+2026-08-12 17:20:52,138 - INFO - [task 0] da xong 30/30 round — bo qua
+2026-08-12 17:20:52,138 - INFO - Nap global test: /kaggle/input/datasets/tongxuanvu/100clientiov/global_test_data.pt
+2026-08-12 17:21:15,974 - INFO - Global test goc: n=42048683
+2026-08-12 17:21:17,818 - INFO - Task 1: loc ve lop 0-5 -> n=41971741
+2026-08-12 17:21:17,818 - INFO - Danh gia moi round tren n=41971741 mau (dtype=float16)
+2026-08-12 17:21:17,831 - INFO - Nap nhanh physics co san: /kaggle/working/VANFED-IDS/out/physics_branch_task1.pkl
+2026-08-12 17:21:17,833 - INFO - ===== Task 1: 60 client, 19 round =====
+2026-08-12 17:21:20,381 - INFO - setup plugin alembic.autogenerate.schemas
+2026-08-12 17:21:20,381 - INFO - setup plugin alembic.autogenerate.tables
+2026-08-12 17:21:20,382 - INFO - setup plugin alembic.autogenerate.types
+2026-08-12 17:21:20,382 - INFO - setup plugin alembic.autogenerate.constraints
+2026-08-12 17:21:20,382 - INFO - setup plugin alembic.autogenerate.defaults
+2026-08-12 17:21:20,382 - INFO - setup plugin alembic.autogenerate.comments
+2026-08-12 17:21:40,248 - WARNING - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+2026-08-12 17:21:40,249 - INFO - Starting Flower simulation, config: num_rounds=19, no round_timeout
+2026-08-12 17:21:51,829 - INFO - Flower VCE: Ray initialized with resources: {'node:172.19.2.2': 1.0, 'CPU': 4.0, 'accelerator_type:T4': 1.0, 'GPU': 2.0, 'node:__internal_head__': 1.0, 'memory': 19702285927.0, 'object_store_memory': 8443836825.0}
+2026-08-12 17:21:51,830 - INFO - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+2026-08-12 17:21:51,830 - INFO - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1.0, 'num_gpus': 0.5}
+2026-08-12 17:21:51,872 - INFO - Flower VCE: Creating VirtualClientEngineActorPool with 4 actors
+2026-08-12 17:21:51,873 - INFO - [INIT]
+2026-08-12 17:21:51,873 - INFO - Using initial global parameters provided by strategy
+2026-08-12 17:21:51,874 - INFO - Starting evaluation of initial global parameters
+2026-08-12 17:21:51,877 - INFO - Evaluation returned no results (`None`)
+2026-08-12 17:21:51,877 - INFO - 
+2026-08-12 17:21:51,877 - INFO - [ROUND 1]
+2026-08-12 17:21:51,879 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 17:22:21,231 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 17:22:21,345 - WARNING - No fit_metrics_aggregation_fn provided
+2026-08-12 17:22:21,345 - INFO - [Round 1] tong hop 60 client (265083 mau), train_loss=1.6809
+2026-08-12 17:22:21,353 - INFO - [Round 43] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_043.pth
+2026-08-12 17:33:36,168 - INFO - [Round 43] loss=6.3981 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0245/0.5000/0.0435 | weighted P/R/F1=0.0001/0.0027/0.0002
+2026-08-12 17:33:36,170 - INFO - fit progress: (1, 6.3981087416945535, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.024500350752011707, 'macro_recall': 0.5, 'macro_f1': 0.043471973799515, 'weighted_precision': 0.00013613826954260227, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.000240344774313068}, 704.2930251079999)
+2026-08-12 17:33:36,170 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 17:33:36,170 - INFO - 
+2026-08-12 17:33:36,171 - INFO - [ROUND 2]
+2026-08-12 17:33:36,171 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 17:33:39,198 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 17:33:39,309 - INFO - [Round 2] tong hop 60 client (265083 mau), train_loss=1.8117
+2026-08-12 17:33:39,315 - INFO - [Round 44] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_044.pth
+2026-08-12 17:44:53,110 - INFO - [Round 44] loss=7.1069 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0258/0.5000/0.0457 | weighted P/R/F1=0.0001/0.0027/0.0002
+2026-08-12 17:44:53,113 - INFO - fit progress: (2, 7.106904442379197, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.025753603823393544, 'macro_recall': 0.5, 'macro_f1': 0.04568748545638792, 'weighted_precision': 0.00014001489612028374, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.00024654958560851815}, 1381.2360728820001)
+2026-08-12 17:44:53,113 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 17:44:53,114 - INFO - 
+2026-08-12 17:44:53,114 - INFO - [ROUND 3]
+2026-08-12 17:44:53,114 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 17:44:56,057 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 17:44:56,168 - INFO - [Round 3] tong hop 60 client (265083 mau), train_loss=1.9435
+2026-08-12 17:44:56,174 - INFO - [Round 45] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_045.pth
+2026-08-12 17:56:03,974 - INFO - [Round 45] DST: packet=0.0016 physics=0.0027 hop nhat=0.0027 (+0.0011 so voi packet)
+2026-08-12 17:56:03,974 - INFO - [Round 45] loss=7.7681 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0265/0.5000/0.0470 | weighted P/R/F1=0.0001/0.0027/0.0003
+2026-08-12 17:56:07,136 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.csv
+2026-08-12 17:56:07,137 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1_normalized.csv
+2026-08-12 17:56:15,550 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0140    1.0000    0.0277      5744
+      fuzzing     0.0016    1.0000    0.0033     67321
+     interval     0.1434    1.0000    0.2508     40542
+
+     accuracy                         0.0027  41971741
+    macro avg     0.0265    0.5000    0.0470  41971741
+ weighted avg     0.0001    0.0027    0.0003  41971741
+
+2026-08-12 17:56:15,912 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.png
+2026-08-12 17:56:15,914 - INFO - fit progress: (3, 7.7681019265236655, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.02651252871279122, 'macro_recall': 0.5, 'macro_f1': 0.0469645596270436, 'weighted_precision': 0.00014305200613278881, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.00025129890551488465}, 2064.036971099)
+2026-08-12 17:56:15,914 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 17:56:15,915 - INFO - 
+2026-08-12 17:56:15,915 - INFO - [ROUND 4]
+2026-08-12 17:56:15,915 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 17:56:19,127 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 17:56:19,243 - INFO - [Round 4] tong hop 60 client (265083 mau), train_loss=2.0683
+2026-08-12 17:56:19,249 - INFO - [Round 46] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_046.pth
+2026-08-12 18:07:34,041 - INFO - [Round 46] loss=8.4334 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0277/0.5000/0.0488 | weighted P/R/F1=0.0001/0.0027/0.0003
+2026-08-12 18:07:34,044 - INFO - fit progress: (4, 8.433364134994362, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.02767755960296393, 'macro_recall': 0.5, 'macro_f1': 0.04883080555728552, 'weighted_precision': 0.00014870293790219933, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.0002599759955948792}, 2742.1665760309997)
+2026-08-12 18:07:34,044 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 18:07:34,044 - INFO - 
+2026-08-12 18:07:34,044 - INFO - [ROUND 5]
+2026-08-12 18:07:34,044 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 18:07:36,930 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 18:07:37,042 - INFO - [Round 5] tong hop 60 client (265083 mau), train_loss=2.2018
+2026-08-12 18:07:37,047 - INFO - [Round 47] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_047.pth
+2026-08-12 18:18:51,250 - INFO - [Round 47] loss=9.0216 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0295/0.5000/0.0519 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 18:18:51,252 - INFO - fit progress: (5, 9.02163464663831, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.02952422012947281, 'macro_recall': 0.5, 'macro_f1': 0.05194950041995348, 'weighted_precision': 0.00015545173567579174, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.00027041657293909}, 3419.375428223)
+2026-08-12 18:18:51,253 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 18:18:51,253 - INFO - 
+2026-08-12 18:18:51,253 - INFO - [ROUND 6]
+2026-08-12 18:18:51,253 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 18:18:53,968 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 18:18:54,081 - INFO - [Round 6] tong hop 60 client (265083 mau), train_loss=2.3209
+2026-08-12 18:18:54,086 - INFO - [Round 48] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_048.pth
+2026-08-12 18:30:07,956 - INFO - [Round 48] loss=9.7514 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0346/0.5000/0.0610 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 18:30:07,958 - INFO - fit progress: (6, 9.751414391186719, {'accuracy': 0.002706749762894039, 'micro_precision': 0.002706749762894039, 'micro_recall': 0.002706749762894039, 'micro_f1': 0.002706749762894039, 'macro_precision': 0.03461531814281321, 'macro_recall': 0.5, 'macro_f1': 0.06101108547704276, 'weighted_precision': 0.00016608649617540344, 'weighted_recall': 0.002706749762894039, 'weighted_f1': 0.0002874577855869734}, 4096.080958255)
+2026-08-12 18:30:07,958 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 18:30:07,958 - INFO - 
+2026-08-12 18:30:07,958 - INFO - [ROUND 7]
+2026-08-12 18:30:07,959 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 18:30:10,865 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 18:30:10,977 - INFO - [Round 7] tong hop 60 client (265083 mau), train_loss=2.4306
+2026-08-12 18:30:10,982 - INFO - [Round 49] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_049.pth
+2026-08-12 18:41:25,032 - INFO - [Round 49] loss=10.3367 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0398/0.4999/0.0702 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 18:41:25,035 - INFO - fit progress: (7, 10.336658794650987, {'accuracy': 0.0027063209029141774, 'micro_precision': 0.0027063209029141774, 'micro_recall': 0.0027063209029141774, 'micro_f1': 0.0027063209029141774, 'macro_precision': 0.03984326795989251, 'macro_recall': 0.4999260026639041, 'macro_f1': 0.07019413400247893, 'weighted_precision': 0.00017313405005127473, 'weighted_recall': 0.0027063209029141774, 'weighted_f1': 0.0002990419936050081}, 4773.157657328999)
+2026-08-12 18:41:25,035 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 18:41:25,035 - INFO - 
+2026-08-12 18:41:25,035 - INFO - [ROUND 8]
+2026-08-12 18:41:25,035 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 18:41:27,807 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 18:41:27,917 - INFO - [Round 8] tong hop 60 client (265083 mau), train_loss=2.5488
+2026-08-12 18:41:27,923 - INFO - [Round 50] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_050.pth
+2026-08-12 18:52:44,303 - INFO - [Round 50] DST: packet=0.0016 physics=0.0027 hop nhat=0.0027 (+0.0011 so voi packet)
+2026-08-12 18:52:44,303 - INFO - [Round 50] loss=10.9374 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0467/0.4999/0.0816 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 18:52:47,384 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.csv
+2026-08-12 18:52:47,384 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1_normalized.csv
+2026-08-12 18:52:55,668 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.1110    1.0000    0.1999      5744
+      fuzzing     0.0016    1.0000    0.0032     67321
+     interval     0.1672    0.9993    0.2865     40542
+
+     accuracy                         0.0027  41971741
+    macro avg     0.0467    0.4999    0.0816  41971741
+ weighted avg     0.0002    0.0027    0.0003  41971741
+
+2026-08-12 18:52:55,917 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.png
+2026-08-12 18:52:55,919 - INFO - fit progress: (8, 10.937369115877486, {'accuracy': 0.00270608264736981, 'micro_precision': 0.00270608264736981, 'micro_recall': 0.00270608264736981, 'micro_f1': 0.00270608264736981, 'macro_precision': 0.04665121749820356, 'macro_recall': 0.4998848930327397, 'macro_f1': 0.08160951348777702, 'weighted_precision': 0.00017933448782913398, 'weighted_recall': 0.00270608264736981, 'weighted_f1': 0.0003093024098189644}, 5464.041966222)
+2026-08-12 18:52:55,919 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 18:52:55,919 - INFO - 
+2026-08-12 18:52:55,920 - INFO - [ROUND 9]
+2026-08-12 18:52:55,920 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 18:52:58,615 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 18:52:58,731 - INFO - [Round 9] tong hop 60 client (265083 mau), train_loss=2.6491
+2026-08-12 18:52:58,737 - INFO - [Round 51] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_051.pth
+2026-08-12 19:04:23,154 - INFO - [Round 51] loss=11.4981 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0601/0.4993/0.1018 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:04:23,156 - INFO - fit progress: (9, 11.49805733210216, {'accuracy': 0.002705629961835512, 'micro_precision': 0.002705629961835512, 'micro_recall': 0.002705629961835512, 'micro_f1': 0.002705629961835512, 'macro_precision': 0.06006092505979479, 'macro_recall': 0.4993335931255902, 'macro_f1': 0.10184271855225059, 'weighted_precision': 0.000190575888552434, 'weighted_recall': 0.002705629961835512, 'weighted_f1': 0.0003262537340793992}, 6151.27907413)
+2026-08-12 19:04:23,156 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:04:23,156 - INFO - 
+2026-08-12 19:04:23,157 - INFO - [ROUND 10]
+2026-08-12 19:04:23,157 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 19:04:25,952 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 19:04:26,068 - INFO - [Round 10] tong hop 60 client (265083 mau), train_loss=2.7437
+2026-08-12 19:04:26,074 - INFO - [Round 52] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_052.pth
+2026-08-12 19:15:34,389 - INFO - [Round 52] loss=12.0679 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0659/0.4870/0.1090 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:15:34,392 - INFO - fit progress: (10, 12.067889398331758, {'accuracy': 0.0026954802756454636, 'micro_precision': 0.0026954802756454636, 'micro_recall': 0.0026954802756454636, 'micro_f1': 0.0026954802756454636, 'macro_precision': 0.06592803517866763, 'macro_recall': 0.486972868891607, 'macro_f1': 0.10897105574341459, 'weighted_precision': 0.00019560766699178045, 'weighted_recall': 0.0026954802756454636, 'weighted_f1': 0.00033242085838417347}, 6822.514554281)
+2026-08-12 19:15:34,392 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:15:34,392 - INFO - 
+2026-08-12 19:15:34,392 - INFO - [ROUND 11]
+2026-08-12 19:15:34,392 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 19:15:37,304 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 19:15:37,416 - INFO - [Round 11] tong hop 60 client (265083 mau), train_loss=2.8504
+2026-08-12 19:15:37,421 - INFO - [Round 53] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_053.pth
+2026-08-12 19:26:48,950 - INFO - [Round 53] loss=12.6358 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0666/0.4870/0.1098 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:26:48,952 - INFO - fit progress: (11, 12.635815352736554, {'accuracy': 0.0026954802756454636, 'micro_precision': 0.0026954802756454636, 'micro_recall': 0.0026954802756454636, 'micro_f1': 0.0026954802756454636, 'macro_precision': 0.06655866364107293, 'macro_recall': 0.486972868891607, 'macro_f1': 0.10982956102250056, 'weighted_precision': 0.00019743606008118438, 'weighted_recall': 0.0026954802756454636, 'weighted_f1': 0.0003350448012284524}, 7497.075428654)
+2026-08-12 19:26:48,953 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:26:48,953 - INFO - 
+2026-08-12 19:26:48,953 - INFO - [ROUND 12]
+2026-08-12 19:26:48,953 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 19:26:51,675 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 19:26:51,783 - INFO - [Round 12] tong hop 60 client (265083 mau), train_loss=2.9456
+2026-08-12 19:26:51,788 - INFO - [Round 54] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_054.pth
+2026-08-12 19:37:32,016 - INFO - [Round 54] loss=13.0601 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0669/0.4870/0.1103 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:37:32,019 - INFO - fit progress: (12, 13.060120607194818, {'accuracy': 0.0026954802756454636, 'micro_precision': 0.0026954802756454636, 'micro_recall': 0.0026954802756454636, 'micro_f1': 0.0026954802756454636, 'macro_precision': 0.06689247211222134, 'macro_recall': 0.486972868891607, 'macro_f1': 0.1103060418255365, 'weighted_precision': 0.0001990600300764268, 'weighted_recall': 0.0026954802756454636, 'weighted_f1': 0.00033740719027245027}, 8140.1418319839995)
+2026-08-12 19:37:32,019 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:37:32,019 - INFO - 
+2026-08-12 19:37:32,019 - INFO - [ROUND 13]
+2026-08-12 19:37:32,019 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 19:37:34,613 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 19:37:34,723 - INFO - [Round 13] tong hop 60 client (265083 mau), train_loss=3.0351
+2026-08-12 19:37:34,729 - INFO - [Round 55] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_055.pth
+2026-08-12 19:48:45,496 - INFO - [Round 55] DST: packet=0.0016 physics=0.0027 hop nhat=0.0027 (+0.0011 so voi packet)
+2026-08-12 19:48:45,496 - INFO - [Round 55] loss=13.6795 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0666/0.4822/0.1096 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:48:48,571 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.csv
+2026-08-12 19:48:48,571 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1_normalized.csv
+2026-08-12 19:48:56,934 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.2241    0.8957    0.3585      5744
+      fuzzing     0.0016    1.0000    0.0032     67321
+     interval     0.1738    0.9975    0.2960     40542
+
+     accuracy                         0.0027  41971741
+    macro avg     0.0666    0.4822    0.1096  41971741
+ weighted avg     0.0002    0.0027    0.0003  41971741
+
+2026-08-12 19:48:57,190 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.png
+2026-08-12 19:48:57,192 - INFO - fit progress: (13, 13.679459245943818, {'accuracy': 0.0026900957003427616, 'micro_precision': 0.0026900957003427616, 'micro_recall': 0.0026900957003427616, 'micro_f1': 0.0026900957003427616, 'macro_precision': 0.06658294893923704, 'macro_recall': 0.4822084487208538, 'macro_f1': 0.10962067432834006, 'weighted_precision': 0.00020110125858270264, 'weighted_recall': 0.0026900957003427616, 'weighted_f1': 0.00034011894759530207}, 8825.314645944)
+2026-08-12 19:48:57,192 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:48:57,192 - INFO - 
+2026-08-12 19:48:57,192 - INFO - [ROUND 14]
+2026-08-12 19:48:57,192 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 19:49:00,100 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 19:49:00,213 - INFO - [Round 14] tong hop 60 client (265083 mau), train_loss=3.1230
+2026-08-12 19:49:00,219 - INFO - [Round 56] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_056.pth
+2026-08-12 19:59:57,719 - INFO - [Round 56] loss=14.2845 acc=0.0027 | micro P/R/F1=0.0027/0.0027/0.0027 | macro P/R/F1=0.0641/0.4615/0.1049 | weighted P/R/F1=0.0002/0.0027/0.0003
+2026-08-12 19:59:57,721 - INFO - fit progress: (14, 14.284528464567465, {'accuracy': 0.0026600040250891665, 'micro_precision': 0.0026600040250891665, 'micro_recall': 0.0026600040250891665, 'micro_f1': 0.0026600040250891665, 'macro_precision': 0.06408064133583245, 'macro_recall': 0.4614507888858063, 'macro_f1': 0.10493162093970498, 'weighted_precision': 0.0002021084270140865, 'weighted_recall': 0.0026600040250891665, 'weighted_f1': 0.00034009276106163104}, 9485.843659346)
+2026-08-12 19:59:57,721 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 19:59:57,721 - INFO - 
+2026-08-12 19:59:57,721 - INFO - [ROUND 15]
+2026-08-12 19:59:57,721 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 20:00:00,316 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 20:00:00,422 - INFO - [Round 15] tong hop 60 client (265083 mau), train_loss=3.2108
+2026-08-12 20:00:00,428 - INFO - [Round 57] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_057.pth
+2026-08-12 20:10:40,359 - INFO - [Round 57] loss=14.7360 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0639/0.4540/0.1041 | weighted P/R/F1=0.0002/0.0026/0.0003
+2026-08-12 20:10:40,361 - INFO - fit progress: (15, 14.736026356315167, {'accuracy': 0.0026415392204006977, 'micro_precision': 0.0026415392204006977, 'micro_recall': 0.0026415392204006977, 'micro_f1': 0.0026415392204006977, 'macro_precision': 0.0638935055320547, 'macro_recall': 0.45395625835619097, 'macro_f1': 0.1041440069259888, 'weighted_precision': 0.00020209688130210955, 'weighted_recall': 0.0026415392204006977, 'weighted_f1': 0.00033906435423345467}, 10128.484096724)
+2026-08-12 20:10:40,361 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 20:10:40,362 - INFO - 
+2026-08-12 20:10:40,362 - INFO - [ROUND 16]
+2026-08-12 20:10:40,362 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 20:10:43,499 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 20:10:43,613 - INFO - [Round 16] tong hop 60 client (265083 mau), train_loss=3.2900
+2026-08-12 20:10:43,618 - INFO - [Round 58] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_058.pth
+2026-08-12 20:21:24,008 - INFO - [Round 58] loss=15.2496 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0645/0.4495/0.1046 | weighted P/R/F1=0.0002/0.0026/0.0003
+2026-08-12 20:21:24,011 - INFO - fit progress: (16, 15.249600077122102, {'accuracy': 0.0026155931916190945, 'micro_precision': 0.0026155931916190945, 'micro_recall': 0.0026155931916190945, 'micro_f1': 0.0026155931916190945, 'macro_precision': 0.06450626191094218, 'macro_recall': 0.449479419522389, 'macro_f1': 0.10464366995531009, 'weighted_precision': 0.00020162079058692523, 'weighted_recall': 0.0026155931916190945, 'weighted_f1': 0.0003369890794194025}, 10772.133998832)
+2026-08-12 20:21:24,011 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 20:21:24,011 - INFO - 
+2026-08-12 20:21:24,012 - INFO - [ROUND 17]
+2026-08-12 20:21:24,012 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 20:21:26,699 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 20:21:26,809 - INFO - [Round 17] tong hop 60 client (265083 mau), train_loss=3.3645
+2026-08-12 20:21:26,814 - INFO - [Round 59] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_059.pth
+2026-08-12 20:31:55,590 - INFO - [Round 59] loss=15.8151 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0681/0.4495/0.1093 | weighted P/R/F1=0.0002/0.0026/0.0004
+2026-08-12 20:31:55,593 - INFO - fit progress: (17, 15.81511251857558, {'accuracy': 0.0026155931916190945, 'micro_precision': 0.0026155931916190945, 'micro_recall': 0.0026155931916190945, 'micro_f1': 0.0026155931916190945, 'macro_precision': 0.06808380779602367, 'macro_recall': 0.449479419522389, 'macro_f1': 0.10926288248400036, 'weighted_precision': 0.00021178477755840378, 'weighted_recall': 0.0026155931916190945, 'weighted_f1': 0.0003509480576838315}, 11403.715744705)
+2026-08-12 20:31:55,593 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 20:31:55,593 - INFO - 
+2026-08-12 20:31:55,593 - INFO - [ROUND 18]
+2026-08-12 20:31:55,594 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 20:31:58,080 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 20:31:58,187 - INFO - [Round 18] tong hop 60 client (265083 mau), train_loss=3.4304
+2026-08-12 20:31:58,192 - INFO - [Round 60] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_060.pth
+2026-08-12 20:42:16,707 - INFO - [Round 60] DST: packet=0.0016 physics=0.0027 hop nhat=0.0026 (+0.0010 so voi packet)
+2026-08-12 20:42:16,707 - INFO - [Round 60] loss=16.1373 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0687/0.4495/0.1100 | weighted P/R/F1=0.0002/0.0026/0.0004
+2026-08-12 20:42:19,695 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.csv
+2026-08-12 20:42:19,696 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1_normalized.csv
+2026-08-12 20:42:27,846 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.2236    0.7568    0.3452      5744
+      fuzzing     0.0016    1.0000    0.0032     67321
+     interval     0.1869    0.9401    0.3118     40542
+
+     accuracy                         0.0026  41971741
+    macro avg     0.0687    0.4495    0.1100  41971741
+ weighted avg     0.0002    0.0026    0.0004  41971741
+
+2026-08-12 20:42:28,079 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.png
+2026-08-12 20:42:28,081 - INFO - fit progress: (18, 16.137252408577815, {'accuracy': 0.0026155931916190945, 'micro_precision': 0.0026155931916190945, 'micro_recall': 0.0026155931916190945, 'micro_f1': 0.0026155931916190945, 'macro_precision': 0.0686783839736121, 'macro_recall': 0.449479419522389, 'macro_f1': 0.11002971225652912, 'weighted_precision': 0.0002136894335073682, 'weighted_recall': 0.0026155931916190945, 'weighted_f1': 0.00035355192384136313}, 12036.203690963)
+2026-08-12 20:42:28,081 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 20:42:28,081 - INFO - 
+2026-08-12 20:42:28,081 - INFO - [ROUND 19]
+2026-08-12 20:42:28,081 - INFO - configure_fit: strategy sampled 60 clients (out of 60)
+2026-08-12 20:42:30,594 - INFO - aggregate_fit: received 60 results and 0 failures
+2026-08-12 20:42:30,698 - INFO - [Round 19] tong hop 60 client (265083 mau), train_loss=3.4905
+2026-08-12 20:42:30,703 - INFO - [Round 61] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_061.pth
+2026-08-12 20:52:50,496 - INFO - [Round 61] DST: packet=0.0016 physics=0.0027 hop nhat=0.0026 (+0.0010 so voi packet)
+2026-08-12 20:52:50,496 - INFO - [Round 61] loss=16.4909 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0693/0.4495/0.1109 | weighted P/R/F1=0.0002/0.0026/0.0004
+2026-08-12 20:52:53,392 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.csv
+2026-08-12 20:52:53,392 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1_normalized.csv
+2026-08-12 20:53:01,397 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.2255    0.7568    0.3475      5744
+      fuzzing     0.0016    1.0000    0.0032     67321
+     interval     0.1889    0.9401    0.3146     40542
+
+     accuracy                         0.0026  41971741
+    macro avg     0.0693    0.4495    0.1109  41971741
+ weighted avg     0.0002    0.0026    0.0004  41971741
+
+2026-08-12 20:53:01,641 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task1.png
+2026-08-12 20:53:01,643 - INFO - fit progress: (19, 16.49088438547374, {'accuracy': 0.0026155931916190945, 'micro_precision': 0.0026155931916190945, 'micro_recall': 0.0026155931916190945, 'micro_f1': 0.0026155931916190945, 'macro_precision': 0.06934022274428008, 'macro_recall': 0.449479419522389, 'macro_f1': 0.11088463262608132, 'weighted_precision': 0.00021591905379821007, 'weighted_recall': 0.0026155931916190945, 'weighted_f1': 0.00035659628421068834}, 12669.765599459999)
+2026-08-12 20:53:01,643 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 20:53:01,643 - INFO - 
+2026-08-12 20:53:01,643 - INFO - [SUMMARY]
+2026-08-12 20:53:01,644 - INFO - Run finished 19 round(s) in 12669.77s
+2026-08-12 20:53:01,646 - INFO - 	History (loss, centralized):
+2026-08-12 20:53:01,647 - INFO - 		round 1: 6.3981087416945535
+2026-08-12 20:53:01,647 - INFO - 		round 2: 7.106904442379197
+2026-08-12 20:53:01,647 - INFO - 		round 3: 7.7681019265236655
+2026-08-12 20:53:01,647 - INFO - 		round 4: 8.433364134994362
+2026-08-12 20:53:01,647 - INFO - 		round 5: 9.02163464663831
+2026-08-12 20:53:01,647 - INFO - 		round 6: 9.751414391186719
+2026-08-12 20:53:01,647 - INFO - 		round 7: 10.336658794650987
+2026-08-12 20:53:01,648 - INFO - 		round 8: 10.937369115877486
+2026-08-12 20:53:01,648 - INFO - 		round 9: 11.49805733210216
+2026-08-12 20:53:01,648 - INFO - 		round 10: 12.067889398331758
+2026-08-12 20:53:01,648 - INFO - 		round 11: 12.635815352736554
+2026-08-12 20:53:01,648 - INFO - 		round 12: 13.060120607194818
+2026-08-12 20:53:01,648 - INFO - 		round 13: 13.679459245943818
+2026-08-12 20:53:01,648 - INFO - 		round 14: 14.284528464567465
+2026-08-12 20:53:01,648 - INFO - 		round 15: 14.736026356315167
+2026-08-12 20:53:01,648 - INFO - 		round 16: 15.249600077122102
+2026-08-12 20:53:01,648 - INFO - 		round 17: 15.81511251857558
+2026-08-12 20:53:01,648 - INFO - 		round 18: 16.137252408577815
+2026-08-12 20:53:01,648 - INFO - 		round 19: 16.49088438547374
+2026-08-12 20:53:01,648 - INFO - 	History (metrics, distributed, fit):
+2026-08-12 20:53:01,648 - INFO - 	{'num_clients': [(1, 60),
+2026-08-12 20:53:01,648 - INFO - 	                 (2, 60),
+2026-08-12 20:53:01,648 - INFO - 	                 (3, 60),
+2026-08-12 20:53:01,648 - INFO - 	                 (4, 60),
+2026-08-12 20:53:01,648 - INFO - 	                 (5, 60),
+2026-08-12 20:53:01,648 - INFO - 	                 (6, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (7, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (8, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (9, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (10, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (11, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (12, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (13, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (14, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (15, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (16, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (17, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (18, 60),
+2026-08-12 20:53:01,649 - INFO - 	                 (19, 60)],
+2026-08-12 20:53:01,649 - INFO - 	 'train_loss': [(1, 1.6808952104775252),
+2026-08-12 20:53:01,649 - INFO - 	                (2, 1.8116674070365575),
+2026-08-12 20:53:01,649 - INFO - 	                (3, 1.9434940657031439),
+2026-08-12 20:53:01,649 - INFO - 	                (4, 2.0683161119421203),
+2026-08-12 20:53:01,649 - INFO - 	                (5, 2.201836759055627),
+2026-08-12 20:53:01,649 - INFO - 	                (6, 2.3208928899987784),
+2026-08-12 20:53:01,649 - INFO - 	                (7, 2.4305523684227843),
+2026-08-12 20:53:01,649 - INFO - 	                (8, 2.5488093534895477),
+2026-08-12 20:53:01,649 - INFO - 	                (9, 2.649139780754287),
+2026-08-12 20:53:01,649 - INFO - 	                (10, 2.743683192174912),
+2026-08-12 20:53:01,649 - INFO - 	                (11, 2.8504461709733606),
+2026-08-12 20:53:01,650 - INFO - 	                (12, 2.9456014774905537),
+2026-08-12 20:53:01,650 - INFO - 	                (13, 3.035141687039372),
+2026-08-12 20:53:01,650 - INFO - 	                (14, 3.123004329106198),
+2026-08-12 20:53:01,650 - INFO - 	                (15, 3.2108308145135096),
+2026-08-12 20:53:01,650 - INFO - 	                (16, 3.29001805020237),
+2026-08-12 20:53:01,650 - INFO - 	                (17, 3.3644586982731517),
+2026-08-12 20:53:01,650 - INFO - 	                (18, 3.430387065908413),
+2026-08-12 20:53:01,650 - INFO - 	                (19, 3.490540130239593)]}
+2026-08-12 20:53:01,650 - INFO - 	History (metrics, centralized):
+2026-08-12 20:53:01,650 - INFO - 	{'accuracy': [(1, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (2, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (3, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (4, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (5, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (6, 0.002706749762894039),
+2026-08-12 20:53:01,650 - INFO - 	              (7, 0.0027063209029141774),
+2026-08-12 20:53:01,650 - INFO - 	              (8, 0.00270608264736981),
+2026-08-12 20:53:01,650 - INFO - 	              (9, 0.002705629961835512),
+2026-08-12 20:53:01,650 - INFO - 	              (10, 0.0026954802756454636),
+2026-08-12 20:53:01,650 - INFO - 	              (11, 0.0026954802756454636),
+2026-08-12 20:53:01,650 - INFO - 	              (12, 0.0026954802756454636),
+2026-08-12 20:53:01,650 - INFO - 	              (13, 0.0026900957003427616),
+2026-08-12 20:53:01,650 - INFO - 	              (14, 0.0026600040250891665),
+2026-08-12 20:53:01,650 - INFO - 	              (15, 0.0026415392204006977),
+2026-08-12 20:53:01,651 - INFO - 	              (16, 0.0026155931916190945),
+2026-08-12 20:53:01,651 - INFO - 	              (17, 0.0026155931916190945),
+2026-08-12 20:53:01,651 - INFO - 	              (18, 0.0026155931916190945),
+2026-08-12 20:53:01,651 - INFO - 	              (19, 0.0026155931916190945)],
+2026-08-12 20:53:01,651 - INFO - 	 'macro_f1': [(1, 0.043471973799515),
+2026-08-12 20:53:01,651 - INFO - 	              (2, 0.04568748545638792),
+2026-08-12 20:53:01,651 - INFO - 	              (3, 0.0469645596270436),
+2026-08-12 20:53:01,651 - INFO - 	              (4, 0.04883080555728552),
+2026-08-12 20:53:01,651 - INFO - 	              (5, 0.05194950041995348),
+2026-08-12 20:53:01,651 - INFO - 	              (6, 0.06101108547704276),
+2026-08-12 20:53:01,651 - INFO - 	              (7, 0.07019413400247893),
+2026-08-12 20:53:01,651 - INFO - 	              (8, 0.08160951348777702),
+2026-08-12 20:53:01,651 - INFO - 	              (9, 0.10184271855225059),
+2026-08-12 20:53:01,651 - INFO - 	              (10, 0.10897105574341459),
+2026-08-12 20:53:01,651 - INFO - 	              (11, 0.10982956102250056),
+2026-08-12 20:53:01,652 - INFO - 	              (12, 0.1103060418255365),
+2026-08-12 20:53:01,652 - INFO - 	              (13, 0.10962067432834006),
+2026-08-12 20:53:01,652 - INFO - 	              (14, 0.10493162093970498),
+2026-08-12 20:53:01,652 - INFO - 	              (15, 0.1041440069259888),
+2026-08-12 20:53:01,652 - INFO - 	              (16, 0.10464366995531009),
+2026-08-12 20:53:01,652 - INFO - 	              (17, 0.10926288248400036),
+2026-08-12 20:53:01,652 - INFO - 	              (18, 0.11002971225652912),
+2026-08-12 20:53:01,652 - INFO - 	              (19, 0.11088463262608132)],
+2026-08-12 20:53:01,652 - INFO - 	 'macro_precision': [(1, 0.024500350752011707),
+2026-08-12 20:53:01,652 - INFO - 	                     (2, 0.025753603823393544),
+2026-08-12 20:53:01,652 - INFO - 	                     (3, 0.02651252871279122),
+2026-08-12 20:53:01,652 - INFO - 	                     (4, 0.02767755960296393),
+2026-08-12 20:53:01,652 - INFO - 	                     (5, 0.02952422012947281),
+2026-08-12 20:53:01,652 - INFO - 	                     (6, 0.03461531814281321),
+2026-08-12 20:53:01,652 - INFO - 	                     (7, 0.03984326795989251),
+2026-08-12 20:53:01,653 - INFO - 	                     (8, 0.04665121749820356),
+2026-08-12 20:53:01,653 - INFO - 	                     (9, 0.06006092505979479),
+2026-08-12 20:53:01,653 - INFO - 	                     (10, 0.06592803517866763),
+2026-08-12 20:53:01,653 - INFO - 	                     (11, 0.06655866364107293),
+2026-08-12 20:53:01,653 - INFO - 	                     (12, 0.06689247211222134),
+2026-08-12 20:53:01,653 - INFO - 	                     (13, 0.06658294893923704),
+2026-08-12 20:53:01,653 - INFO - 	                     (14, 0.06408064133583245),
+2026-08-12 20:53:01,653 - INFO - 	                     (15, 0.0638935055320547),
+2026-08-12 20:53:01,653 - INFO - 	                     (16, 0.06450626191094218),
+2026-08-12 20:53:01,653 - INFO - 	                     (17, 0.06808380779602367),
+2026-08-12 20:53:01,653 - INFO - 	                     (18, 0.0686783839736121),
+2026-08-12 20:53:01,653 - INFO - 	                     (19, 0.06934022274428008)],
+2026-08-12 20:53:01,653 - INFO - 	 'macro_recall': [(1, 0.5),
+2026-08-12 20:53:01,653 - INFO - 	                  (2, 0.5),
+2026-08-12 20:53:01,653 - INFO - 	                  (3, 0.5),
+2026-08-12 20:53:01,653 - INFO - 	                  (4, 0.5),
+2026-08-12 20:53:01,653 - INFO - 	                  (5, 0.5),
+2026-08-12 20:53:01,654 - INFO - 	                  (6, 0.5),
+2026-08-12 20:53:01,654 - INFO - 	                  (7, 0.4999260026639041),
+2026-08-12 20:53:01,654 - INFO - 	                  (8, 0.4998848930327397),
+2026-08-12 20:53:01,654 - INFO - 	                  (9, 0.4993335931255902),
+2026-08-12 20:53:01,654 - INFO - 	                  (10, 0.486972868891607),
+2026-08-12 20:53:01,654 - INFO - 	                  (11, 0.486972868891607),
+2026-08-12 20:53:01,654 - INFO - 	                  (12, 0.486972868891607),
+2026-08-12 20:53:01,654 - INFO - 	                  (13, 0.4822084487208538),
+2026-08-12 20:53:01,654 - INFO - 	                  (14, 0.4614507888858063),
+2026-08-12 20:53:01,654 - INFO - 	                  (15, 0.45395625835619097),
+2026-08-12 20:53:01,654 - INFO - 	                  (16, 0.449479419522389),
+2026-08-12 20:53:01,654 - INFO - 	                  (17, 0.449479419522389),
+2026-08-12 20:53:01,654 - INFO - 	                  (18, 0.449479419522389),
+2026-08-12 20:53:01,654 - INFO - 	                  (19, 0.449479419522389)],
+2026-08-12 20:53:01,654 - INFO - 	 'micro_f1': [(1, 0.002706749762894039),
+2026-08-12 20:53:01,654 - INFO - 	              (2, 0.002706749762894039),
+2026-08-12 20:53:01,655 - INFO - 	              (3, 0.002706749762894039),
+2026-08-12 20:53:01,655 - INFO - 	              (4, 0.002706749762894039),
+2026-08-12 20:53:01,655 - INFO - 	              (5, 0.002706749762894039),
+2026-08-12 20:53:01,655 - INFO - 	              (6, 0.002706749762894039),
+2026-08-12 20:53:01,655 - INFO - 	              (7, 0.0027063209029141774),
+2026-08-12 20:53:01,655 - INFO - 	              (8, 0.00270608264736981),
+2026-08-12 20:53:01,655 - INFO - 	              (9, 0.002705629961835512),
+2026-08-12 20:53:01,655 - INFO - 	              (10, 0.0026954802756454636),
+2026-08-12 20:53:01,655 - INFO - 	              (11, 0.0026954802756454636),
+2026-08-12 20:53:01,655 - INFO - 	              (12, 0.0026954802756454636),
+2026-08-12 20:53:01,655 - INFO - 	              (13, 0.0026900957003427616),
+2026-08-12 20:53:01,655 - INFO - 	              (14, 0.0026600040250891665),
+2026-08-12 20:53:01,655 - INFO - 	              (15, 0.0026415392204006977),
+2026-08-12 20:53:01,655 - INFO - 	              (16, 0.0026155931916190945),
+2026-08-12 20:53:01,656 - INFO - 	              (17, 0.0026155931916190945),
+2026-08-12 20:53:01,656 - INFO - 	              (18, 0.0026155931916190945),
+2026-08-12 20:53:01,656 - INFO - 	              (19, 0.0026155931916190945)],
+2026-08-12 20:53:01,656 - INFO - 	 'micro_precision': [(1, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (2, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (3, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (4, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (5, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (6, 0.002706749762894039),
+2026-08-12 20:53:01,656 - INFO - 	                     (7, 0.0027063209029141774),
+2026-08-12 20:53:01,656 - INFO - 	                     (8, 0.00270608264736981),
+2026-08-12 20:53:01,656 - INFO - 	                     (9, 0.002705629961835512),
+2026-08-12 20:53:01,656 - INFO - 	                     (10, 0.0026954802756454636),
+2026-08-12 20:53:01,656 - INFO - 	                     (11, 0.0026954802756454636),
+2026-08-12 20:53:01,657 - INFO - 	                     (12, 0.0026954802756454636),
+2026-08-12 20:53:01,657 - INFO - 	                     (13, 0.0026900957003427616),
+2026-08-12 20:53:01,657 - INFO - 	                     (14, 0.0026600040250891665),
+2026-08-12 20:53:01,657 - INFO - 	                     (15, 0.0026415392204006977),
+2026-08-12 20:53:01,657 - INFO - 	                     (16, 0.0026155931916190945),
+2026-08-12 20:53:01,657 - INFO - 	                     (17, 0.0026155931916190945),
+2026-08-12 20:53:01,657 - INFO - 	                     (18, 0.0026155931916190945),
+2026-08-12 20:53:01,657 - INFO - 	                     (19, 0.0026155931916190945)],
+2026-08-12 20:53:01,657 - INFO - 	 'micro_recall': [(1, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (2, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (3, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (4, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (5, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (6, 0.002706749762894039),
+2026-08-12 20:53:01,657 - INFO - 	                  (7, 0.0027063209029141774),
+2026-08-12 20:53:01,657 - INFO - 	                  (8, 0.00270608264736981),
+2026-08-12 20:53:01,658 - INFO - 	                  (9, 0.002705629961835512),
+2026-08-12 20:53:01,658 - INFO - 	                  (10, 0.0026954802756454636),
+2026-08-12 20:53:01,658 - INFO - 	                  (11, 0.0026954802756454636),
+2026-08-12 20:53:01,658 - INFO - 	                  (12, 0.0026954802756454636),
+2026-08-12 20:53:01,658 - INFO - 	                  (13, 0.0026900957003427616),
+2026-08-12 20:53:01,658 - INFO - 	                  (14, 0.0026600040250891665),
+2026-08-12 20:53:01,658 - INFO - 	                  (15, 0.0026415392204006977),
+2026-08-12 20:53:01,658 - INFO - 	                  (16, 0.0026155931916190945),
+2026-08-12 20:53:01,658 - INFO - 	                  (17, 0.0026155931916190945),
+2026-08-12 20:53:01,658 - INFO - 	                  (18, 0.0026155931916190945),
+2026-08-12 20:53:01,658 - INFO - 	                  (19, 0.0026155931916190945)],
+2026-08-12 20:53:01,658 - INFO - 	 'weighted_f1': [(1, 0.000240344774313068),
+2026-08-12 20:53:01,658 - INFO - 	                 (2, 0.00024654958560851815),
+2026-08-12 20:53:01,658 - INFO - 	                 (3, 0.00025129890551488465),
+2026-08-12 20:53:01,659 - INFO - 	                 (4, 0.0002599759955948792),
+2026-08-12 20:53:01,659 - INFO - 	                 (5, 0.00027041657293909),
+2026-08-12 20:53:01,659 - INFO - 	                 (6, 0.0002874577855869734),
+2026-08-12 20:53:01,659 - INFO - 	                 (7, 0.0002990419936050081),
+2026-08-12 20:53:01,659 - INFO - 	                 (8, 0.0003093024098189644),
+2026-08-12 20:53:01,659 - INFO - 	                 (9, 0.0003262537340793992),
+2026-08-12 20:53:01,659 - INFO - 	                 (10, 0.00033242085838417347),
+2026-08-12 20:53:01,659 - INFO - 	                 (11, 0.0003350448012284524),
+2026-08-12 20:53:01,659 - INFO - 	                 (12, 0.00033740719027245027),
+2026-08-12 20:53:01,659 - INFO - 	                 (13, 0.00034011894759530207),
+2026-08-12 20:53:01,659 - INFO - 	                 (14, 0.00034009276106163104),
+2026-08-12 20:53:01,659 - INFO - 	                 (15, 0.00033906435423345467),
+2026-08-12 20:53:01,659 - INFO - 	                 (16, 0.0003369890794194025),
+2026-08-12 20:53:01,659 - INFO - 	                 (17, 0.0003509480576838315),
+2026-08-12 20:53:01,659 - INFO - 	                 (18, 0.00035355192384136313),
+2026-08-12 20:53:01,659 - INFO - 	                 (19, 0.00035659628421068834)],
+2026-08-12 20:53:01,659 - INFO - 	 'weighted_precision': [(1, 0.00013613826954260227),
+2026-08-12 20:53:01,659 - INFO - 	                        (2, 0.00014001489612028374),
+2026-08-12 20:53:01,659 - INFO - 	                        (3, 0.00014305200613278881),
+2026-08-12 20:53:01,659 - INFO - 	                        (4, 0.00014870293790219933),
+2026-08-12 20:53:01,659 - INFO - 	                        (5, 0.00015545173567579174),
+2026-08-12 20:53:01,659 - INFO - 	                        (6, 0.00016608649617540344),
+2026-08-12 20:53:01,659 - INFO - 	                        (7, 0.00017313405005127473),
+2026-08-12 20:53:01,659 - INFO - 	                        (8, 0.00017933448782913398),
+2026-08-12 20:53:01,659 - INFO - 	                        (9, 0.000190575888552434),
+2026-08-12 20:53:01,659 - INFO - 	                        (10, 0.00019560766699178045),
+2026-08-12 20:53:01,659 - INFO - 	                        (11, 0.00019743606008118438),
+2026-08-12 20:53:01,659 - INFO - 	                        (12, 0.0001990600300764268),
+2026-08-12 20:53:01,660 - INFO - 	                        (13, 0.00020110125858270264),
+2026-08-12 20:53:01,660 - INFO - 	                        (14, 0.0002021084270140865),
+2026-08-12 20:53:01,660 - INFO - 	                        (15, 0.00020209688130210955),
+2026-08-12 20:53:01,660 - INFO - 	                        (16, 0.00020162079058692523),
+2026-08-12 20:53:01,660 - INFO - 	                        (17, 0.00021178477755840378),
+2026-08-12 20:53:01,660 - INFO - 	                        (18, 0.0002136894335073682),
+2026-08-12 20:53:01,660 - INFO - 	                        (19, 0.00021591905379821007)],
+2026-08-12 20:53:01,660 - INFO - 	 'weighted_recall': [(1, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (2, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (3, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (4, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (5, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (6, 0.002706749762894039),
+2026-08-12 20:53:01,660 - INFO - 	                     (7, 0.0027063209029141774),
+2026-08-12 20:53:01,660 - INFO - 	                     (8, 0.00270608264736981),
+2026-08-12 20:53:01,660 - INFO - 	                     (9, 0.002705629961835512),
+2026-08-12 20:53:01,660 - INFO - 	                     (10, 0.0026954802756454636),
+2026-08-12 20:53:01,660 - INFO - 	                     (11, 0.0026954802756454636),
+2026-08-12 20:53:01,661 - INFO - 	                     (12, 0.0026954802756454636),
+2026-08-12 20:53:01,661 - INFO - 	                     (13, 0.0026900957003427616),
+2026-08-12 20:53:01,661 - INFO - 	                     (14, 0.0026600040250891665),
+2026-08-12 20:53:01,661 - INFO - 	                     (15, 0.0026415392204006977),
+2026-08-12 20:53:01,661 - INFO - 	                     (16, 0.0026155931916190945),
+2026-08-12 20:53:01,661 - INFO - 	                     (17, 0.0026155931916190945),
+2026-08-12 20:53:01,661 - INFO - 	                     (18, 0.0026155931916190945),
+2026-08-12 20:53:01,661 - INFO - 	                     (19, 0.0026155931916190945)]}
+2026-08-12 20:53:01,661 - INFO - 
+2026-08-12 20:53:01,665 - INFO - [task 1] danh gia tren TOAN BO tap global test (khong lay mau) — buoc nay cham, chi chay 1 lan/task
+2026-08-12 20:53:01,665 - INFO - Nap global test: /kaggle/input/datasets/tongxuanvu/100clientiov/global_test_data.pt
+2026-08-12 20:53:03,635 - INFO - Global test goc: n=42048683
+2026-08-12 20:53:05,500 - INFO - Task 1: loc ve lop 0-5 -> n=41971741
+2026-08-12 20:53:05,500 - INFO - Danh gia moi round tren n=41971741 mau (dtype=float16)
+2026-08-12 21:03:35,659 - INFO - TOAN BO TAP TEST | [Round 61] loss=16.4909 acc=0.0026 | micro P/R/F1=0.0026/0.0026/0.0026 | macro P/R/F1=0.0693/0.4495/0.1109 | weighted P/R/F1=0.0002/0.0026/0.0004
+2026-08-12 21:03:38,568 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task1.csv
+2026-08-12 21:03:38,568 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task1_normalized.csv
+2026-08-12 21:03:46,485 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_FULLTEST_task1.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.2255    0.7568    0.3475      5744
+      fuzzing     0.0016    1.0000    0.0032     67321
+     interval     0.1889    0.9401    0.3146     40542
+
+     accuracy                         0.0026  41971741
+    macro avg     0.0693    0.4495    0.1109  41971741
+ weighted avg     0.0002    0.0026    0.0004  41971741
+
+2026-08-12 21:03:46,714 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task1.png
+2026-08-12 21:03:46,721 - INFO - Nap global test: /kaggle/input/datasets/tongxuanvu/100clientiov/global_test_data.pt
+2026-08-12 21:03:48,660 - INFO - Global test goc: n=42048683
+2026-08-12 21:03:50,443 - INFO - Task 2: loc ve lop 0-8 -> n=41987401
+2026-08-12 21:03:50,443 - INFO - Danh gia moi round tren n=41987401 mau (dtype=float16)
+2026-08-12 21:03:50,468 - INFO - Client 0 (task=2): n=1546 | classes={6: 1546}
+2026-08-12 21:03:50,483 - INFO - Client 1 (task=2): n=70 | classes={7: 70}
+2026-08-12 21:03:50,510 - INFO - Client 2 (task=2): n=357 | classes={8: 357}
+2026-08-12 21:03:50,526 - INFO - Client 3 (task=2): n=95 | classes={7: 95}
+2026-08-12 21:03:50,552 - INFO - Client 4 (task=2): n=55 | classes={8: 55}
+2026-08-12 21:03:50,579 - INFO - Client 5 (task=2): n=330 | classes={8: 330}
+2026-08-12 21:03:50,603 - INFO - Client 6 (task=2): n=350 | classes={6: 350}
+2026-08-12 21:03:50,618 - INFO - Client 7 (task=2): n=41 | classes={7: 41}
+2026-08-12 21:03:50,644 - INFO - Client 8 (task=2): n=464 | classes={8: 464}
+2026-08-12 21:03:50,664 - INFO - Client 9 (task=2): n=492 | classes={6: 492}
+2026-08-12 21:03:50,685 - INFO - Client 10 (task=2): n=1456 | classes={6: 1456}
+2026-08-12 21:03:50,705 - INFO - Client 11 (task=2): n=679 | classes={6: 679}
+2026-08-12 21:03:50,731 - INFO - Client 12 (task=2): n=54 | classes={6: 54}
+2026-08-12 21:03:50,757 - INFO - Client 13 (task=2): n=856 | classes={7: 856}
+2026-08-12 21:03:50,793 - INFO - Client 14 (task=2): n=643 | classes={8: 643}
+2026-08-12 21:03:50,830 - INFO - Client 15 (task=2): n=4958 | classes={8: 4958}
+2026-08-12 21:03:50,839 - INFO - Client 16 (task=2): n=851 | classes={6: 529, 8: 322}
+2026-08-12 21:03:50,859 - INFO - Client 17 (task=2): n=290 | classes={6: 290}
+2026-08-12 21:03:50,889 - INFO - Client 18 (task=2): n=662 | classes={8: 662}
+2026-08-12 21:03:50,917 - INFO - Client 19 (task=2): n=565 | classes={8: 565}
+2026-08-12 21:03:50,931 - INFO - Client 20 (task=2): n=301 | classes={7: 301}
+2026-08-12 21:03:50,962 - INFO - Client 21 (task=2): n=319 | classes={8: 319}
+2026-08-12 21:03:50,976 - INFO - Client 22 (task=2): n=74 | classes={7: 74}
+2026-08-12 21:03:51,000 - INFO - Client 23 (task=2): n=342 | classes={8: 342}
+2026-08-12 21:03:51,014 - INFO - Client 24 (task=2): n=508 | classes={7: 508}
+2026-08-12 21:03:51,034 - INFO - Client 25 (task=2): n=672 | classes={6: 672}
+2026-08-12 21:03:51,054 - INFO - Client 26 (task=2): n=107 | classes={6: 107}
+2026-08-12 21:03:51,068 - INFO - Client 27 (task=2): n=352 | classes={7: 352}
+2026-08-12 21:03:51,081 - INFO - Client 28 (task=2): n=126 | classes={7: 126}
+2026-08-12 21:03:51,108 - INFO - Client 29 (task=2): n=426 | classes={8: 426}
+2026-08-12 21:03:51,134 - INFO - Client 30 (task=2): n=943 | classes={8: 943}
+2026-08-12 21:03:51,188 - INFO - Client 31 (task=2): n=133 | classes={6: 133}
+2026-08-12 21:03:51,215 - INFO - Client 32 (task=2): n=221 | classes={8: 221}
+2026-08-12 21:03:51,245 - INFO - Client 33 (task=2): n=324 | classes={8: 324}
+2026-08-12 21:03:51,258 - INFO - Client 34 (task=2): n=252 | classes={7: 252}
+2026-08-12 21:03:51,283 - INFO - Client 35 (task=2): n=349 | classes={6: 349}
+2026-08-12 21:03:51,297 - INFO - Client 36 (task=2): n=259 | classes={7: 259}
+2026-08-12 21:03:51,311 - INFO - Client 37 (task=2): n=52 | classes={7: 52}
+2026-08-12 21:03:51,338 - INFO - Client 38 (task=2): n=584 | classes={8: 584}
+2026-08-12 21:03:51,360 - INFO - Client 39 (task=2): n=201 | classes={6: 201}
+2026-08-12 21:03:51,381 - INFO - Client 40 (task=2): n=224 | classes={6: 224}
+2026-08-12 21:03:51,395 - INFO - Client 41 (task=2): n=121 | classes={7: 121}
+2026-08-12 21:03:51,422 - INFO - Client 42 (task=2): n=122 | classes={8: 122}
+2026-08-12 21:03:51,436 - INFO - Client 43 (task=2): n=337 | classes={7: 337}
+2026-08-12 21:03:51,449 - INFO - Client 44 (task=2): n=74 | classes={7: 74}
+2026-08-12 21:03:51,471 - INFO - Client 45 (task=2): n=415 | classes={6: 415}
+2026-08-12 21:03:51,490 - INFO - Client 46 (task=2): n=910 | classes={6: 910}
+2026-08-12 21:03:51,516 - INFO - Client 47 (task=2): n=276 | classes={8: 276}
+2026-08-12 21:03:51,544 - INFO - Client 48 (task=2): n=905 | classes={8: 905}
+2026-08-12 21:03:51,558 - INFO - Client 49 (task=2): n=1050 | classes={7: 1050}
+2026-08-12 21:03:51,579 - INFO - Client 50 (task=2): n=813 | classes={6: 813}
+2026-08-12 21:03:51,621 - INFO - Client 51 (task=2): n=262 | classes={7: 262}
+2026-08-12 21:03:51,634 - INFO - Client 52 (task=2): n=287 | classes={7: 287}
+2026-08-12 21:03:51,661 - INFO - Client 53 (task=2): n=133 | classes={8: 133}
+2026-08-12 21:03:51,682 - INFO - Client 54 (task=2): n=418 | classes={6: 418}
+2026-08-12 21:03:51,695 - INFO - Client 55 (task=2): n=517 | classes={7: 517}
+2026-08-12 21:03:51,712 - INFO - Client 56 (task=2): n=579 | classes={7: 579}
+2026-08-12 21:03:51,733 - INFO - Client 57 (task=2): n=156 | classes={6: 156}
+2026-08-12 21:03:51,752 - INFO - Client 58 (task=2): n=388 | classes={6: 388}
+2026-08-12 21:03:51,793 - INFO - Client 59 (task=2): n=1597 | classes={8: 1597}
+2026-08-12 21:03:51,806 - INFO - Client 60 (task=2): n=184 | classes={7: 184}
+2026-08-12 21:03:51,828 - INFO - Client 61 (task=2): n=700 | classes={6: 700}
+2026-08-12 21:03:51,867 - INFO - Client 62 (task=2): n=732 | classes={7: 120, 8: 612}
+2026-08-12 21:03:51,887 - INFO - Client 63 (task=2): n=251 | classes={6: 251}
+2026-08-12 21:03:51,933 - INFO - Client 64 (task=2): n=1469 | classes={8: 1469}
+2026-08-12 21:03:51,948 - INFO - Client 65 (task=2): n=412 | classes={7: 412}
+2026-08-12 21:03:51,971 - INFO - Client 66 (task=2): n=410 | classes={6: 410}
+2026-08-12 21:03:51,984 - INFO - Client 67 (task=2): n=412 | classes={7: 412}
+2026-08-12 21:03:52,014 - INFO - Client 68 (task=2): n=802 | classes={8: 802}
+2026-08-12 21:03:52,035 - INFO - Client 69 (task=2): n=225 | classes={6: 225}
+2026-08-12 21:03:52,036 - INFO - Nhanh physics: 70 client, 36540 mau (tran nap/client=khong, tran dung cay/client=500000), 13 dac trung, 20 vong boosting
+2026-08-12 21:03:59,405 - INFO - Luu nhanh physics -> /kaggle/working/VANFED-IDS/out/physics_branch_task2.pkl
+2026-08-12 21:03:59,417 - INFO - ===== Task 2: 70 client, 30 round =====
+2026-08-12 21:03:59,417 - WARNING - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+2026-08-12 21:03:59,418 - INFO - Starting Flower simulation, config: num_rounds=30, no round_timeout
+2026-08-12 21:04:11,132 - INFO - Flower VCE: Ray initialized with resources: {'node:172.19.2.2': 1.0, 'node:__internal_head__': 1.0, 'accelerator_type:T4': 1.0, 'CPU': 4.0, 'GPU': 2.0, 'memory': 18842768180.0, 'object_store_memory': 8075472076.0}
+2026-08-12 21:04:11,133 - INFO - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+2026-08-12 21:04:11,133 - INFO - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1.0, 'num_gpus': 0.5}
+2026-08-12 21:04:11,153 - INFO - Flower VCE: Creating VirtualClientEngineActorPool with 4 actors
+2026-08-12 21:04:11,155 - INFO - [INIT]
+2026-08-12 21:04:11,155 - INFO - Using initial global parameters provided by strategy
+2026-08-12 21:04:11,156 - INFO - Starting evaluation of initial global parameters
+2026-08-12 21:04:11,161 - INFO - Evaluation returned no results (`None`)
+2026-08-12 21:04:11,161 - INFO - 
+2026-08-12 21:04:11,161 - INFO - [ROUND 1]
+2026-08-12 21:04:11,162 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:04:30,049 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:04:30,172 - WARNING - No fit_metrics_aggregation_fn provided
+2026-08-12 21:04:30,172 - INFO - [Round 1] tong hop 70 client (36540 mau), train_loss=19.7484
+2026-08-12 21:04:30,178 - INFO - [Round 62] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_062.pth
+2026-08-12 21:15:02,307 - INFO - [Round 62] loss=16.6334 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0004/0.2288/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 21:15:02,310 - INFO - fit progress: (1, 16.63343170265746, {'accuracy': 0.0017141570634486283, 'micro_precision': 0.0017141570634486283, 'micro_recall': 0.0017141570634486283, 'micro_f1': 0.0017141570634486283, 'macro_precision': 0.00044884821507442274, 'macro_recall': 0.2288271736110762, 'macro_f1': 0.0008953613803816644, 'weighted_precision': 3.3463937334641375e-06, 'weighted_recall': 0.0017141570634486283, 'weighted_f1': 6.679047044077649e-06}, 651.148359402001)
+2026-08-12 21:15:02,310 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 21:15:02,310 - INFO - 
+2026-08-12 21:15:02,310 - INFO - [ROUND 2]
+2026-08-12 21:15:02,310 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:15:03,629 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:15:03,760 - INFO - [Round 2] tong hop 70 client (36540 mau), train_loss=18.7147
+2026-08-12 21:15:03,766 - INFO - [Round 63] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_063.pth
+2026-08-12 21:25:58,021 - INFO - [Round 63] loss=16.7603 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0004/0.2253/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 21:25:58,024 - INFO - fit progress: (2, 16.760330669078208, {'accuracy': 0.001708941213103426, 'micro_precision': 0.001708941213103426, 'micro_recall': 0.001708941213103426, 'micro_f1': 0.001708941213103426, 'macro_precision': 0.00044433970521170644, 'macro_recall': 0.22528981396879694, 'macro_f1': 0.0008862847538976776, 'weighted_precision': 3.3566060144356072e-06, 'weighted_recall': 0.001708941213103426, 'weighted_f1': 6.699271067042414e-06}, 1306.8622528859996)
+2026-08-12 21:25:58,024 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 21:25:58,024 - INFO - 
+2026-08-12 21:25:58,024 - INFO - [ROUND 3]
+2026-08-12 21:25:58,024 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:25:59,390 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:25:59,520 - INFO - [Round 3] tong hop 70 client (36540 mau), train_loss=17.7423
+2026-08-12 21:25:59,525 - INFO - [Round 64] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_064.pth
+2026-08-12 21:36:09,234 - INFO - [Round 64] loss=16.8079 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2234/0.0010 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 21:36:09,237 - INFO - fit progress: (3, 16.8078965749081, {'accuracy': 0.0017056783295541441, 'micro_precision': 0.0017056783295541441, 'micro_recall': 0.0017056783295541441, 'micro_f1': 0.0017056783295541441, 'macro_precision': 0.0005328621524090542, 'macro_recall': 0.22344156835165455, 'macro_f1': 0.0009703605132841096, 'weighted_precision': 3.4238682472297467e-06, 'weighted_recall': 0.0017056783295541441, 'weighted_f1': 6.771022507955062e-06}, 1918.0754972920004)
+2026-08-12 21:36:09,237 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 21:36:09,237 - INFO - 
+2026-08-12 21:36:09,237 - INFO - [ROUND 4]
+2026-08-12 21:36:09,238 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:36:10,408 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:36:10,523 - INFO - [Round 4] tong hop 70 client (36540 mau), train_loss=16.8469
+2026-08-12 21:36:10,528 - INFO - [Round 65] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_065.pth
+2026-08-12 21:46:05,206 - INFO - [Round 65] DST: packet=0.0016 physics=0.0004 hop nhat=0.0017 (+0.0001 so voi packet)
+2026-08-12 21:46:05,206 - INFO - [Round 65] loss=16.7832 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2240/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 21:46:08,324 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-12 21:46:08,324 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-12 21:46:16,537 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0019    0.9537    0.0038     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0012    0.2382    0.0023      5043
+rpm-accessory     0.0004    0.0048    0.0007      3146
+        speed     0.0008    0.8190    0.0016      7471
+
+     accuracy                         0.0017  41987401
+    macro avg     0.0005    0.2240    0.0009  41987401
+ weighted avg     0.0000    0.0017    0.0000  41987401
+
+2026-08-12 21:46:16,887 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-12 21:46:16,890 - INFO - fit progress: (4, 16.783150529549793, {'accuracy': 0.0017038206294311953, 'micro_precision': 0.0017038206294311953, 'micro_recall': 0.0017038206294311953, 'micro_f1': 0.0017038206294311953, 'macro_precision': 0.00047422116223450224, 'macro_recall': 0.22396143217748055, 'macro_f1': 0.0009405494476477505, 'weighted_precision': 3.401512369754804e-06, 'weighted_recall': 0.0017038206294311953, 'weighted_f1': 6.7851340035362805e-06}, 2525.7284124979997)
+2026-08-12 21:46:16,890 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 21:46:16,890 - INFO - 
+2026-08-12 21:46:16,890 - INFO - [ROUND 5]
+2026-08-12 21:46:16,890 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:46:18,062 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:46:18,181 - INFO - [Round 5] tong hop 70 client (36540 mau), train_loss=15.9673
+2026-08-12 21:46:18,185 - INFO - [Round 66] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_066.pth
+2026-08-12 21:56:27,060 - INFO - [Round 66] loss=16.6133 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2257/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 21:56:27,062 - INFO - fit progress: (5, 16.613279459313897, {'accuracy': 0.0017009626292420433, 'micro_precision': 0.0017009626292420433, 'micro_recall': 0.0017009626292420433, 'micro_f1': 0.0017009626292420433, 'macro_precision': 0.0004597060086128506, 'macro_recall': 0.22570497262601683, 'macro_f1': 0.0009157785993155251, 'weighted_precision': 3.4136456374558516e-06, 'weighted_recall': 0.0017009626292420433, 'weighted_f1': 6.812057374329328e-06}, 3135.9010202659993)
+2026-08-12 21:56:27,063 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 21:56:27,063 - INFO - 
+2026-08-12 21:56:27,063 - INFO - [ROUND 6]
+2026-08-12 21:56:27,063 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 21:56:28,267 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 21:56:28,399 - INFO - [Round 6] tong hop 70 client (36540 mau), train_loss=15.1954
+2026-08-12 21:56:28,405 - INFO - [Round 67] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_067.pth
+2026-08-12 22:06:41,905 - INFO - [Round 67] loss=16.3264 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2296/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 22:06:41,908 - INFO - fit progress: (6, 16.3263578535859, {'accuracy': 0.0016918884786414857, 'micro_precision': 0.0016918884786414857, 'micro_recall': 0.0016918884786414857, 'micro_f1': 0.0016918884786414857, 'macro_precision': 0.00045844933135116725, 'macro_recall': 0.22964177379765763, 'macro_f1': 0.0009144019084932069, 'weighted_precision': 3.4495660250922998e-06, 'weighted_recall': 0.0016918884786414857, 'weighted_f1': 6.884256003463151e-06}, 3750.746882444)
+2026-08-12 22:06:41,909 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:06:41,909 - INFO - 
+2026-08-12 22:06:41,909 - INFO - [ROUND 7]
+2026-08-12 22:06:41,909 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:06:43,119 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:06:43,242 - INFO - [Round 7] tong hop 70 client (36540 mau), train_loss=14.5821
+2026-08-12 22:06:43,248 - INFO - [Round 68] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_068.pth
+2026-08-12 22:16:55,536 - INFO - [Round 68] loss=16.0179 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0004/0.2285/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 22:16:55,539 - INFO - fit progress: (7, 16.017917983230294, {'accuracy': 0.0016716681273032355, 'micro_precision': 0.0016716681273032355, 'micro_recall': 0.0016716681273032355, 'micro_f1': 0.0016716681273032355, 'macro_precision': 0.00044896647712430217, 'macro_recall': 0.22848897777824284, 'macro_f1': 0.0008955967944365247, 'weighted_precision': 3.4639713749671803e-06, 'weighted_recall': 0.0016716681273032355, 'weighted_f1': 6.91285184490498e-06}, 4364.377559568002)
+2026-08-12 22:16:55,539 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:16:55,539 - INFO - 
+2026-08-12 22:16:55,539 - INFO - [ROUND 8]
+2026-08-12 22:16:55,540 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:16:56,764 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:16:56,887 - INFO - [Round 8] tong hop 70 client (36540 mau), train_loss=13.9049
+2026-08-12 22:16:56,892 - INFO - [Round 69] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_069.pth
+2026-08-12 22:27:07,622 - INFO - [Round 69] loss=15.6103 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0004/0.2319/0.0009 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 22:27:07,624 - INFO - fit progress: (8, 15.610250334776433, {'accuracy': 0.0016549726428649394, 'micro_precision': 0.0016549726428649394, 'micro_recall': 0.0016549726428649394, 'micro_f1': 0.0016549726428649394, 'macro_precision': 0.00044597995029818714, 'macro_recall': 0.2318625979982675, 'macro_f1': 0.0008897415920182192, 'weighted_precision': 3.511451607322885e-06, 'weighted_recall': 0.0016549726428649394, 'weighted_f1': 7.0072975126580795e-06}, 4976.462863790002)
+2026-08-12 22:27:07,625 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:27:07,625 - INFO - 
+2026-08-12 22:27:07,625 - INFO - [ROUND 9]
+2026-08-12 22:27:07,625 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:27:08,804 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:27:08,924 - INFO - [Round 9] tong hop 70 client (36540 mau), train_loss=13.2949
+2026-08-12 22:27:08,930 - INFO - [Round 70] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_070.pth
+2026-08-12 22:37:16,918 - INFO - [Round 70] DST: packet=0.0016 physics=0.0004 hop nhat=0.0017 (+0.0001 so voi packet)
+2026-08-12 22:37:16,918 - INFO - [Round 70] loss=15.1620 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2632/0.0011 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 22:37:19,911 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-12 22:37:19,912 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-12 22:37:28,369 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0021    0.8992    0.0042     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0021    0.6040    0.0042      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0007    0.8591    0.0014      7471
+
+     accuracy                         0.0017  41987401
+    macro avg     0.0005    0.2632    0.0011  41987401
+ weighted avg     0.0000    0.0017    0.0000  41987401
+
+2026-08-12 22:37:28,739 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-12 22:37:28,741 - INFO - fit progress: (9, 15.162032325818311, {'accuracy': 0.0016676907437066658, 'micro_precision': 0.0016676907437066658, 'micro_recall': 0.0016676907437066658, 'micro_f1': 0.0016676907437066658, 'macro_precision': 0.0005489926398850715, 'macro_recall': 0.26318464055191537, 'macro_f1': 0.0010951070241035738, 'weighted_precision': 3.737569839932495e-06, 'weighted_recall': 0.0016676907437066658, 'weighted_f1': 7.457552693431755e-06}, 5597.579839539001)
+2026-08-12 22:37:28,741 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:37:28,742 - INFO - 
+2026-08-12 22:37:28,742 - INFO - [ROUND 10]
+2026-08-12 22:37:28,742 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:37:29,895 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:37:30,007 - INFO - [Round 10] tong hop 70 client (36540 mau), train_loss=12.7032
+2026-08-12 22:37:30,013 - INFO - [Round 71] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_071.pth
+2026-08-12 22:47:31,087 - INFO - [Round 71] loss=14.6959 acc=0.0017 | micro P/R/F1=0.0017/0.0017/0.0017 | macro P/R/F1=0.0005/0.2668/0.0011 | weighted P/R/F1=0.0000/0.0017/0.0000
+2026-08-12 22:47:31,089 - INFO - fit progress: (10, 14.695893652252355, {'accuracy': 0.0016524480760311884, 'micro_precision': 0.0016524480760311884, 'micro_recall': 0.0016524480760311884, 'micro_f1': 0.0016524480760311884, 'macro_precision': 0.0005329817464257781, 'macro_recall': 0.2668037110710305, 'macro_f1': 0.0010633629061499342, 'weighted_precision': 3.7849543199816127e-06, 'weighted_recall': 0.0016524480760311884, 'weighted_f1': 7.551785796031099e-06}, 6199.927902033)
+2026-08-12 22:47:31,090 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:47:31,090 - INFO - 
+2026-08-12 22:47:31,090 - INFO - [ROUND 11]
+2026-08-12 22:47:31,090 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:47:32,322 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:47:32,445 - INFO - [Round 11] tong hop 70 client (36540 mau), train_loss=12.1426
+2026-08-12 22:47:32,449 - INFO - [Round 72] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_072.pth
+2026-08-12 22:58:11,149 - INFO - [Round 72] loss=14.2089 acc=0.0016 | micro P/R/F1=0.0016/0.0016/0.0016 | macro P/R/F1=0.0005/0.2659/0.0010 | weighted P/R/F1=0.0000/0.0016/0.0000
+2026-08-12 22:58:11,151 - INFO - fit progress: (11, 14.208854446154364, {'accuracy': 0.001635180991555062, 'micro_precision': 0.001635180991555062, 'micro_recall': 0.001635180991555062, 'micro_f1': 0.001635180991555062, 'macro_precision': 0.0004926919242807326, 'macro_recall': 0.2659073614304217, 'macro_f1': 0.0009832048902096995, 'weighted_precision': 3.8041803221912506e-06, 'weighted_recall': 0.001635180991555062, 'weighted_f1': 7.589876842203842e-06}, 6839.989766130002)
+2026-08-12 22:58:11,151 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 22:58:11,151 - INFO - 
+2026-08-12 22:58:11,152 - INFO - [ROUND 12]
+2026-08-12 22:58:11,152 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 22:58:12,320 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 22:58:12,441 - INFO - [Round 12] tong hop 70 client (36540 mau), train_loss=11.5962
+2026-08-12 22:58:12,447 - INFO - [Round 73] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_073.pth
+2026-08-12 23:08:44,022 - INFO - [Round 73] loss=13.6823 acc=0.0016 | micro P/R/F1=0.0016/0.0016/0.0016 | macro P/R/F1=0.0005/0.2654/0.0009 | weighted P/R/F1=0.0000/0.0016/0.0000
+2026-08-12 23:08:44,024 - INFO - fit progress: (12, 13.682251868509871, {'accuracy': 0.0016192714571687827, 'micro_precision': 0.0016192714571687827, 'micro_recall': 0.0016192714571687827, 'micro_f1': 0.0016192714571687827, 'macro_precision': 0.00046122019387448036, 'macro_recall': 0.2654163174537825, 'macro_f1': 0.0009205103932225754, 'weighted_precision': 3.840482754983623e-06, 'weighted_recall': 0.0016192714571687827, 'weighted_f1': 7.661835565485077e-06}, 7472.8627546200005)
+2026-08-12 23:08:44,024 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:08:44,024 - INFO - 
+2026-08-12 23:08:44,025 - INFO - [ROUND 13]
+2026-08-12 23:08:44,025 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:08:45,218 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:08:45,340 - INFO - [Round 13] tong hop 70 client (36540 mau), train_loss=11.1200
+2026-08-12 23:08:45,345 - INFO - [Round 74] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_074.pth
+2026-08-12 23:18:50,589 - INFO - [Round 74] loss=13.2008 acc=0.0016 | micro P/R/F1=0.0016/0.0016/0.0016 | macro P/R/F1=0.0004/0.2644/0.0009 | weighted P/R/F1=0.0000/0.0016/0.0000
+2026-08-12 23:18:50,591 - INFO - fit progress: (13, 13.200793361003289, {'accuracy': 0.0016036953561379044, 'micro_precision': 0.0016036953561379044, 'micro_recall': 0.0016036953561379044, 'micro_f1': 0.0016036953561379044, 'macro_precision': 0.00044252297510372844, 'macro_recall': 0.2643572940934001, 'macro_f1': 0.0008832149272930724, 'weighted_precision': 3.877580134364138e-06, 'weighted_recall': 0.0016036953561379044, 'weighted_f1': 7.735337142415796e-06}, 8079.4299786209995)
+2026-08-12 23:18:50,592 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:18:50,592 - INFO - 
+2026-08-12 23:18:50,592 - INFO - [ROUND 14]
+2026-08-12 23:18:50,592 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:18:51,768 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:18:51,894 - INFO - [Round 14] tong hop 70 client (36540 mau), train_loss=10.6329
+2026-08-12 23:18:51,899 - INFO - [Round 75] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_075.pth
+2026-08-12 23:29:07,331 - INFO - [Round 75] DST: packet=0.0016 physics=0.0004 hop nhat=0.0016 (-0.0000 so voi packet)
+2026-08-12 23:29:07,331 - INFO - [Round 75] loss=12.6774 acc=0.0016 | micro P/R/F1=0.0016/0.0016/0.0016 | macro P/R/F1=0.0004/0.2648/0.0009 | weighted P/R/F1=0.0000/0.0016/0.0000
+2026-08-12 23:29:10,434 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-12 23:29:10,434 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-12 23:29:19,443 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0023    0.8407    0.0046     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0009    0.6585    0.0019      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0006    0.8781    0.0013      7471
+
+     accuracy                         0.0016  41987401
+    macro avg     0.0004    0.2648    0.0009  41987401
+ weighted avg     0.0000    0.0016    0.0000  41987401
+
+2026-08-12 23:29:19,814 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-12 23:29:19,816 - INFO - fit progress: (14, 12.6774140509986, {'accuracy': 0.0015837131714820834, 'micro_precision': 0.0015837131714820834, 'micro_recall': 0.0015837131714820834, 'micro_f1': 0.0015837131714820834, 'macro_precision': 0.0004303771262764407, 'macro_recall': 0.2648477211493737, 'macro_f1': 0.0008589581734459459, 'weighted_precision': 3.9223150394619774e-06, 'weighted_recall': 0.0015837131714820834, 'weighted_f1': 7.823917715545281e-06}, 8708.654629657001)
+2026-08-12 23:29:19,816 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:29:19,816 - INFO - 
+2026-08-12 23:29:19,816 - INFO - [ROUND 15]
+2026-08-12 23:29:19,816 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:29:20,972 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:29:21,086 - INFO - [Round 15] tong hop 70 client (36540 mau), train_loss=10.1793
+2026-08-12 23:29:21,091 - INFO - [Round 76] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_076.pth
+2026-08-12 23:39:20,836 - INFO - [Round 76] loss=12.1755 acc=0.0016 | micro P/R/F1=0.0016/0.0016/0.0016 | macro P/R/F1=0.0004/0.2650/0.0008 | weighted P/R/F1=0.0000/0.0016/0.0000
+2026-08-12 23:39:20,838 - INFO - fit progress: (15, 12.175488569250154, {'accuracy': 0.0015599203199073931, 'micro_precision': 0.0015599203199073931, 'micro_recall': 0.0015599203199073931, 'micro_f1': 0.0015599203199073931, 'macro_precision': 0.000421110545789486, 'macro_recall': 0.26497283066571686, 'macro_f1': 0.0008404131361835222, 'weighted_precision': 3.980527091985701e-06, 'weighted_recall': 0.0015599203199073931, 'weighted_f1': 7.939174328039659e-06}, 9309.676714163)
+2026-08-12 23:39:20,838 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:39:20,838 - INFO - 
+2026-08-12 23:39:20,839 - INFO - [ROUND 16]
+2026-08-12 23:39:20,839 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:39:21,991 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:39:22,110 - INFO - [Round 16] tong hop 70 client (36540 mau), train_loss=9.7615
+2026-08-12 23:39:22,116 - INFO - [Round 77] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_077.pth
+2026-08-12 23:49:22,334 - INFO - [Round 77] loss=11.6480 acc=0.0015 | micro P/R/F1=0.0015/0.0015/0.0015 | macro P/R/F1=0.0004/0.2664/0.0008 | weighted P/R/F1=0.0000/0.0015/0.0000
+2026-08-12 23:49:22,336 - INFO - fit progress: (16, 11.647997660725748, {'accuracy': 0.0015302923846131843, 'micro_precision': 0.0015302923846131843, 'micro_recall': 0.0015302923846131843, 'micro_f1': 0.0015302923846131843, 'macro_precision': 0.0004151434730974646, 'macro_recall': 0.26635733129368194, 'macro_f1': 0.0008284135135976158, 'weighted_precision': 4.070995806886252e-06, 'weighted_recall': 0.0015302923846131843, 'weighted_f1': 8.11833643462748e-06}, 9911.174781156002)
+2026-08-12 23:49:22,336 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:49:22,336 - INFO - 
+2026-08-12 23:49:22,337 - INFO - [ROUND 17]
+2026-08-12 23:49:22,337 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:49:23,479 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:49:23,595 - INFO - [Round 17] tong hop 70 client (36540 mau), train_loss=9.3505
+2026-08-12 23:49:23,600 - INFO - [Round 78] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_078.pth
+2026-08-12 23:59:39,050 - INFO - [Round 78] loss=11.1801 acc=0.0015 | micro P/R/F1=0.0015/0.0015/0.0015 | macro P/R/F1=0.0004/0.2710/0.0008 | weighted P/R/F1=0.0000/0.0015/0.0000
+2026-08-12 23:59:39,052 - INFO - fit progress: (17, 11.180096946033823, {'accuracy': 0.0015003071992953315, 'micro_precision': 0.0015003071992953315, 'micro_recall': 0.0015003071992953315, 'micro_f1': 0.0015003071992953315, 'macro_precision': 0.0004140812836125448, 'macro_recall': 0.27098287279865285, 'macro_f1': 0.0008261907962563605, 'weighted_precision': 4.157663525366333e-06, 'weighted_recall': 0.0015003071992953315, 'weighted_f1': 8.289742465581629e-06}, 10527.890892991)
+2026-08-12 23:59:39,053 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-12 23:59:39,053 - INFO - 
+2026-08-12 23:59:39,053 - INFO - [ROUND 18]
+2026-08-12 23:59:39,053 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-12 23:59:40,213 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-12 23:59:40,338 - INFO - [Round 18] tong hop 70 client (36540 mau), train_loss=8.9213
+2026-08-12 23:59:40,344 - INFO - [Round 79] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_079.pth
+2026-08-13 00:09:53,723 - INFO - [Round 79] loss=10.6564 acc=0.0014 | micro P/R/F1=0.0014/0.0014/0.0014 | macro P/R/F1=0.0004/0.2674/0.0008 | weighted P/R/F1=0.0000/0.0014/0.0000
+2026-08-13 00:09:53,725 - INFO - fit progress: (18, 10.656387044980857, {'accuracy': 0.0014492442625824828, 'micro_precision': 0.0014492442625824828, 'micro_recall': 0.0014492442625824828, 'micro_f1': 0.0014492442625824828, 'macro_precision': 0.00041027145126176323, 'macro_recall': 0.2674442708435093, 'macro_f1': 0.0008184170393010578, 'weighted_precision': 4.270572471458827e-06, 'weighted_recall': 0.0014492442625824828, 'weighted_f1': 8.512795523791285e-06}, 11142.563747627999)
+2026-08-13 00:09:53,725 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 00:09:53,725 - INFO - 
+2026-08-13 00:09:53,725 - INFO - [ROUND 19]
+2026-08-13 00:09:53,726 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 00:09:54,925 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 00:09:55,052 - INFO - [Round 19] tong hop 70 client (36540 mau), train_loss=8.5133
+2026-08-13 00:09:55,058 - INFO - [Round 80] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_080.pth
+2026-08-13 00:20:08,164 - INFO - [Round 80] DST: packet=0.0016 physics=0.0004 hop nhat=0.0014 (-0.0002 so voi packet)
+2026-08-13 00:20:08,165 - INFO - [Round 80] loss=10.1649 acc=0.0014 | micro P/R/F1=0.0014/0.0014/0.0014 | macro P/R/F1=0.0004/0.2653/0.0008 | weighted P/R/F1=0.0000/0.0014/0.0000
+2026-08-13 00:20:11,357 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-13 00:20:11,357 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-13 00:20:20,911 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0026    0.7078    0.0053     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0005    0.6736    0.0010      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0006    0.9997    0.0011      7471
+
+     accuracy                         0.0014  41987401
+    macro avg     0.0004    0.2653    0.0008  41987401
+ weighted avg     0.0000    0.0014    0.0000  41987401
+
+2026-08-13 00:20:21,643 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-13 00:20:21,645 - INFO - fit progress: (19, 10.164913145766214, {'accuracy': 0.0013941086756000926, 'micro_precision': 0.0013941086756000926, 'micro_recall': 0.0013941086756000926, 'micro_f1': 0.0013941086756000926, 'macro_precision': 0.00041029034098582004, 'macro_recall': 0.2652760686073129, 'macro_f1': 0.0008182479732987843, 'weighted_precision': 4.394712444281544e-06, 'weighted_recall': 0.0013941086756000926, 'weighted_f1': 8.757711905471708e-06}, 11770.484182096)
+2026-08-13 00:20:21,646 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 00:20:21,646 - INFO - 
+2026-08-13 00:20:21,646 - INFO - [ROUND 20]
+2026-08-13 00:20:21,646 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 00:20:22,816 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 00:20:22,939 - INFO - [Round 20] tong hop 70 client (36540 mau), train_loss=8.1649
+2026-08-13 00:20:22,945 - INFO - [Round 81] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_081.pth
+2026-08-13 00:30:35,884 - INFO - [Round 81] loss=9.6941 acc=0.0013 | micro P/R/F1=0.0013/0.0013/0.0013 | macro P/R/F1=0.0004/0.2609/0.0008 | weighted P/R/F1=0.0000/0.0013/0.0000
+2026-08-13 00:30:35,887 - INFO - fit progress: (20, 9.694052010440277, {'accuracy': 0.0013309706880880766, 'micro_precision': 0.0013309706880880766, 'micro_recall': 0.0013309706880880766, 'micro_f1': 0.0013309706880880766, 'macro_precision': 0.00040932461106677983, 'macro_recall': 0.26092712342353497, 'macro_f1': 0.0008160898122636648, 'weighted_precision': 4.4936017206504e-06, 'weighted_recall': 0.0013309706880880766, 'weighted_f1': 8.951925922046629e-06}, 12384.725357964002)
+2026-08-13 00:30:35,887 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 00:30:35,887 - INFO - 
+2026-08-13 00:30:35,887 - INFO - [ROUND 21]
+2026-08-13 00:30:35,887 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 00:30:37,058 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 00:30:37,177 - INFO - [Round 21] tong hop 70 client (36540 mau), train_loss=7.7839
+2026-08-13 00:30:37,182 - INFO - [Round 82] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_082.pth
+2026-08-13 00:40:50,397 - INFO - [Round 82] loss=9.2358 acc=0.0013 | micro P/R/F1=0.0013/0.0013/0.0013 | macro P/R/F1=0.0004/0.2563/0.0008 | weighted P/R/F1=0.0000/0.0013/0.0000
+2026-08-13 00:40:50,400 - INFO - fit progress: (21, 9.235848879700184, {'accuracy': 0.0012637600503065194, 'micro_precision': 0.0012637600503065194, 'micro_recall': 0.0012637600503065194, 'micro_f1': 0.0012637600503065194, 'macro_precision': 0.0004065539382270752, 'macro_recall': 0.2562695046187704, 'macro_f1': 0.0008103423469203566, 'weighted_precision': 4.535157896747195e-06, 'weighted_recall': 0.0012637600503065194, 'weighted_f1': 9.031870415670604e-06}, 12999.238523447999)
+2026-08-13 00:40:50,400 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 00:40:50,400 - INFO - 
+2026-08-13 00:40:50,400 - INFO - [ROUND 22]
+2026-08-13 00:40:50,401 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 00:40:51,579 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 00:40:51,695 - INFO - [Round 22] tong hop 70 client (36540 mau), train_loss=7.4205
+2026-08-13 00:40:51,701 - INFO - [Round 83] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_083.pth
+2026-08-13 00:51:05,148 - INFO - [Round 83] loss=8.7705 acc=0.0012 | micro P/R/F1=0.0012/0.0012/0.0012 | macro P/R/F1=0.0004/0.2511/0.0008 | weighted P/R/F1=0.0000/0.0012/0.0000
+2026-08-13 00:51:05,150 - INFO - fit progress: (22, 8.770536940361323, {'accuracy': 0.0011895711287297826, 'micro_precision': 0.0011895711287297826, 'micro_recall': 0.0011895711287297826, 'micro_f1': 0.0011895711287297826, 'macro_precision': 0.00040393074380012435, 'macro_recall': 0.2511282988863673, 'macro_f1': 0.000804843645314676, 'weighted_precision': 4.569679570340994e-06, 'weighted_recall': 0.0011895711287297826, 'weighted_f1': 9.097115394499602e-06}, 13613.988594462)
+2026-08-13 00:51:05,150 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 00:51:05,150 - INFO - 
+2026-08-13 00:51:05,150 - INFO - [ROUND 23]
+2026-08-13 00:51:05,151 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 00:51:06,405 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 00:51:06,523 - INFO - [Round 23] tong hop 70 client (36540 mau), train_loss=7.1174
+2026-08-13 00:51:06,528 - INFO - [Round 84] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_084.pth
+2026-08-13 01:01:18,452 - INFO - [Round 84] loss=8.3048 acc=0.0011 | micro P/R/F1=0.0011/0.0011/0.0011 | macro P/R/F1=0.0004/0.2456/0.0008 | weighted P/R/F1=0.0000/0.0011/0.0000
+2026-08-13 01:01:18,454 - INFO - fit progress: (23, 8.304849763763624, {'accuracy': 0.0011099281901254142, 'micro_precision': 0.0011099281901254142, 'micro_recall': 0.0011099281901254142, 'micro_f1': 0.0011099281901254142, 'macro_precision': 0.00040557478048019644, 'macro_recall': 0.24560913613543434, 'macro_f1': 0.0008077234357368158, 'weighted_precision': 4.664695170980962e-06, 'weighted_recall': 0.0011099281901254142, 'weighted_f1': 9.281113471480525e-06}, 14227.293093256001)
+2026-08-13 01:01:18,455 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:01:18,455 - INFO - 
+2026-08-13 01:01:18,455 - INFO - [ROUND 24]
+2026-08-13 01:01:18,455 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:01:19,627 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:01:19,747 - INFO - [Round 24] tong hop 70 client (36540 mau), train_loss=6.8013
+2026-08-13 01:01:19,752 - INFO - [Round 85] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_085.pth
+2026-08-13 01:11:44,334 - INFO - [Round 85] DST: packet=0.0019 physics=0.0004 hop nhat=0.0010 (-0.0008 so voi packet)
+2026-08-13 01:11:44,335 - INFO - [Round 85] loss=7.8513 acc=0.0010 | micro P/R/F1=0.0010/0.0010/0.0010 | macro P/R/F1=0.0004/0.2396/0.0008 | weighted P/R/F1=0.0000/0.0010/0.0000
+2026-08-13 01:11:47,585 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-13 01:11:47,586 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-13 01:11:57,066 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0029    0.4761    0.0058     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0003    0.6736    0.0006      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0005    1.0000    0.0010      7471
+
+     accuracy                         0.0010  41987401
+    macro avg     0.0004    0.2396    0.0008  41987401
+ weighted avg     0.0000    0.0010    0.0000  41987401
+
+2026-08-13 01:11:57,438 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-13 01:11:57,441 - INFO - fit progress: (24, 7.851284466165645, {'accuracy': 0.0010227115510197929, 'micro_precision': 0.0010227115510197929, 'micro_recall': 0.0010227115510197929, 'micro_f1': 0.0010227115510197929, 'macro_precision': 0.00040960889547061465, 'macro_recall': 0.23956512477361727, 'macro_f1': 0.0008152096591258846, 'weighted_precision': 4.78675014100399e-06, 'weighted_recall': 0.0010227115510197929, 'weighted_f1': 9.516708592077902e-06}, 14866.279890259)
+2026-08-13 01:11:57,442 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:11:57,442 - INFO - 
+2026-08-13 01:11:57,442 - INFO - [ROUND 25]
+2026-08-13 01:11:57,442 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:11:58,639 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:11:58,761 - INFO - [Round 25] tong hop 70 client (36540 mau), train_loss=6.4700
+2026-08-13 01:11:58,767 - INFO - [Round 86] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_086.pth
+2026-08-13 01:22:22,956 - INFO - [Round 86] loss=7.4403 acc=0.0009 | micro P/R/F1=0.0009/0.0009/0.0009 | macro P/R/F1=0.0004/0.2341/0.0008 | weighted P/R/F1=0.0000/0.0009/0.0000
+2026-08-13 01:22:22,959 - INFO - fit progress: (25, 7.440306275242794, {'accuracy': 0.0009434973124437971, 'micro_precision': 0.0009434973124437971, 'micro_recall': 0.0009434973124437971, 'micro_f1': 0.0009434973124437971, 'macro_precision': 0.00041102203314465725, 'macro_recall': 0.2340756704346212, 'macro_f1': 0.0008174631526728326, 'weighted_precision': 4.850041995842943e-06, 'weighted_recall': 0.0009434973124437971, 'weighted_f1': 9.634954904991156e-06}, 15491.797672737)
+2026-08-13 01:22:22,959 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:22:22,959 - INFO - 
+2026-08-13 01:22:22,959 - INFO - [ROUND 26]
+2026-08-13 01:22:22,960 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:22:24,174 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:22:24,294 - INFO - [Round 26] tong hop 70 client (36540 mau), train_loss=6.1929
+2026-08-13 01:22:24,300 - INFO - [Round 87] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_087.pth
+2026-08-13 01:32:55,932 - INFO - [Round 87] loss=7.0438 acc=0.0009 | micro P/R/F1=0.0009/0.0009/0.0009 | macro P/R/F1=0.0004/0.2289/0.0008 | weighted P/R/F1=0.0000/0.0009/0.0000
+2026-08-13 01:32:55,934 - INFO - fit progress: (26, 7.04376653908125, {'accuracy': 0.0008688082408339588, 'micro_precision': 0.0008688082408339588, 'micro_recall': 0.0008688082408339588, 'micro_f1': 0.0008688082408339588, 'macro_precision': 0.00041344301450405415, 'macro_recall': 0.22889980488829176, 'macro_f1': 0.000821608873693431, 'weighted_precision': 4.918155032466697e-06, 'weighted_recall': 0.0008688082408339588, 'weighted_f1': 9.761082450324688e-06}, 16124.772606285002)
+2026-08-13 01:32:55,934 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:32:55,934 - INFO - 
+2026-08-13 01:32:55,934 - INFO - [ROUND 27]
+2026-08-13 01:32:55,934 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:32:57,178 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:32:57,304 - INFO - [Round 27] tong hop 70 client (36540 mau), train_loss=5.8891
+2026-08-13 01:32:57,309 - INFO - [Round 88] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_088.pth
+2026-08-13 01:43:20,102 - INFO - [Round 88] loss=6.6505 acc=0.0008 | micro P/R/F1=0.0008/0.0008/0.0008 | macro P/R/F1=0.0004/0.2245/0.0008 | weighted P/R/F1=0.0000/0.0008/0.0000
+2026-08-13 01:43:20,105 - INFO - fit progress: (27, 6.65050491811287, {'accuracy': 0.0008048604866016832, 'micro_precision': 0.0008048604866016832, 'micro_recall': 0.0008048604866016832, 'micro_f1': 0.0008048604866016832, 'macro_precision': 0.0004151701090212617, 'macro_recall': 0.22446830010771313, 'macro_f1': 0.000824337353560239, 'weighted_precision': 4.967038417726898e-06, 'weighted_recall': 0.0008048604866016832, 'weighted_f1': 9.848341713672679e-06}, 16748.943553103)
+2026-08-13 01:43:20,105 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:43:20,105 - INFO - 
+2026-08-13 01:43:20,105 - INFO - [ROUND 28]
+2026-08-13 01:43:20,106 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:43:21,266 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:43:21,385 - INFO - [Round 28] tong hop 70 client (36540 mau), train_loss=5.6284
+2026-08-13 01:43:21,390 - INFO - [Round 89] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_089.pth
+2026-08-13 01:53:34,221 - INFO - [Round 89] loss=6.2314 acc=0.0008 | micro P/R/F1=0.0008/0.0008/0.0008 | macro P/R/F1=0.0004/0.2266/0.0008 | weighted P/R/F1=0.0000/0.0008/0.0000
+2026-08-13 01:53:34,223 - INFO - fit progress: (28, 6.231427600239326, {'accuracy': 0.0007524638164672303, 'micro_precision': 0.0007524638164672303, 'micro_recall': 0.0007524638164672303, 'micro_f1': 0.0007524638164672303, 'macro_precision': 0.00041965462002046253, 'macro_recall': 0.22664621987909317, 'macro_f1': 0.0008324357596491942, 'weighted_precision': 5.024541398703803e-06, 'weighted_recall': 0.0007524638164672303, 'weighted_f1': 9.950773834794764e-06}, 17363.061769289)
+2026-08-13 01:53:34,223 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 01:53:34,223 - INFO - 
+2026-08-13 01:53:34,223 - INFO - [ROUND 29]
+2026-08-13 01:53:34,224 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 01:53:35,406 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 01:53:35,532 - INFO - [Round 29] tong hop 70 client (36540 mau), train_loss=5.3874
+2026-08-13 01:53:35,540 - INFO - [Round 90] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_090.pth
+2026-08-13 02:03:46,204 - INFO - [Round 90] DST: packet=0.0022 physics=0.0004 hop nhat=0.0007 (-0.0015 so voi packet)
+2026-08-13 02:03:46,204 - INFO - [Round 90] loss=5.8433 acc=0.0007 | micro P/R/F1=0.0007/0.0007/0.0007 | macro P/R/F1=0.0004/0.2333/0.0008 | weighted P/R/F1=0.0000/0.0007/0.0000
+2026-08-13 02:03:49,468 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-13 02:03:49,469 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-13 02:03:58,964 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0031    0.2720    0.0062     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0003    0.8211    0.0005      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0005    1.0000    0.0009      7471
+
+     accuracy                         0.0007  41987401
+    macro avg     0.0004    0.2333    0.0008  41987401
+ weighted avg     0.0000    0.0007    0.0000  41987401
+
+2026-08-13 02:03:59,338 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-13 02:03:59,341 - INFO - fit progress: (29, 5.8433287509556875, {'accuracy': 0.0007131901305346335, 'micro_precision': 0.0007131901305346335, 'micro_recall': 0.0007131901305346335, 'micro_f1': 0.0007131901305346335, 'macro_precision': 0.0004270847824307931, 'macro_recall': 0.23328006270737114, 'macro_f1': 0.000846272147919626, 'weighted_precision': 5.106939360702538e-06, 'weighted_recall': 0.0007131901305346335, 'weighted_f1': 1.0100797091377782e-05}, 17988.179280141)
+2026-08-13 02:03:59,341 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 02:03:59,341 - INFO - 
+2026-08-13 02:03:59,341 - INFO - [ROUND 30]
+2026-08-13 02:03:59,341 - INFO - configure_fit: strategy sampled 70 clients (out of 70)
+2026-08-13 02:04:00,518 - INFO - aggregate_fit: received 70 results and 0 failures
+2026-08-13 02:04:00,645 - INFO - [Round 30] tong hop 70 client (36540 mau), train_loss=5.1200
+2026-08-13 02:04:00,650 - INFO - [Round 91] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_091.pth
+2026-08-13 02:14:15,134 - INFO - [Round 91] DST: packet=0.0022 physics=0.0004 hop nhat=0.0007 (-0.0015 so voi packet)
+2026-08-13 02:14:15,135 - INFO - [Round 91] loss=5.4795 acc=0.0007 | micro P/R/F1=0.0007/0.0007/0.0007 | macro P/R/F1=0.0004/0.2300/0.0009 | weighted P/R/F1=0.0000/0.0007/0.0000
+2026-08-13 02:14:18,371 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.csv
+2026-08-13 02:14:18,371 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2_normalized.csv
+2026-08-13 02:14:27,810 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0032    0.2423    0.0062     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0002    0.8211    0.0005      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0005    1.0000    0.0009      7471
+
+     accuracy                         0.0007  41987401
+    macro avg     0.0004    0.2300    0.0009  41987401
+ weighted avg     0.0000    0.0007    0.0000  41987401
+
+2026-08-13 02:14:28,189 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task2.png
+2026-08-13 02:14:28,192 - INFO - fit progress: (30, 5.479482893315353, {'accuracy': 0.0006655806107170101, 'micro_precision': 0.0006655806107170101, 'micro_recall': 0.0006655806107170101, 'micro_f1': 0.0006655806107170101, 'macro_precision': 0.0004313356331096746, 'macro_recall': 0.22998077851505214, 'macro_f1': 0.0008535531210913252, 'weighted_precision': 5.1837514948849375e-06, 'weighted_recall': 0.0006655806107170101, 'weighted_f1': 1.0236786627875766e-05}, 18617.030274191)
+2026-08-13 02:14:28,192 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 02:14:28,192 - INFO - 
+2026-08-13 02:14:28,192 - INFO - [SUMMARY]
+2026-08-13 02:14:28,193 - INFO - Run finished 30 round(s) in 18617.03s
+2026-08-13 02:14:28,197 - INFO - 	History (loss, centralized):
+2026-08-13 02:14:28,197 - INFO - 		round 1: 16.63343170265746
+2026-08-13 02:14:28,197 - INFO - 		round 2: 16.760330669078208
+2026-08-13 02:14:28,197 - INFO - 		round 3: 16.8078965749081
+2026-08-13 02:14:28,197 - INFO - 		round 4: 16.783150529549793
+2026-08-13 02:14:28,197 - INFO - 		round 5: 16.613279459313897
+2026-08-13 02:14:28,197 - INFO - 		round 6: 16.3263578535859
+2026-08-13 02:14:28,197 - INFO - 		round 7: 16.017917983230294
+2026-08-13 02:14:28,197 - INFO - 		round 8: 15.610250334776433
+2026-08-13 02:14:28,197 - INFO - 		round 9: 15.162032325818311
+2026-08-13 02:14:28,197 - INFO - 		round 10: 14.695893652252355
+2026-08-13 02:14:28,197 - INFO - 		round 11: 14.208854446154364
+2026-08-13 02:14:28,197 - INFO - 		round 12: 13.682251868509871
+2026-08-13 02:14:28,197 - INFO - 		round 13: 13.200793361003289
+2026-08-13 02:14:28,197 - INFO - 		round 14: 12.6774140509986
+2026-08-13 02:14:28,197 - INFO - 		round 15: 12.175488569250154
+2026-08-13 02:14:28,197 - INFO - 		round 16: 11.647997660725748
+2026-08-13 02:14:28,197 - INFO - 		round 17: 11.180096946033823
+2026-08-13 02:14:28,197 - INFO - 		round 18: 10.656387044980857
+2026-08-13 02:14:28,197 - INFO - 		round 19: 10.164913145766214
+2026-08-13 02:14:28,198 - INFO - 		round 20: 9.694052010440277
+2026-08-13 02:14:28,198 - INFO - 		round 21: 9.235848879700184
+2026-08-13 02:14:28,198 - INFO - 		round 22: 8.770536940361323
+2026-08-13 02:14:28,198 - INFO - 		round 23: 8.304849763763624
+2026-08-13 02:14:28,198 - INFO - 		round 24: 7.851284466165645
+2026-08-13 02:14:28,198 - INFO - 		round 25: 7.440306275242794
+2026-08-13 02:14:28,198 - INFO - 		round 26: 7.04376653908125
+2026-08-13 02:14:28,198 - INFO - 		round 27: 6.65050491811287
+2026-08-13 02:14:28,198 - INFO - 		round 28: 6.231427600239326
+2026-08-13 02:14:28,198 - INFO - 		round 29: 5.8433287509556875
+2026-08-13 02:14:28,198 - INFO - 		round 30: 5.479482893315353
+2026-08-13 02:14:28,198 - INFO - 	History (metrics, distributed, fit):
+2026-08-13 02:14:28,198 - INFO - 	{'num_clients': [(1, 70),
+2026-08-13 02:14:28,198 - INFO - 	                 (2, 70),
+2026-08-13 02:14:28,198 - INFO - 	                 (3, 70),
+2026-08-13 02:14:28,198 - INFO - 	                 (4, 70),
+2026-08-13 02:14:28,198 - INFO - 	                 (5, 70),
+2026-08-13 02:14:28,198 - INFO - 	                 (6, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (7, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (8, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (9, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (10, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (11, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (12, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (13, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (14, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (15, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (16, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (17, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (18, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (19, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (20, 70),
+2026-08-13 02:14:28,199 - INFO - 	                 (21, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (22, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (23, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (24, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (25, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (26, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (27, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (28, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (29, 70),
+2026-08-13 02:14:28,200 - INFO - 	                 (30, 70)],
+2026-08-13 02:14:28,200 - INFO - 	 'train_loss': [(1, 19.74835894244754),
+2026-08-13 02:14:28,200 - INFO - 	                (2, 18.71474811564917),
+2026-08-13 02:14:28,200 - INFO - 	                (3, 17.742315019826517),
+2026-08-13 02:14:28,200 - INFO - 	                (4, 16.846901414818497),
+2026-08-13 02:14:28,200 - INFO - 	                (5, 15.967299174761775),
+2026-08-13 02:14:28,200 - INFO - 	                (6, 15.195409335066554),
+2026-08-13 02:14:28,200 - INFO - 	                (7, 14.582087796550013),
+2026-08-13 02:14:28,200 - INFO - 	                (8, 13.904885295248667),
+2026-08-13 02:14:28,200 - INFO - 	                (9, 13.294895390505513),
+2026-08-13 02:14:28,201 - INFO - 	                (10, 12.70315936770367),
+2026-08-13 02:14:28,201 - INFO - 	                (11, 12.142583724077417),
+2026-08-13 02:14:28,201 - INFO - 	                (12, 11.596244010825245),
+2026-08-13 02:14:28,201 - INFO - 	                (13, 11.120035895151153),
+2026-08-13 02:14:28,201 - INFO - 	                (14, 10.632905422273593),
+2026-08-13 02:14:28,201 - INFO - 	                (15, 10.179328792800305),
+2026-08-13 02:14:28,201 - INFO - 	                (16, 9.761482593304613),
+2026-08-13 02:14:28,201 - INFO - 	                (17, 9.35051521970177),
+2026-08-13 02:14:28,201 - INFO - 	                (18, 8.921265692193238),
+2026-08-13 02:14:28,201 - INFO - 	                (19, 8.513264492305389),
+2026-08-13 02:14:28,201 - INFO - 	                (20, 8.16488082609675),
+2026-08-13 02:14:28,201 - INFO - 	                (21, 7.783945953874252),
+2026-08-13 02:14:28,202 - INFO - 	                (22, 7.420533726275608),
+2026-08-13 02:14:28,202 - INFO - 	                (23, 7.117375180641679),
+2026-08-13 02:14:28,202 - INFO - 	                (24, 6.801346891189313),
+2026-08-13 02:14:28,202 - INFO - 	                (25, 6.4700013433647205),
+2026-08-13 02:14:28,202 - INFO - 	                (26, 6.192878194904702),
+2026-08-13 02:14:28,202 - INFO - 	                (27, 5.88911691178242),
+2026-08-13 02:14:28,202 - INFO - 	                (28, 5.628408059810683),
+2026-08-13 02:14:28,202 - INFO - 	                (29, 5.387446672928375),
+2026-08-13 02:14:28,202 - INFO - 	                (30, 5.119975305053684)]}
+2026-08-13 02:14:28,202 - INFO - 	History (metrics, centralized):
+2026-08-13 02:14:28,202 - INFO - 	{'accuracy': [(1, 0.0017141570634486283),
+2026-08-13 02:14:28,202 - INFO - 	              (2, 0.001708941213103426),
+2026-08-13 02:14:28,202 - INFO - 	              (3, 0.0017056783295541441),
+2026-08-13 02:14:28,202 - INFO - 	              (4, 0.0017038206294311953),
+2026-08-13 02:14:28,203 - INFO - 	              (5, 0.0017009626292420433),
+2026-08-13 02:14:28,203 - INFO - 	              (6, 0.0016918884786414857),
+2026-08-13 02:14:28,203 - INFO - 	              (7, 0.0016716681273032355),
+2026-08-13 02:14:28,203 - INFO - 	              (8, 0.0016549726428649394),
+2026-08-13 02:14:28,203 - INFO - 	              (9, 0.0016676907437066658),
+2026-08-13 02:14:28,203 - INFO - 	              (10, 0.0016524480760311884),
+2026-08-13 02:14:28,203 - INFO - 	              (11, 0.001635180991555062),
+2026-08-13 02:14:28,203 - INFO - 	              (12, 0.0016192714571687827),
+2026-08-13 02:14:28,203 - INFO - 	              (13, 0.0016036953561379044),
+2026-08-13 02:14:28,203 - INFO - 	              (14, 0.0015837131714820834),
+2026-08-13 02:14:28,203 - INFO - 	              (15, 0.0015599203199073931),
+2026-08-13 02:14:28,203 - INFO - 	              (16, 0.0015302923846131843),
+2026-08-13 02:14:28,203 - INFO - 	              (17, 0.0015003071992953315),
+2026-08-13 02:14:28,204 - INFO - 	              (18, 0.0014492442625824828),
+2026-08-13 02:14:28,204 - INFO - 	              (19, 0.0013941086756000926),
+2026-08-13 02:14:28,204 - INFO - 	              (20, 0.0013309706880880766),
+2026-08-13 02:14:28,204 - INFO - 	              (21, 0.0012637600503065194),
+2026-08-13 02:14:28,204 - INFO - 	              (22, 0.0011895711287297826),
+2026-08-13 02:14:28,204 - INFO - 	              (23, 0.0011099281901254142),
+2026-08-13 02:14:28,204 - INFO - 	              (24, 0.0010227115510197929),
+2026-08-13 02:14:28,204 - INFO - 	              (25, 0.0009434973124437971),
+2026-08-13 02:14:28,204 - INFO - 	              (26, 0.0008688082408339588),
+2026-08-13 02:14:28,204 - INFO - 	              (27, 0.0008048604866016832),
+2026-08-13 02:14:28,204 - INFO - 	              (28, 0.0007524638164672303),
+2026-08-13 02:14:28,204 - INFO - 	              (29, 0.0007131901305346335),
+2026-08-13 02:14:28,204 - INFO - 	              (30, 0.0006655806107170101)],
+2026-08-13 02:14:28,205 - INFO - 	 'macro_f1': [(1, 0.0008953613803816644),
+2026-08-13 02:14:28,205 - INFO - 	              (2, 0.0008862847538976776),
+2026-08-13 02:14:28,205 - INFO - 	              (3, 0.0009703605132841096),
+2026-08-13 02:14:28,205 - INFO - 	              (4, 0.0009405494476477505),
+2026-08-13 02:14:28,205 - INFO - 	              (5, 0.0009157785993155251),
+2026-08-13 02:14:28,205 - INFO - 	              (6, 0.0009144019084932069),
+2026-08-13 02:14:28,205 - INFO - 	              (7, 0.0008955967944365247),
+2026-08-13 02:14:28,205 - INFO - 	              (8, 0.0008897415920182192),
+2026-08-13 02:14:28,205 - INFO - 	              (9, 0.0010951070241035738),
+2026-08-13 02:14:28,205 - INFO - 	              (10, 0.0010633629061499342),
+2026-08-13 02:14:28,205 - INFO - 	              (11, 0.0009832048902096995),
+2026-08-13 02:14:28,205 - INFO - 	              (12, 0.0009205103932225754),
+2026-08-13 02:14:28,205 - INFO - 	              (13, 0.0008832149272930724),
+2026-08-13 02:14:28,205 - INFO - 	              (14, 0.0008589581734459459),
+2026-08-13 02:14:28,205 - INFO - 	              (15, 0.0008404131361835222),
+2026-08-13 02:14:28,206 - INFO - 	              (16, 0.0008284135135976158),
+2026-08-13 02:14:28,206 - INFO - 	              (17, 0.0008261907962563605),
+2026-08-13 02:14:28,206 - INFO - 	              (18, 0.0008184170393010578),
+2026-08-13 02:14:28,206 - INFO - 	              (19, 0.0008182479732987843),
+2026-08-13 02:14:28,206 - INFO - 	              (20, 0.0008160898122636648),
+2026-08-13 02:14:28,206 - INFO - 	              (21, 0.0008103423469203566),
+2026-08-13 02:14:28,206 - INFO - 	              (22, 0.000804843645314676),
+2026-08-13 02:14:28,206 - INFO - 	              (23, 0.0008077234357368158),
+2026-08-13 02:14:28,206 - INFO - 	              (24, 0.0008152096591258846),
+2026-08-13 02:14:28,206 - INFO - 	              (25, 0.0008174631526728326),
+2026-08-13 02:14:28,206 - INFO - 	              (26, 0.000821608873693431),
+2026-08-13 02:14:28,206 - INFO - 	              (27, 0.000824337353560239),
+2026-08-13 02:14:28,206 - INFO - 	              (28, 0.0008324357596491942),
+2026-08-13 02:14:28,206 - INFO - 	              (29, 0.000846272147919626),
+2026-08-13 02:14:28,207 - INFO - 	              (30, 0.0008535531210913252)],
+2026-08-13 02:14:28,207 - INFO - 	 'macro_precision': [(1, 0.00044884821507442274),
+2026-08-13 02:14:28,207 - INFO - 	                     (2, 0.00044433970521170644),
+2026-08-13 02:14:28,207 - INFO - 	                     (3, 0.0005328621524090542),
+2026-08-13 02:14:28,207 - INFO - 	                     (4, 0.00047422116223450224),
+2026-08-13 02:14:28,207 - INFO - 	                     (5, 0.0004597060086128506),
+2026-08-13 02:14:28,207 - INFO - 	                     (6, 0.00045844933135116725),
+2026-08-13 02:14:28,207 - INFO - 	                     (7, 0.00044896647712430217),
+2026-08-13 02:14:28,207 - INFO - 	                     (8, 0.00044597995029818714),
+2026-08-13 02:14:28,207 - INFO - 	                     (9, 0.0005489926398850715),
+2026-08-13 02:14:28,207 - INFO - 	                     (10, 0.0005329817464257781),
+2026-08-13 02:14:28,207 - INFO - 	                     (11, 0.0004926919242807326),
+2026-08-13 02:14:28,207 - INFO - 	                     (12, 0.00046122019387448036),
+2026-08-13 02:14:28,207 - INFO - 	                     (13, 0.00044252297510372844),
+2026-08-13 02:14:28,207 - INFO - 	                     (14, 0.0004303771262764407),
+2026-08-13 02:14:28,208 - INFO - 	                     (15, 0.000421110545789486),
+2026-08-13 02:14:28,208 - INFO - 	                     (16, 0.0004151434730974646),
+2026-08-13 02:14:28,208 - INFO - 	                     (17, 0.0004140812836125448),
+2026-08-13 02:14:28,208 - INFO - 	                     (18, 0.00041027145126176323),
+2026-08-13 02:14:28,208 - INFO - 	                     (19, 0.00041029034098582004),
+2026-08-13 02:14:28,208 - INFO - 	                     (20, 0.00040932461106677983),
+2026-08-13 02:14:28,208 - INFO - 	                     (21, 0.0004065539382270752),
+2026-08-13 02:14:28,208 - INFO - 	                     (22, 0.00040393074380012435),
+2026-08-13 02:14:28,208 - INFO - 	                     (23, 0.00040557478048019644),
+2026-08-13 02:14:28,208 - INFO - 	                     (24, 0.00040960889547061465),
+2026-08-13 02:14:28,208 - INFO - 	                     (25, 0.00041102203314465725),
+2026-08-13 02:14:28,208 - INFO - 	                     (26, 0.00041344301450405415),
+2026-08-13 02:14:28,208 - INFO - 	                     (27, 0.0004151701090212617),
+2026-08-13 02:14:28,208 - INFO - 	                     (28, 0.00041965462002046253),
+2026-08-13 02:14:28,208 - INFO - 	                     (29, 0.0004270847824307931),
+2026-08-13 02:14:28,209 - INFO - 	                     (30, 0.0004313356331096746)],
+2026-08-13 02:14:28,209 - INFO - 	 'macro_recall': [(1, 0.2288271736110762),
+2026-08-13 02:14:28,209 - INFO - 	                  (2, 0.22528981396879694),
+2026-08-13 02:14:28,209 - INFO - 	                  (3, 0.22344156835165455),
+2026-08-13 02:14:28,209 - INFO - 	                  (4, 0.22396143217748055),
+2026-08-13 02:14:28,209 - INFO - 	                  (5, 0.22570497262601683),
+2026-08-13 02:14:28,209 - INFO - 	                  (6, 0.22964177379765763),
+2026-08-13 02:14:28,209 - INFO - 	                  (7, 0.22848897777824284),
+2026-08-13 02:14:28,209 - INFO - 	                  (8, 0.2318625979982675),
+2026-08-13 02:14:28,209 - INFO - 	                  (9, 0.26318464055191537),
+2026-08-13 02:14:28,209 - INFO - 	                  (10, 0.2668037110710305),
+2026-08-13 02:14:28,209 - INFO - 	                  (11, 0.2659073614304217),
+2026-08-13 02:14:28,209 - INFO - 	                  (12, 0.2654163174537825),
+2026-08-13 02:14:28,209 - INFO - 	                  (13, 0.2643572940934001),
+2026-08-13 02:14:28,210 - INFO - 	                  (14, 0.2648477211493737),
+2026-08-13 02:14:28,210 - INFO - 	                  (15, 0.26497283066571686),
+2026-08-13 02:14:28,210 - INFO - 	                  (16, 0.26635733129368194),
+2026-08-13 02:14:28,210 - INFO - 	                  (17, 0.27098287279865285),
+2026-08-13 02:14:28,210 - INFO - 	                  (18, 0.2674442708435093),
+2026-08-13 02:14:28,210 - INFO - 	                  (19, 0.2652760686073129),
+2026-08-13 02:14:28,210 - INFO - 	                  (20, 0.26092712342353497),
+2026-08-13 02:14:28,210 - INFO - 	                  (21, 0.2562695046187704),
+2026-08-13 02:14:28,210 - INFO - 	                  (22, 0.2511282988863673),
+2026-08-13 02:14:28,210 - INFO - 	                  (23, 0.24560913613543434),
+2026-08-13 02:14:28,210 - INFO - 	                  (24, 0.23956512477361727),
+2026-08-13 02:14:28,210 - INFO - 	                  (25, 0.2340756704346212),
+2026-08-13 02:14:28,210 - INFO - 	                  (26, 0.22889980488829176),
+2026-08-13 02:14:28,210 - INFO - 	                  (27, 0.22446830010771313),
+2026-08-13 02:14:28,210 - INFO - 	                  (28, 0.22664621987909317),
+2026-08-13 02:14:28,210 - INFO - 	                  (29, 0.23328006270737114),
+2026-08-13 02:14:28,210 - INFO - 	                  (30, 0.22998077851505214)],
+2026-08-13 02:14:28,210 - INFO - 	 'micro_f1': [(1, 0.0017141570634486283),
+2026-08-13 02:14:28,210 - INFO - 	              (2, 0.001708941213103426),
+2026-08-13 02:14:28,210 - INFO - 	              (3, 0.0017056783295541441),
+2026-08-13 02:14:28,210 - INFO - 	              (4, 0.0017038206294311953),
+2026-08-13 02:14:28,210 - INFO - 	              (5, 0.0017009626292420433),
+2026-08-13 02:14:28,211 - INFO - 	              (6, 0.0016918884786414857),
+2026-08-13 02:14:28,211 - INFO - 	              (7, 0.0016716681273032355),
+2026-08-13 02:14:28,211 - INFO - 	              (8, 0.0016549726428649394),
+2026-08-13 02:14:28,211 - INFO - 	              (9, 0.0016676907437066658),
+2026-08-13 02:14:28,211 - INFO - 	              (10, 0.0016524480760311884),
+2026-08-13 02:14:28,211 - INFO - 	              (11, 0.001635180991555062),
+2026-08-13 02:14:28,211 - INFO - 	              (12, 0.0016192714571687827),
+2026-08-13 02:14:28,211 - INFO - 	              (13, 0.0016036953561379044),
+2026-08-13 02:14:28,211 - INFO - 	              (14, 0.0015837131714820834),
+2026-08-13 02:14:28,211 - INFO - 	              (15, 0.0015599203199073931),
+2026-08-13 02:14:28,211 - INFO - 	              (16, 0.0015302923846131843),
+2026-08-13 02:14:28,211 - INFO - 	              (17, 0.0015003071992953315),
+2026-08-13 02:14:28,211 - INFO - 	              (18, 0.0014492442625824828),
+2026-08-13 02:14:28,211 - INFO - 	              (19, 0.0013941086756000926),
+2026-08-13 02:14:28,211 - INFO - 	              (20, 0.0013309706880880766),
+2026-08-13 02:14:28,211 - INFO - 	              (21, 0.0012637600503065194),
+2026-08-13 02:14:28,211 - INFO - 	              (22, 0.0011895711287297826),
+2026-08-13 02:14:28,211 - INFO - 	              (23, 0.0011099281901254142),
+2026-08-13 02:14:28,211 - INFO - 	              (24, 0.0010227115510197929),
+2026-08-13 02:14:28,211 - INFO - 	              (25, 0.0009434973124437971),
+2026-08-13 02:14:28,211 - INFO - 	              (26, 0.0008688082408339588),
+2026-08-13 02:14:28,211 - INFO - 	              (27, 0.0008048604866016832),
+2026-08-13 02:14:28,211 - INFO - 	              (28, 0.0007524638164672303),
+2026-08-13 02:14:28,211 - INFO - 	              (29, 0.0007131901305346335),
+2026-08-13 02:14:28,212 - INFO - 	              (30, 0.0006655806107170101)],
+2026-08-13 02:14:28,212 - INFO - 	 'micro_precision': [(1, 0.0017141570634486283),
+2026-08-13 02:14:28,212 - INFO - 	                     (2, 0.001708941213103426),
+2026-08-13 02:14:28,212 - INFO - 	                     (3, 0.0017056783295541441),
+2026-08-13 02:14:28,212 - INFO - 	                     (4, 0.0017038206294311953),
+2026-08-13 02:14:28,212 - INFO - 	                     (5, 0.0017009626292420433),
+2026-08-13 02:14:28,212 - INFO - 	                     (6, 0.0016918884786414857),
+2026-08-13 02:14:28,212 - INFO - 	                     (7, 0.0016716681273032355),
+2026-08-13 02:14:28,212 - INFO - 	                     (8, 0.0016549726428649394),
+2026-08-13 02:14:28,212 - INFO - 	                     (9, 0.0016676907437066658),
+2026-08-13 02:14:28,212 - INFO - 	                     (10, 0.0016524480760311884),
+2026-08-13 02:14:28,212 - INFO - 	                     (11, 0.001635180991555062),
+2026-08-13 02:14:28,212 - INFO - 	                     (12, 0.0016192714571687827),
+2026-08-13 02:14:28,212 - INFO - 	                     (13, 0.0016036953561379044),
+2026-08-13 02:14:28,212 - INFO - 	                     (14, 0.0015837131714820834),
+2026-08-13 02:14:28,212 - INFO - 	                     (15, 0.0015599203199073931),
+2026-08-13 02:14:28,212 - INFO - 	                     (16, 0.0015302923846131843),
+2026-08-13 02:14:28,212 - INFO - 	                     (17, 0.0015003071992953315),
+2026-08-13 02:14:28,212 - INFO - 	                     (18, 0.0014492442625824828),
+2026-08-13 02:14:28,212 - INFO - 	                     (19, 0.0013941086756000926),
+2026-08-13 02:14:28,212 - INFO - 	                     (20, 0.0013309706880880766),
+2026-08-13 02:14:28,212 - INFO - 	                     (21, 0.0012637600503065194),
+2026-08-13 02:14:28,212 - INFO - 	                     (22, 0.0011895711287297826),
+2026-08-13 02:14:28,212 - INFO - 	                     (23, 0.0011099281901254142),
+2026-08-13 02:14:28,212 - INFO - 	                     (24, 0.0010227115510197929),
+2026-08-13 02:14:28,212 - INFO - 	                     (25, 0.0009434973124437971),
+2026-08-13 02:14:28,213 - INFO - 	                     (26, 0.0008688082408339588),
+2026-08-13 02:14:28,213 - INFO - 	                     (27, 0.0008048604866016832),
+2026-08-13 02:14:28,213 - INFO - 	                     (28, 0.0007524638164672303),
+2026-08-13 02:14:28,213 - INFO - 	                     (29, 0.0007131901305346335),
+2026-08-13 02:14:28,213 - INFO - 	                     (30, 0.0006655806107170101)],
+2026-08-13 02:14:28,213 - INFO - 	 'micro_recall': [(1, 0.0017141570634486283),
+2026-08-13 02:14:28,213 - INFO - 	                  (2, 0.001708941213103426),
+2026-08-13 02:14:28,213 - INFO - 	                  (3, 0.0017056783295541441),
+2026-08-13 02:14:28,213 - INFO - 	                  (4, 0.0017038206294311953),
+2026-08-13 02:14:28,213 - INFO - 	                  (5, 0.0017009626292420433),
+2026-08-13 02:14:28,213 - INFO - 	                  (6, 0.0016918884786414857),
+2026-08-13 02:14:28,213 - INFO - 	                  (7, 0.0016716681273032355),
+2026-08-13 02:14:28,213 - INFO - 	                  (8, 0.0016549726428649394),
+2026-08-13 02:14:28,213 - INFO - 	                  (9, 0.0016676907437066658),
+2026-08-13 02:14:28,213 - INFO - 	                  (10, 0.0016524480760311884),
+2026-08-13 02:14:28,213 - INFO - 	                  (11, 0.001635180991555062),
+2026-08-13 02:14:28,213 - INFO - 	                  (12, 0.0016192714571687827),
+2026-08-13 02:14:28,213 - INFO - 	                  (13, 0.0016036953561379044),
+2026-08-13 02:14:28,213 - INFO - 	                  (14, 0.0015837131714820834),
+2026-08-13 02:14:28,213 - INFO - 	                  (15, 0.0015599203199073931),
+2026-08-13 02:14:28,213 - INFO - 	                  (16, 0.0015302923846131843),
+2026-08-13 02:14:28,213 - INFO - 	                  (17, 0.0015003071992953315),
+2026-08-13 02:14:28,213 - INFO - 	                  (18, 0.0014492442625824828),
+2026-08-13 02:14:28,213 - INFO - 	                  (19, 0.0013941086756000926),
+2026-08-13 02:14:28,213 - INFO - 	                  (20, 0.0013309706880880766),
+2026-08-13 02:14:28,213 - INFO - 	                  (21, 0.0012637600503065194),
+2026-08-13 02:14:28,214 - INFO - 	                  (22, 0.0011895711287297826),
+2026-08-13 02:14:28,214 - INFO - 	                  (23, 0.0011099281901254142),
+2026-08-13 02:14:28,214 - INFO - 	                  (24, 0.0010227115510197929),
+2026-08-13 02:14:28,214 - INFO - 	                  (25, 0.0009434973124437971),
+2026-08-13 02:14:28,214 - INFO - 	                  (26, 0.0008688082408339588),
+2026-08-13 02:14:28,214 - INFO - 	                  (27, 0.0008048604866016832),
+2026-08-13 02:14:28,214 - INFO - 	                  (28, 0.0007524638164672303),
+2026-08-13 02:14:28,214 - INFO - 	                  (29, 0.0007131901305346335),
+2026-08-13 02:14:28,214 - INFO - 	                  (30, 0.0006655806107170101)],
+2026-08-13 02:14:28,214 - INFO - 	 'weighted_f1': [(1, 6.679047044077649e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (2, 6.699271067042414e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (3, 6.771022507955062e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (4, 6.7851340035362805e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (5, 6.812057374329328e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (6, 6.884256003463151e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (7, 6.91285184490498e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (8, 7.0072975126580795e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (9, 7.457552693431755e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (10, 7.551785796031099e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (11, 7.589876842203842e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (12, 7.661835565485077e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (13, 7.735337142415796e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (14, 7.823917715545281e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (15, 7.939174328039659e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (16, 8.11833643462748e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (17, 8.289742465581629e-06),
+2026-08-13 02:14:28,214 - INFO - 	                 (18, 8.512795523791285e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (19, 8.757711905471708e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (20, 8.951925922046629e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (21, 9.031870415670604e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (22, 9.097115394499602e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (23, 9.281113471480525e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (24, 9.516708592077902e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (25, 9.634954904991156e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (26, 9.761082450324688e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (27, 9.848341713672679e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (28, 9.950773834794764e-06),
+2026-08-13 02:14:28,215 - INFO - 	                 (29, 1.0100797091377782e-05),
+2026-08-13 02:14:28,215 - INFO - 	                 (30, 1.0236786627875766e-05)],
+2026-08-13 02:14:28,215 - INFO - 	 'weighted_precision': [(1, 3.3463937334641375e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (2, 3.3566060144356072e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (3, 3.4238682472297467e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (4, 3.401512369754804e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (5, 3.4136456374558516e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (6, 3.4495660250922998e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (7, 3.4639713749671803e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (8, 3.511451607322885e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (9, 3.737569839932495e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (10, 3.7849543199816127e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (11, 3.8041803221912506e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (12, 3.840482754983623e-06),
+2026-08-13 02:14:28,215 - INFO - 	                        (13, 3.877580134364138e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (14, 3.9223150394619774e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (15, 3.980527091985701e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (16, 4.070995806886252e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (17, 4.157663525366333e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (18, 4.270572471458827e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (19, 4.394712444281544e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (20, 4.4936017206504e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (21, 4.535157896747195e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (22, 4.569679570340994e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (23, 4.664695170980962e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (24, 4.78675014100399e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (25, 4.850041995842943e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (26, 4.918155032466697e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (27, 4.967038417726898e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (28, 5.024541398703803e-06),
+2026-08-13 02:14:28,216 - INFO - 	                        (29, 5.106939360702538e-06),
+2026-08-13 02:14:28,217 - INFO - 	                        (30, 5.1837514948849375e-06)],
+2026-08-13 02:14:28,217 - INFO - 	 'weighted_recall': [(1, 0.0017141570634486283),
+2026-08-13 02:14:28,217 - INFO - 	                     (2, 0.001708941213103426),
+2026-08-13 02:14:28,217 - INFO - 	                     (3, 0.0017056783295541441),
+2026-08-13 02:14:28,217 - INFO - 	                     (4, 0.0017038206294311953),
+2026-08-13 02:14:28,217 - INFO - 	                     (5, 0.0017009626292420433),
+2026-08-13 02:14:28,217 - INFO - 	                     (6, 0.0016918884786414857),
+2026-08-13 02:14:28,217 - INFO - 	                     (7, 0.0016716681273032355),
+2026-08-13 02:14:28,217 - INFO - 	                     (8, 0.0016549726428649394),
+2026-08-13 02:14:28,217 - INFO - 	                     (9, 0.0016676907437066658),
+2026-08-13 02:14:28,217 - INFO - 	                     (10, 0.0016524480760311884),
+2026-08-13 02:14:28,217 - INFO - 	                     (11, 0.001635180991555062),
+2026-08-13 02:14:28,217 - INFO - 	                     (12, 0.0016192714571687827),
+2026-08-13 02:14:28,217 - INFO - 	                     (13, 0.0016036953561379044),
+2026-08-13 02:14:28,217 - INFO - 	                     (14, 0.0015837131714820834),
+2026-08-13 02:14:28,217 - INFO - 	                     (15, 0.0015599203199073931),
+2026-08-13 02:14:28,217 - INFO - 	                     (16, 0.0015302923846131843),
+2026-08-13 02:14:28,218 - INFO - 	                     (17, 0.0015003071992953315),
+2026-08-13 02:14:28,218 - INFO - 	                     (18, 0.0014492442625824828),
+2026-08-13 02:14:28,218 - INFO - 	                     (19, 0.0013941086756000926),
+2026-08-13 02:14:28,218 - INFO - 	                     (20, 0.0013309706880880766),
+2026-08-13 02:14:28,218 - INFO - 	                     (21, 0.0012637600503065194),
+2026-08-13 02:14:28,218 - INFO - 	                     (22, 0.0011895711287297826),
+2026-08-13 02:14:28,218 - INFO - 	                     (23, 0.0011099281901254142),
+2026-08-13 02:14:28,218 - INFO - 	                     (24, 0.0010227115510197929),
+2026-08-13 02:14:28,218 - INFO - 	                     (25, 0.0009434973124437971),
+2026-08-13 02:14:28,218 - INFO - 	                     (26, 0.0008688082408339588),
+2026-08-13 02:14:28,218 - INFO - 	                     (27, 0.0008048604866016832),
+2026-08-13 02:14:28,218 - INFO - 	                     (28, 0.0007524638164672303),
+2026-08-13 02:14:28,218 - INFO - 	                     (29, 0.0007131901305346335),
+2026-08-13 02:14:28,218 - INFO - 	                     (30, 0.0006655806107170101)]}
+2026-08-13 02:14:28,218 - INFO - 
+2026-08-13 02:14:28,223 - INFO - [task 2] danh gia tren TOAN BO tap global test (khong lay mau) — buoc nay cham, chi chay 1 lan/task
+2026-08-13 02:14:28,224 - INFO - Nap global test: /kaggle/input/datasets/tongxuanvu/100clientiov/global_test_data.pt
+2026-08-13 02:14:30,173 - INFO - Global test goc: n=42048683
+2026-08-13 02:14:31,977 - INFO - Task 2: loc ve lop 0-8 -> n=41987401
+2026-08-13 02:14:31,978 - INFO - Danh gia moi round tren n=41987401 mau (dtype=float16)
+2026-08-13 02:24:20,868 - INFO - TOAN BO TAP TEST | [Round 91] loss=5.4795 acc=0.0007 | micro P/R/F1=0.0007/0.0007/0.0007 | macro P/R/F1=0.0004/0.2300/0.0009 | weighted P/R/F1=0.0000/0.0007/0.0000
+2026-08-13 02:24:23,991 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task2.csv
+2026-08-13 02:24:23,992 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task2_normalized.csv
+2026-08-13 02:24:33,107 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_FULLTEST_task2.txt
+               precision    recall  f1-score   support
+
+       Benign     0.0000    0.0000    0.0000  41700592
+          DoS     0.0000    0.0000    0.0000    145129
+       double     0.0000    0.0000    0.0000     12413
+force-neutral     0.0000    0.0000    0.0000      5744
+      fuzzing     0.0032    0.2423    0.0062     67321
+     interval     0.0000    0.0000    0.0000     40542
+          rpm     0.0002    0.8211    0.0005      5043
+rpm-accessory     0.0000    0.0064    0.0000      3146
+        speed     0.0005    1.0000    0.0009      7471
+
+     accuracy                         0.0007  41987401
+    macro avg     0.0004    0.2300    0.0009  41987401
+ weighted avg     0.0000    0.0007    0.0000  41987401
+
+2026-08-13 02:24:33,450 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_FULLTEST_task2.png
+2026-08-13 02:24:33,457 - INFO - Nap global test: /kaggle/input/datasets/tongxuanvu/100clientiov/global_test_data.pt
+2026-08-13 02:24:35,350 - INFO - Global test goc: n=42048683
+2026-08-13 02:24:37,150 - INFO - Task 3: loc ve lop 0-10 -> n=41995397
+2026-08-13 02:24:37,150 - INFO - Danh gia moi round tren n=41995397 mau (dtype=float16)
+2026-08-13 02:24:37,165 - INFO - Client 0 (task=3): n=201 | classes={9: 201}
+2026-08-13 02:24:37,187 - INFO - Client 1 (task=3): n=176 | classes={10: 176}
+2026-08-13 02:24:37,210 - INFO - Client 2 (task=3): n=138 | classes={10: 138}
+2026-08-13 02:24:37,235 - INFO - Client 3 (task=3): n=202 | classes={10: 202}
+2026-08-13 02:24:37,248 - INFO - Client 4 (task=3): n=86 | classes={9: 86}
+2026-08-13 02:24:37,271 - INFO - Client 5 (task=3): n=147 | classes={10: 147}
+2026-08-13 02:24:37,284 - INFO - Client 6 (task=3): n=50 | classes={9: 50}
+2026-08-13 02:24:37,297 - INFO - Client 7 (task=3): n=155 | classes={9: 155}
+2026-08-13 02:24:37,323 - INFO - Client 8 (task=3): n=191 | classes={10: 191}
+2026-08-13 02:24:37,345 - INFO - Client 9 (task=3): n=337 | classes={10: 337}
+2026-08-13 02:24:37,373 - INFO - Client 10 (task=3): n=307 | classes={10: 307}
+2026-08-13 02:24:37,397 - INFO - Client 11 (task=3): n=187 | classes={10: 187}
+2026-08-13 02:24:37,411 - INFO - Client 12 (task=3): n=141 | classes={9: 141}
+2026-08-13 02:24:37,434 - INFO - Client 13 (task=3): n=526 | classes={10: 526}
+2026-08-13 02:24:37,448 - INFO - Client 14 (task=3): n=52 | classes={9: 52}
+2026-08-13 02:24:37,461 - INFO - Client 15 (task=3): n=95 | classes={9: 95}
+2026-08-13 02:24:37,477 - INFO - Client 16 (task=3): n=155 | classes={9: 155}
+2026-08-13 02:24:37,501 - INFO - Client 17 (task=3): n=357 | classes={10: 357}
+2026-08-13 02:24:37,523 - INFO - Client 18 (task=3): n=138 | classes={10: 138}
+2026-08-13 02:24:37,546 - INFO - Client 19 (task=3): n=309 | classes={10: 309}
+2026-08-13 02:24:37,558 - INFO - Client 20 (task=3): n=163 | classes={9: 163}
+2026-08-13 02:24:37,571 - INFO - Client 21 (task=3): n=179 | classes={9: 179}
+2026-08-13 02:24:37,581 - INFO - Client 22 (task=3): n=153 | classes={9: 153}
+2026-08-13 02:24:37,603 - INFO - Client 23 (task=3): n=1320 | classes={10: 1320}
+2026-08-13 02:24:37,616 - INFO - Client 24 (task=3): n=51 | classes={9: 51}
+2026-08-13 02:24:37,627 - INFO - Client 25 (task=3): n=85 | classes={9: 85}
+2026-08-13 02:24:37,651 - INFO - Client 26 (task=3): n=547 | classes={10: 547}
+2026-08-13 02:24:37,666 - INFO - Client 27 (task=3): n=39 | classes={9: 39}
+2026-08-13 02:24:37,690 - INFO - Client 28 (task=3): n=159 | classes={10: 159}
+2026-08-13 02:24:37,713 - INFO - Client 29 (task=3): n=803 | classes={10: 803}
+2026-08-13 02:24:37,736 - INFO - Client 30 (task=3): n=122 | classes={10: 122}
+2026-08-13 02:24:37,752 - INFO - Client 31 (task=3): n=88 | classes={9: 88}
+2026-08-13 02:24:37,774 - INFO - Client 32 (task=3): n=44 | classes={10: 44}
+2026-08-13 02:24:37,787 - INFO - Client 33 (task=3): n=54 | classes={9: 54}
+2026-08-13 02:24:37,799 - INFO - Client 34 (task=3): n=177 | classes={9: 177}
+2026-08-13 02:24:37,814 - INFO - Client 35 (task=3): n=101 | classes={9: 101}
+2026-08-13 02:24:37,829 - INFO - Client 36 (task=3): n=152 | classes={9: 152}
+2026-08-13 02:24:37,837 - INFO - Client 37 (task=3): n=308 | classes={9: 73, 10: 235}
+2026-08-13 02:24:37,854 - INFO - Client 38 (task=3): n=94 | classes={9: 94}
+2026-08-13 02:24:37,877 - INFO - Client 39 (task=3): n=446 | classes={10: 446}
+2026-08-13 02:24:37,889 - INFO - Client 40 (task=3): n=109 | classes={9: 109}
+2026-08-13 02:24:37,913 - INFO - Client 41 (task=3): n=469 | classes={10: 469}
+2026-08-13 02:24:37,941 - INFO - Client 42 (task=3): n=350 | classes={10: 350}
+2026-08-13 02:24:37,954 - INFO - Client 43 (task=3): n=74 | classes={9: 74}
+2026-08-13 02:24:37,972 - INFO - Client 44 (task=3): n=118 | classes={9: 118}
+2026-08-13 02:24:37,994 - INFO - Client 45 (task=3): n=62 | classes={10: 62}
+2026-08-13 02:24:38,019 - INFO - Client 46 (task=3): n=295 | classes={10: 295}
+2026-08-13 02:24:38,045 - INFO - Client 47 (task=3): n=265 | classes={10: 265}
+2026-08-13 02:24:38,058 - INFO - Client 48 (task=3): n=135 | classes={9: 135}
+2026-08-13 02:24:38,081 - INFO - Client 49 (task=3): n=602 | classes={10: 602}
+2026-08-13 02:24:38,093 - INFO - Client 50 (task=3): n=208 | classes={9: 208}
+2026-08-13 02:24:38,123 - INFO - Client 51 (task=3): n=104 | classes={10: 104}
+2026-08-13 02:24:38,152 - INFO - Client 52 (task=3): n=34 | classes={10: 34}
+2026-08-13 02:24:38,186 - INFO - Client 53 (task=3): n=829 | classes={10: 829}
+2026-08-13 02:24:38,206 - INFO - Client 54 (task=3): n=424 | classes={10: 424}
+2026-08-13 02:24:38,219 - INFO - Client 55 (task=3): n=189 | classes={10: 189}
+2026-08-13 02:24:38,264 - INFO - Client 56 (task=3): n=208 | classes={9: 208}
+2026-08-13 02:24:38,274 - INFO - Client 57 (task=3): n=109 | classes={9: 109}
+2026-08-13 02:24:38,291 - INFO - Client 58 (task=3): n=461 | classes={10: 461}
+2026-08-13 02:24:38,307 - INFO - Client 59 (task=3): n=155 | classes={10: 155}
+2026-08-13 02:24:38,320 - INFO - Client 60 (task=3): n=406 | classes={9: 406}
+2026-08-13 02:24:38,337 - INFO - Client 61 (task=3): n=346 | classes={10: 346}
+2026-08-13 02:24:38,347 - INFO - Client 62 (task=3): n=41 | classes={9: 41}
+2026-08-13 02:24:38,357 - INFO - Client 63 (task=3): n=97 | classes={9: 97}
+2026-08-13 02:24:38,372 - INFO - Client 64 (task=3): n=74 | classes={10: 74}
+2026-08-13 02:24:38,383 - INFO - Client 65 (task=3): n=829 | classes={9: 166, 10: 663}
+2026-08-13 02:24:38,393 - INFO - Client 66 (task=3): n=324 | classes={9: 324}
+2026-08-13 02:24:38,405 - INFO - Client 67 (task=3): n=43 | classes={9: 43}
+2026-08-13 02:24:38,421 - INFO - Client 68 (task=3): n=320 | classes={9: 320}
+2026-08-13 02:24:38,461 - INFO - Client 69 (task=3): n=549 | classes={10: 549}
+2026-08-13 02:24:38,478 - INFO - Client 70 (task=3): n=51 | classes={10: 51}
+2026-08-13 02:24:38,497 - INFO - Client 71 (task=3): n=283 | classes={10: 283}
+2026-08-13 02:24:38,508 - INFO - Client 72 (task=3): n=121 | classes={9: 121}
+2026-08-13 02:24:38,520 - INFO - Client 73 (task=3): n=52 | classes={9: 52}
+2026-08-13 02:24:38,534 - INFO - Client 74 (task=3): n=36 | classes={9: 36}
+2026-08-13 02:24:38,549 - INFO - Client 75 (task=3): n=361 | classes={10: 361}
+2026-08-13 02:24:38,558 - INFO - Client 76 (task=3): n=152 | classes={9: 152}
+2026-08-13 02:24:38,567 - INFO - Client 77 (task=3): n=58 | classes={9: 58}
+2026-08-13 02:24:38,577 - INFO - Client 78 (task=3): n=146 | classes={9: 146}
+2026-08-13 02:24:38,594 - INFO - Client 79 (task=3): n=134 | classes={10: 134}
+2026-08-13 02:24:38,594 - INFO - Nhanh physics: 80 client, 18658 mau (tran nap/client=khong, tran dung cay/client=500000), 13 dac trung, 20 vong boosting
+2026-08-13 02:24:41,967 - INFO - Luu nhanh physics -> /kaggle/working/VANFED-IDS/out/physics_branch_task3.pkl
+2026-08-13 02:24:41,978 - INFO - ===== Task 3: 80 client, 30 round =====
+2026-08-13 02:24:41,978 - WARNING - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+2026-08-13 02:24:41,979 - INFO - Starting Flower simulation, config: num_rounds=30, no round_timeout
+2026-08-13 02:24:52,377 - INFO - Flower VCE: Ray initialized with resources: {'node:172.19.2.2': 1.0, 'node:__internal_head__': 1.0, 'accelerator_type:T4': 1.0, 'GPU': 2.0, 'CPU': 4.0, 'memory': 18806022144.0, 'object_store_memory': 8059723776.0}
+2026-08-13 02:24:52,377 - INFO - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+2026-08-13 02:24:52,377 - INFO - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1.0, 'num_gpus': 0.5}
+2026-08-13 02:24:52,397 - INFO - Flower VCE: Creating VirtualClientEngineActorPool with 4 actors
+2026-08-13 02:24:52,399 - INFO - [INIT]
+2026-08-13 02:24:52,401 - INFO - Using initial global parameters provided by strategy
+2026-08-13 02:24:52,401 - INFO - Starting evaluation of initial global parameters
+2026-08-13 02:24:52,404 - INFO - Evaluation returned no results (`None`)
+2026-08-13 02:24:52,404 - INFO - 
+2026-08-13 02:24:52,405 - INFO - [ROUND 1]
+2026-08-13 02:24:52,405 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 02:25:10,050 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 02:25:10,192 - WARNING - No fit_metrics_aggregation_fn provided
+2026-08-13 02:25:10,192 - INFO - [Round 1] tong hop 80 client (18658 mau), train_loss=6.6314
+2026-08-13 02:25:10,199 - INFO - [Round 92] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_092.pth
+2026-08-13 02:34:47,342 - INFO - [Round 92] loss=5.0795 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 02:34:47,344 - INFO - fit progress: (1, 5.079456092857168, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.311881904069477e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.622531055244187e-05, 'weighted_precision': 3.6918336821894883e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.382213541540556e-08}, 594.9399303020036)
+2026-08-13 02:34:47,345 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 02:34:47,345 - INFO - 
+2026-08-13 02:34:47,345 - INFO - [ROUND 2]
+2026-08-13 02:34:47,345 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 02:34:48,604 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 02:34:48,743 - INFO - [Round 2] tong hop 80 client (18658 mau), train_loss=6.3642
+2026-08-13 02:34:48,748 - INFO - [Round 93] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_093.pth
+2026-08-13 02:44:24,129 - INFO - [Round 93] loss=4.7192 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 02:44:24,132 - INFO - fit progress: (2, 4.7192415910430805, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.311272384289609e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.621312394064912e-05, 'weighted_precision': 3.691472522594474e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381491446729774e-08}, 1171.7273866809992)
+2026-08-13 02:44:24,132 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 02:44:24,132 - INFO - 
+2026-08-13 02:44:24,132 - INFO - [ROUND 3]
+2026-08-13 02:44:24,133 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 02:44:25,373 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 02:44:25,523 - INFO - [Round 3] tong hop 80 client (18658 mau), train_loss=6.1262
+2026-08-13 02:44:25,529 - INFO - [Round 94] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_094.pth
+2026-08-13 02:54:13,454 - INFO - [Round 94] loss=4.4678 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 02:54:13,457 - INFO - fit progress: (3, 4.467842814957911, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.311111351963951e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620990429316349e-05, 'weighted_precision': 3.691377259705178e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381300980064909e-08}, 1761.0520878380048)
+2026-08-13 02:54:13,457 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 02:54:13,457 - INFO - 
+2026-08-13 02:54:13,457 - INFO - [ROUND 4]
+2026-08-13 02:54:13,457 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 02:54:14,799 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 02:54:14,946 - INFO - [Round 4] tong hop 80 client (18658 mau), train_loss=5.9247
+2026-08-13 02:54:14,951 - INFO - [Round 95] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_095.pth
+2026-08-13 03:04:51,498 - INFO - [Round 95] DST: packet=0.0019 physics=0.0002 hop nhat=0.0002 (-0.0017 so voi packet)
+2026-08-13 03:04:51,499 - INFO - [Round 95] loss=4.2794 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:04:54,618 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.csv
+2026-08-13 03:04:54,619 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3_normalized.csv
+2026-08-13 03:05:03,334 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task3.txt
+                 precision    recall  f1-score   support
+
+         Benign     0.0000    0.0000    0.0000  41700592
+            DoS     0.0000    0.0000    0.0000    145129
+         double     0.0000    0.0000    0.0000     12413
+  force-neutral     0.0000    0.0000    0.0000      5744
+        fuzzing     0.0000    0.0000    0.0000     67321
+       interval     0.0000    0.0000    0.0000     40542
+            rpm     0.0000    0.0000    0.0000      5043
+  rpm-accessory     0.0000    0.0000    0.0000      3146
+          speed     0.0000    0.0000    0.0000      7471
+speed-accessory     0.0002    1.0000    0.0003      2257
+     standstill     0.0002    1.0000    0.0004      5739
+
+       accuracy                         0.0002  41995397
+      macro avg     0.0000    0.1818    0.0001  41995397
+   weighted avg     0.0000    0.0002    0.0000  41995397
+
+2026-08-13 03:05:03,812 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.png
+2026-08-13 03:05:03,815 - INFO - fit progress: (4, 4.279425039531358, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 2411.410082772003)
+2026-08-13 03:05:03,815 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:05:03,815 - INFO - 
+2026-08-13 03:05:03,815 - INFO - [ROUND 5]
+2026-08-13 03:05:03,815 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:05:05,056 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:05:05,198 - INFO - [Round 5] tong hop 80 client (18658 mau), train_loss=5.7194
+2026-08-13 03:05:05,204 - INFO - [Round 96] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_096.pth
+2026-08-13 03:14:44,717 - INFO - [Round 96] loss=4.1471 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:14:44,720 - INFO - fit progress: (5, 4.147072221201989, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 2992.315240710006)
+2026-08-13 03:14:44,720 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:14:44,720 - INFO - 
+2026-08-13 03:14:44,720 - INFO - [ROUND 6]
+2026-08-13 03:14:44,720 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:14:45,923 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:14:46,048 - INFO - [Round 6] tong hop 80 client (18658 mau), train_loss=5.5166
+2026-08-13 03:14:46,053 - INFO - [Round 97] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_097.pth
+2026-08-13 03:24:24,045 - INFO - [Round 97] loss=4.0408 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:24:24,048 - INFO - fit progress: (6, 4.040849823027625, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 3571.6435325420025)
+2026-08-13 03:24:24,048 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:24:24,048 - INFO - 
+2026-08-13 03:24:24,048 - INFO - [ROUND 7]
+2026-08-13 03:24:24,048 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:24:25,369 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:24:25,515 - INFO - [Round 7] tong hop 80 client (18658 mau), train_loss=5.3597
+2026-08-13 03:24:25,522 - INFO - [Round 98] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_098.pth
+2026-08-13 03:33:55,044 - INFO - [Round 98] loss=3.9381 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:33:55,046 - INFO - fit progress: (7, 3.9381170559078265, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 4142.6417595759995)
+2026-08-13 03:33:55,046 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:33:55,047 - INFO - 
+2026-08-13 03:33:55,047 - INFO - [ROUND 8]
+2026-08-13 03:33:55,047 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:33:56,219 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:33:56,354 - INFO - [Round 8] tong hop 80 client (18658 mau), train_loss=5.1764
+2026-08-13 03:33:56,359 - INFO - [Round 99] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_099.pth
+2026-08-13 03:43:24,526 - INFO - [Round 99] loss=3.8519 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:43:24,529 - INFO - fit progress: (8, 3.8518609129300083, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 4712.124366891003)
+2026-08-13 03:43:24,529 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:43:24,529 - INFO - 
+2026-08-13 03:43:24,529 - INFO - [ROUND 9]
+2026-08-13 03:43:24,529 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:43:25,772 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:43:25,911 - INFO - [Round 9] tong hop 80 client (18658 mau), train_loss=5.0307
+2026-08-13 03:43:25,916 - INFO - [Round 100] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_100.pth
+2026-08-13 03:52:46,780 - INFO - [Round 100] DST: packet=0.0018 physics=0.0002 hop nhat=0.0002 (-0.0016 so voi packet)
+2026-08-13 03:52:46,780 - INFO - [Round 100] loss=3.7732 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 03:52:49,720 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.csv
+2026-08-13 03:52:49,720 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3_normalized.csv
+2026-08-13 03:52:58,018 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task3.txt
+                 precision    recall  f1-score   support
+
+         Benign     0.0000    0.0000    0.0000  41700592
+            DoS     0.0000    0.0000    0.0000    145129
+         double     0.0000    0.0000    0.0000     12413
+  force-neutral     0.0000    0.0000    0.0000      5744
+        fuzzing     0.0000    0.0000    0.0000     67321
+       interval     0.0000    0.0000    0.0000     40542
+            rpm     0.0000    0.0000    0.0000      5043
+  rpm-accessory     0.0000    0.0000    0.0000      3146
+          speed     0.0000    0.0000    0.0000      7471
+speed-accessory     0.0002    1.0000    0.0003      2257
+     standstill     0.0002    1.0000    0.0004      5739
+
+       accuracy                         0.0002  41995397
+      macro avg     0.0000    0.1818    0.0001  41995397
+   weighted avg     0.0000    0.0002    0.0000  41995397
+
+2026-08-13 03:52:58,459 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.png
+2026-08-13 03:52:58,461 - INFO - fit progress: (9, 3.773154536375334, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 5286.056863542006)
+2026-08-13 03:52:58,462 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 03:52:58,462 - INFO - 
+2026-08-13 03:52:58,462 - INFO - [ROUND 10]
+2026-08-13 03:52:58,462 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 03:52:59,536 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 03:52:59,666 - INFO - [Round 10] tong hop 80 client (18658 mau), train_loss=4.8853
+2026-08-13 03:52:59,671 - INFO - [Round 101] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_101.pth
+2026-08-13 04:02:17,231 - INFO - [Round 101] loss=3.6879 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:02:17,234 - INFO - fit progress: (10, 3.687936308139082, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 5844.8294126450055)
+2026-08-13 04:02:17,234 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:02:17,234 - INFO - 
+2026-08-13 04:02:17,234 - INFO - [ROUND 11]
+2026-08-13 04:02:17,234 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:02:18,363 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:02:18,489 - INFO - [Round 11] tong hop 80 client (18658 mau), train_loss=4.7366
+2026-08-13 04:02:18,494 - INFO - [Round 102] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_102.pth
+2026-08-13 04:11:35,835 - INFO - [Round 102] loss=3.6179 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:11:35,837 - INFO - fit progress: (11, 3.6179434220918525, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 6403.432759358002)
+2026-08-13 04:11:35,837 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:11:35,838 - INFO - 
+2026-08-13 04:11:35,838 - INFO - [ROUND 12]
+2026-08-13 04:11:35,838 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:11:36,936 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:11:37,065 - INFO - [Round 12] tong hop 80 client (18658 mau), train_loss=4.6096
+2026-08-13 04:11:37,070 - INFO - [Round 103] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_103.pth
+2026-08-13 04:20:55,205 - INFO - [Round 103] loss=3.5451 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:20:55,207 - INFO - fit progress: (12, 3.5451173914196223, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 6962.802532098001)
+2026-08-13 04:20:55,207 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:20:55,207 - INFO - 
+2026-08-13 04:20:55,207 - INFO - [ROUND 13]
+2026-08-13 04:20:55,208 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:20:56,355 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:20:56,478 - INFO - [Round 13] tong hop 80 client (18658 mau), train_loss=4.4836
+2026-08-13 04:20:56,485 - INFO - [Round 104] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_104.pth
+2026-08-13 04:30:13,091 - INFO - [Round 104] loss=3.4793 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:30:13,093 - INFO - fit progress: (13, 3.4793240291995793, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 7520.688708658003)
+2026-08-13 04:30:13,093 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:30:13,094 - INFO - 
+2026-08-13 04:30:13,094 - INFO - [ROUND 14]
+2026-08-13 04:30:13,094 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:30:14,162 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:30:14,292 - INFO - [Round 14] tong hop 80 client (18658 mau), train_loss=4.3733
+2026-08-13 04:30:14,298 - INFO - [Round 105] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_105.pth
+2026-08-13 04:39:30,200 - INFO - [Round 105] DST: packet=0.0016 physics=0.0002 hop nhat=0.0002 (-0.0014 so voi packet)
+2026-08-13 04:39:30,201 - INFO - [Round 105] loss=3.4057 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:39:33,079 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.csv
+2026-08-13 04:39:33,080 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3_normalized.csv
+2026-08-13 04:39:41,264 - INFO - Luu /kaggle/working/VANFED-IDS/out/classification_report_task3.txt
+                 precision    recall  f1-score   support
+
+         Benign     0.0000    0.0000    0.0000  41700592
+            DoS     0.0000    0.0000    0.0000    145129
+         double     0.0000    0.0000    0.0000     12413
+  force-neutral     0.0000    0.0000    0.0000      5744
+        fuzzing     0.0000    0.0000    0.0000     67321
+       interval     0.0000    0.0000    0.0000     40542
+            rpm     0.0000    0.0000    0.0000      5043
+  rpm-accessory     0.0000    0.0000    0.0000      3146
+          speed     0.0000    0.0000    0.0000      7471
+speed-accessory     0.0002    1.0000    0.0003      2257
+     standstill     0.0002    1.0000    0.0004      5739
+
+       accuracy                         0.0002  41995397
+      macro avg     0.0000    0.1818    0.0001  41995397
+   weighted avg     0.0000    0.0002    0.0000  41995397
+
+2026-08-13 04:39:41,696 - INFO - Luu /kaggle/working/VANFED-IDS/out/confusion_matrix_task3.png
+2026-08-13 04:39:41,698 - INFO - fit progress: (14, 3.405692066923532, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 8089.2935058110015)
+2026-08-13 04:39:41,698 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:39:41,698 - INFO - 
+2026-08-13 04:39:41,698 - INFO - [ROUND 15]
+2026-08-13 04:39:41,699 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:39:42,806 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:39:42,939 - INFO - [Round 15] tong hop 80 client (18658 mau), train_loss=4.2562
+2026-08-13 04:39:42,944 - INFO - [Round 106] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_106.pth
+2026-08-13 04:48:57,493 - INFO - [Round 106] loss=3.3486 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:48:57,495 - INFO - fit progress: (15, 3.348590108321188, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 8645.090745657006)
+2026-08-13 04:48:57,495 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:48:57,496 - INFO - 
+2026-08-13 04:48:57,496 - INFO - [ROUND 16]
+2026-08-13 04:48:57,496 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:48:58,603 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:48:58,732 - INFO - [Round 16] tong hop 80 client (18658 mau), train_loss=4.1662
+2026-08-13 04:48:58,737 - INFO - [Round 107] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_107.pth
+2026-08-13 04:58:16,216 - INFO - [Round 107] loss=3.2543 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 04:58:16,218 - INFO - fit progress: (16, 3.254339916955131, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 9203.813761882004)
+2026-08-13 04:58:16,218 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 04:58:16,219 - INFO - 
+2026-08-13 04:58:16,219 - INFO - [ROUND 17]
+2026-08-13 04:58:16,219 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 04:58:17,330 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 04:58:17,464 - INFO - [Round 17] tong hop 80 client (18658 mau), train_loss=4.0566
+2026-08-13 04:58:17,469 - INFO - [Round 108] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_108.pth
+2026-08-13 05:07:36,569 - INFO - [Round 108] loss=3.1974 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 05:07:36,572 - INFO - fit progress: (17, 3.197368099040012, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 9764.167159665005)
+2026-08-13 05:07:36,572 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 05:07:36,572 - INFO - 
+2026-08-13 05:07:36,572 - INFO - [ROUND 18]
+2026-08-13 05:07:36,572 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 05:07:37,676 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 05:07:37,803 - INFO - [Round 18] tong hop 80 client (18658 mau), train_loss=3.9605
+2026-08-13 05:07:37,808 - INFO - [Round 109] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_109.pth
+2026-08-13 05:16:55,886 - INFO - [Round 109] loss=3.1008 acc=0.0002 | micro P/R/F1=0.0002/0.0002/0.0002 | macro P/R/F1=0.0000/0.1818/0.0001 | weighted P/R/F1=0.0000/0.0002/0.0000
+2026-08-13 05:16:55,888 - INFO - fit progress: (18, 3.10082693158342, {'accuracy': 0.00019040181951369576, 'micro_precision': 0.00019040181951369576, 'micro_recall': 0.00019040181951369576, 'micro_f1': 0.00019040181951369576, 'macro_precision': 3.3110952673691264e-05, 'macro_recall': 0.18181818181818182, 'macro_f1': 6.620958270103292e-05, 'weighted_precision': 3.6913677507526685e-08, 'weighted_recall': 0.00019040181951369576, 'weighted_f1': 7.381281968057888e-08}, 10323.483752709006)
+2026-08-13 05:16:55,888 - INFO - configure_evaluate: no clients selected, skipping evaluation
+2026-08-13 05:16:55,889 - INFO - 
+2026-08-13 05:16:55,889 - INFO - [ROUND 19]
+2026-08-13 05:16:55,889 - INFO - configure_fit: strategy sampled 80 clients (out of 80)
+2026-08-13 05:16:57,019 - INFO - aggregate_fit: received 80 results and 0 failures
+2026-08-13 05:16:57,149 - INFO - [Round 19] tong hop 80 client (18658 mau), train_loss=3.8796
+2026-08-13 05:16:57,155 - INFO - [Round 110] luu checkpoint -> /kaggle/working/VANFED-IDS/out/checkpoints/round_110.pth

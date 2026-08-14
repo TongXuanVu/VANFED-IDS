@@ -1,0 +1,3 @@
+round,loss,accuracy,micro_precision,micro_recall,micro_f1,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1
+60,16.229847,0.001705,0.001705,0.001705,0.001705,0.012984,0.184114,0.015245,7.6e-05,0.001705,9e-05
+90,5.24411,0.007489,0.007489,0.007489,0.007489,0.114325,0.357281,0.007905,0.991775,0.007489,0.012229

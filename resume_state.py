@@ -12,6 +12,10 @@ Chi luu nhung gi CAN de resume, khong luu het:
   metrics_task*.csv            dem so round da xong (rounds_done() doc file nay)
   physics_branch_task*.pkl     cay lien ket — co san thi khong phai dung lai
   classification_report/cm/dst  ket qua da co, khong muon mat
+  client_state_taskN.tar.gz    model cuc bo tung client (P2 Eq.15, P3 Alg.1
+                               dong 10). CHI dong goi task DANG chay — task
+                               cu khong bao gio duoc doc lai.
+                               Mat file nay thi co che ca nhan hoa bi DUT.
 KHONG luu: checkpoint tung round (.pth moi round ~170KB x 150 round = 26MB,
 phinh lich su git), va file .png (ve lai duoc tu CSV).
 
@@ -23,8 +27,10 @@ Chay:
 import argparse
 import glob
 import os
+import re
 import shutil
 import sys
+import tarfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESUME = os.path.join(HERE, "logs", "resume")
@@ -50,6 +56,23 @@ def thu_muc_ckpt(goc):
     return sorted(os.path.basename(d) for d in
                   glob.glob(os.path.join(goc, "checkpoints*"))
                   if os.path.isdir(d))
+
+
+def task_cuc_bo(thu_muc):
+    """Task moi nhat co client_state. Task cu khong bao gio duoc doc lai nen
+    khong can dong goi (100 client x 5 task = qua nang cho git)."""
+    cs = os.path.join(thu_muc, "client_state")
+    if not os.path.isdir(cs):
+        return None, []
+    theo_task = {}
+    for p in glob.glob(os.path.join(cs, "client_*_*.npz")):
+        m = re.search(r"_(task\d+|flat)\.npz$", os.path.basename(p))
+        if m:
+            theo_task.setdefault(m.group(1), []).append(p)
+    if not theo_task:
+        return None, []
+    t = sorted(theo_task)[-1]
+    return t, sorted(theo_task[t])
 
 
 def dem_round(thu_muc):
@@ -104,6 +127,11 @@ def in_trang_thai(ten, thu_muc):
         print("  (chua co metrics CSV)")
     for pkl in sorted(glob.glob(os.path.join(thu_muc, "physics_branch_task*.pkl"))):
         print(f"  cay co san        : {os.path.basename(pkl)}")
+    t, files = task_cuc_bo(thu_muc)
+    if t:
+        print(f"  client_state      : {len(files)} client ({t})")
+    for tar in sorted(glob.glob(os.path.join(thu_muc, "client_state_*.tar.gz"))):
+        print(f"  client_state (nen): {os.path.basename(tar)}")
 
 
 def chep(nguon, dich, ten_file):
@@ -112,7 +140,7 @@ def chep(nguon, dich, ten_file):
     return ten_file
 
 
-def save(out_dir, force):
+def save(out_dir, force, bo_client_state=False):
     if not os.path.isdir(out_dir):
         sys.exit(f"Khong thay {out_dir} — chua chay lan nao?")
     cu, moi = dem_round(RESUME), dem_round(out_dir)
@@ -133,6 +161,21 @@ def save(out_dir, force):
         for p in sorted(glob.glob(os.path.join(out_dir, mau))):
             da.append(chep(p, os.path.join(RESUME, os.path.basename(p)),
                            os.path.basename(p)))
+
+    for cu_tar in glob.glob(os.path.join(RESUME, "client_state_*.tar.gz")):
+        os.remove(cu_tar)                       # chi giu task moi nhat
+    t, files = task_cuc_bo(out_dir)
+    if t and not bo_client_state:
+        tar = os.path.join(RESUME, f"client_state_{t}.tar.gz")
+        with tarfile.open(tar, "w:gz") as tf:
+            for f in files:
+                tf.add(f, arcname=os.path.join("client_state",
+                                               os.path.basename(f)))
+        da.append(f"client_state_{t}.tar.gz ({len(files)} client, "
+                  f"{os.path.getsize(tar) / 1024 / 1024:.1f} MB)")
+    elif t:
+        print(f"  (bo qua client_state cua {t}: {len(files)} file)")
+
     print(f"Da dong goi {len(da)} file -> {RESUME}")
     for f in da:
         print(f"   {f}")
@@ -157,9 +200,16 @@ def load(out_dir, force):
             da.append(chep(latest, os.path.join(out_dir, ten, "latest.pth"),
                            f"{ten}/latest.pth"))
     for p in sorted(glob.glob(os.path.join(RESUME, "*"))):
-        if os.path.isfile(p):
-            da.append(chep(p, os.path.join(out_dir, os.path.basename(p)),
-                           os.path.basename(p)))
+        if not os.path.isfile(p):
+            continue
+        if p.endswith(".tar.gz"):
+            with tarfile.open(p, "r:gz") as tf:
+                tf.extractall(out_dir)
+            n = len(glob.glob(os.path.join(out_dir, "client_state", "*.npz")))
+            da.append(f"{os.path.basename(p)} -> client_state/ ({n} file)")
+            continue
+        da.append(chep(p, os.path.join(out_dir, os.path.basename(p)),
+                       os.path.basename(p)))
     print(f"Da khoi phuc {len(da)} file -> {out_dir}")
     in_trang_thai("Sau khi khoi phuc", out_dir)
     print("\nChay tiep binh thuong. TUYET DOI KHONG them --restart.")
@@ -174,13 +224,16 @@ def main():
     g.add_argument("--status", action="store_true", help="Chi xem, khong dong gi")
     p.add_argument("--force", action="store_true",
                    help="Bo qua canh bao lui tien do / ghi de")
+    p.add_argument("--no-client-state", action="store_true",
+                   help="Khong dong goi client_state (commit nhe hon, nhung "
+                        "resume se lam DUT co che ca nhan hoa cua P2/P3)")
     a = p.parse_args()
 
     if a.status:
         in_trang_thai("Trong repo (logs/resume)", RESUME)
         in_trang_thai("Dang chay (out)", a.out_dir)
     elif a.save:
-        save(a.out_dir, a.force)
+        save(a.out_dir, a.force, a.no_client_state)
     else:
         load(a.out_dir, a.force)
 

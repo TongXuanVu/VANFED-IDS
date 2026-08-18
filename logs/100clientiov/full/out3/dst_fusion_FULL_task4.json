@@ -1,0 +1,7 @@
+{
+  "acc_packet_only": 0.0015980524288953355,
+  "acc_physics_only": 0.0012671502696053525,
+  "acc_dst_fused": 0.0012671502696053525,
+  "gain_vs_packet": -0.000330902159289983,
+  "gain_vs_physics": 0.0
+}

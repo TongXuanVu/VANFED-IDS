@@ -50,7 +50,8 @@ class BiLSTM_IDS(nn.Module):
     """
 
     def __init__(self, n_features=N_PACKET_FEATURES,
-                 num_classes=NUM_GLOBAL_CLASSES, hidden=16, dropout=0.15):
+                 num_classes=None, hidden=16, dropout=0.15):
+        num_classes = NUM_GLOBAL_CLASSES if num_classes is None else num_classes
         super().__init__()
         self.n_features = n_features
         self.num_classes = num_classes

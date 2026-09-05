@@ -33,7 +33,7 @@ from flwr.common import (FitRes, Parameters, Scalar, ndarrays_to_parameters,
 from flwr.server.client_proxy import ClientProxy
 
 import common as C
-from model_cnn1d import CNN1D_IDS, INPUT_LEN, NUM_GLOBAL_CLASSES
+from model_cnn1d import CNN1D_IDS
 
 logger = logging.getLogger(__name__)
 
@@ -184,7 +184,7 @@ def main():
     p.add_argument("--address", type=str, default="0.0.0.0:8081")
     p.add_argument("--test-samples", type=int, default=1_000_000,
                    help="0 = dung toan bo global test")
-    p.add_argument("--task", type=int, default=None, choices=range(C.NUM_TASKS),
+    p.add_argument("--task", type=int, default=None,
                    help="Class-incremental: chi danh gia cac lop da hoc")
     p.add_argument("--ckpt", type=str, default=None,
                    help="Checkpoint de resume/test (mac dinh: <out>/checkpoints/latest.pth)")
@@ -207,8 +207,10 @@ def main():
                             "federated_data_10shot"])
     p.add_argument("--seed", type=int, default=42)
     args = p.parse_args()
-
     C.set_fed_subdir(args.fed_subdir)
+    C.init_dataset(args.data_dir, args.fed_subdir)
+    if args.task is not None and not 0 <= args.task < C.NUM_TASKS:
+        p.error(f"--task phai nam trong 0..{C.NUM_TASKS - 1}")
     os.makedirs(args.out_dir, exist_ok=True)
     C.setup_logging(os.path.join(args.out_dir, "server.log"))
     torch.manual_seed(args.seed)
@@ -217,7 +219,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger.info(f"Thiet bi: {device} | che do: {args.mode} | task: {args.task}")
 
-    model = CNN1D_IDS(INPUT_LEN, NUM_GLOBAL_CLASSES, args.dropout).to(device)
+    model = CNN1D_IDS(C.INPUT_LEN, C.NUM_GLOBAL_CLASSES, args.dropout).to(device)
 
     if args.mode == "test":
         run_test(args, model, device)
@@ -253,7 +255,7 @@ def main():
             ids = args.gbdt_clients or list(range(args.num_clients))
             gbdt = train_physics_branch(
                 args.data_dir, ids, args.task, args.n_packet_features,
-                C.load_client_data, NUM_GLOBAL_CLASSES, args.gbdt_bins,
+                C.load_client_data, C.NUM_GLOBAL_CLASSES, args.gbdt_bins,
                 args.gbdt_depth, args.gbdt_rounds,
                 max_samples=args.max_samples,
                 gbdt_max_per_client=args.gbdt_max_per_client)

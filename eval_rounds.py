@@ -32,7 +32,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import common as C                                              # noqa: E402
-from model_cnn1d import CNN1D_IDS, INPUT_LEN, NUM_GLOBAL_CLASSES  # noqa: E402
+from model_cnn1d import CNN1D_IDS  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +104,7 @@ def main():
         description="Danh gia nhieu checkpoint, confusion matrix so luong tho")
     p.add_argument("--data-dir", required=True)
     p.add_argument("--rounds", type=int, nargs="+", required=True)
-    p.add_argument("--task", type=int, default=1, choices=range(C.NUM_TASKS))
+    p.add_argument("--task", type=int, default=1)
     p.add_argument("--ckpt-dir", default=os.path.join(HERE, "logs", "ckpt_eval"))
     p.add_argument("--physics", default=None,
                    help="Mac dinh <ckpt-dir>/physics_branch_task<TASK>.pkl")
@@ -120,11 +120,14 @@ def main():
 
     os.makedirs(a.out_dir, exist_ok=True)
     C.setup_logging(os.path.join(a.out_dir, "eval_rounds.log"))
+    C.init_dataset(a.data_dir)
+    if not 0 <= a.task < C.NUM_TASKS:
+        p.error(f"--task phai nam trong 0..{C.NUM_TASKS - 1}")
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     n_cls = C.learned_classes(a.task)
-    ten = C.load_class_names(a.data_dir)[:NUM_GLOBAL_CLASSES]
-    if len(ten) < NUM_GLOBAL_CLASSES:
-        ten += [f"class_{i}" for i in range(len(ten), NUM_GLOBAL_CLASSES)]
+    ten = C.load_class_names(a.data_dir)[:C.NUM_GLOBAL_CLASSES]
+    if len(ten) < C.NUM_GLOBAL_CLASSES:
+        ten += [f"class_{i}" for i in range(len(ten), C.NUM_GLOBAL_CLASSES)]
     ten_hien = ten[:n_cls]
 
     logger.info(f"Thiet bi {dev} | task {a.task} -> lop 0..{n_cls - 1} | "
@@ -143,7 +146,7 @@ def main():
         fuser = DSTFuser(gbdt, a.n_packet_features, device=dev)
         logger.info(f"Nhanh physics: {gpath} ({len(gbdt.trees)} cay)")
 
-    model = CNN1D_IDS(INPUT_LEN, NUM_GLOBAL_CLASSES, a.dropout).to(dev)
+    model = CNN1D_IDS(C.INPUT_LEN, C.NUM_GLOBAL_CLASSES, a.dropout).to(dev)
     tom_tat = []
 
     for r in a.rounds:

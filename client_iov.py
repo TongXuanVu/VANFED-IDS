@@ -22,7 +22,7 @@ import torch
 import torch.optim as optim
 
 import common as C
-from model_cnn1d import CNN1D_IDS, FocalLoss, INPUT_LEN, NUM_GLOBAL_CLASSES
+from model_cnn1d import CNN1D_IDS, FocalLoss
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ class VanFedClient(fl.client.NumPyClient):
         self.loader = C.make_loader(x, y, batch_size, shuffle=True)
         self.n_samples = len(y)
 
-        self.model = CNN1D_IDS(INPUT_LEN, NUM_GLOBAL_CLASSES, dropout).to(device)
+        self.model = CNN1D_IDS(C.INPUT_LEN, C.NUM_GLOBAL_CLASSES, dropout).to(device)
         self.criterion = FocalLoss(
             alpha=C.make_focal_alpha(y).to(device), gamma=2.0)
 
@@ -89,7 +89,7 @@ def main():
     p.add_argument("--batch-size", type=int, default=512)
     p.add_argument("--lr", type=float, default=1e-3)
     p.add_argument("--dropout", type=float, default=0.15)
-    p.add_argument("--task", type=int, default=None, choices=range(C.NUM_TASKS),
+    p.add_argument("--task", type=int, default=None,
                    help="Class-incremental: chi hoc du lieu cua task nay")
     p.add_argument("--fed-subdir", type=str, default="federated_data",
                    choices=["federated_data", "federated_data_fewshot",
@@ -97,6 +97,9 @@ def main():
     args = p.parse_args()
 
     C.set_fed_subdir(args.fed_subdir)
+    C.init_dataset(args.data_dir, args.fed_subdir)
+    if args.task is not None and not 0 <= args.task < C.NUM_TASKS:
+        p.error(f"--task phai nam trong 0..{C.NUM_TASKS - 1}")
     C.setup_logging()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     client = VanFedClient(args.client_id, args.data_dir, device, args.max_samples,

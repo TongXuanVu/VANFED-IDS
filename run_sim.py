@@ -359,6 +359,7 @@ def main():
             strategy=strategy,
             client_resources={"num_cpus": args.actor_cpus,
                               "num_gpus": args.actor_gpus},
+            ray_init_args={"runtime_env": {"working_dir": ROOT}},
         )
         # --- danh gia tren TOAN BO tap test, mot lan cuoi task ---
         if args.final_full_test:

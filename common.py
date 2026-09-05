@@ -98,14 +98,16 @@ def _doc_task_mapping(data_dir, fed_subdir=None):
     task phi tuan tu nen bat buoc phai remap.
     """
     if fed_subdir is None: fed_subdir = FED_SUBDIR
+    repo_dir = os.path.dirname(os.path.abspath(__file__))
     for p in (os.path.join(data_dir, "task_mapping_label_ids.json"),
               os.path.join(data_dir, fed_subdir, "task_mapping_label_ids.json"),
-              os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "task_mapping_label_ids.json")):
+              os.path.join(repo_dir, "data", "task_mapping_label_ids.json"),
+              os.path.join(repo_dir, "task_mapping_label_ids.json")):
         if os.path.exists(p):
             with open(p, encoding="utf-8") as f:
                 d = json.load(f)
-            if isinstance(d, list) and d and isinstance(d[0], list):
+            if (isinstance(d, list) and d and
+                    all(isinstance(task, list) and task for task in d)):
                 return d, p
     return None, None
 
@@ -159,13 +161,26 @@ def init_dataset(data_dir, fed_subdir=None):
         y_max = int(np.asarray(yy).max())
 
     mapping, map_file = _doc_task_mapping(data_dir, fed_subdir)
+    if y_max >= 13 and mapping is None:
+        raise ValueError(
+            f"Phat hien nhan IoT lon nhat {y_max}, nhung khong tim thay "
+            "task_mapping_label_ids.json trong thu muc du lieu hoac repo/data. "
+            "Khong the dung cau hinh IoV mac dinh (13 lop, 5 task).")
     dung_remap = mapping is not None and y_max >= 13
 
     if dung_remap:
-        TASK_LABELS = mapping
         TASK_INCREMENTS = [len(t_) for t_ in mapping]
         NUM_TASKS = len(mapping)
-        phang = [c for t_ in mapping for c in t_]
+        try:
+            phang = [int(c) for t_ in mapping for c in t_]
+        except (TypeError, ValueError) as e:
+            raise ValueError(f"Mapping nhan khong hop le: {map_file}") from e
+        if len(set(phang)) != len(phang) or min(phang) < 0:
+            raise ValueError(f"Mapping nhan khong hop le: {map_file}")
+        mapping = [phang[sum(len(t) for t in mapping[:i]):
+                           sum(len(t) for t in mapping[:i + 1])]
+                   for i in range(len(mapping))]
+        TASK_LABELS = mapping
         NUM_GLOBAL_CLASSES = len(phang)
         lut = np.full(max(phang) + 1, -1, dtype=np.int64)
         for moi, goc in enumerate(phang):
@@ -258,9 +273,13 @@ def apply_profile(d):
 
 def remap_labels(y):
     """Nhan goc -> nhan tuan tu theo thu tu task. No-op voi bo da tuan tu."""
-    if _LABEL_LUT is None:
-        return y
     y = np.asarray(y)
+    if _LABEL_LUT is None:
+        if y.size and int(y.max()) >= 13:
+            raise ValueError(
+                f"Phat hien nhan {int(y.max())} vuot pham vi IoV 0..12 "
+                "nhung chua co task_mapping_label_ids.json")
+        return y
     if y.size and int(y.max()) >= len(_LABEL_LUT):
         raise ValueError(f"Nhan {int(y.max())} vuot ngoai bang remap "
                          f"({len(_LABEL_LUT)} muc)")

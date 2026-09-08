@@ -151,12 +151,17 @@ def init_dataset(data_dir, fed_subdir=None):
     FED_SUBDIR = fed_subdir
     n_feat, nguon = _do_so_dac_trung(data_dir, fed_subdir)
 
+    # Dung CHUNG tim_global_test() voi load_global_test — truoc day cho nay co
+    # ban sao rieng chi thu hai vi tri (data_dir, data_dir/fed_subdir). Voi bo
+    # cuc fewshot cua IoT, fed_subdir tro sang 'iot100client_fewshot/...' von
+    # KHONG kem tap test, nen ca hai deu truot, y_max o nguyen -1, ho so roi ve
+    # IoV 13 lop, va checkpoint 34 lop nap vao thi vo ngay o classifier.
     y_max = -1
-    t = os.path.join(data_dir, "global_test_data.pt")
-    t2 = os.path.join(data_dir, fed_subdir, "global_test_data.pt")
-    if os.path.exists(t2):
-        t = t2
-    if os.path.exists(t):
+    try:
+        t = tim_global_test(data_dir, fed_subdir)
+    except FileNotFoundError:
+        t = None
+    if t:
         _, yy = _read_pt(t)
         y_max = int(np.asarray(yy).max())
 
